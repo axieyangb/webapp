@@ -1,0 +1,38 @@
+import { User } from './../user/user';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { DropdownModule } from 'ng2-dropdown'
+@Component({
+    moduleId: module.id,
+    selector: 'job-index',
+    templateUrl: 'indexComponent.html',
+    styleUrls: ['indexComponent.css']
+})
+export class IndexComponent implements OnInit {
+    private keywords: string;
+    private user: User;
+    private iconUrl: string;
+    constructor(private router: Router) {
+        this.keywords = "";
+        this.user = new User();
+        let iconNames = [];
+        for (var i = 1; i < 10; i++) {
+            iconNames.push("man" + i);
+            iconNames.push("woman" + i);
+        }
+        let num = Math.floor(Math.random() * 10 + 1);
+        this.iconUrl = "content/imgs/usericons/" + iconNames[num] + ".png";
+    }
+
+    ngOnInit() { }
+    redirectToList() {
+        if (this.keywords.length > 0)
+            this.router.navigate(['/list', { 'keywords': this.keywords }]);
+    }
+
+    logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        this.user = new User();
+    }
+}

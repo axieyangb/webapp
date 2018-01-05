@@ -1,0 +1,8 @@
+﻿
+@{
+    ViewBag.Title = "ForgetPassword";
+    Layout = "~/Views/Admin/_ViewStart.cshtml";
+}
+
+<h2>ForgetPassword</h2>
+

@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="WebsiteBuilder" xml:space="preserve">
+    <value>Website Builder</value>
+  </data>
+  <data name="Article" xml:space="preserve">
+    <value>Article</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="AuthorInfo_Name" xml:space="preserve">
+    <value>Jerry Xie</value>
+  </data>
+  <data name="AuthorInfo_Pos" xml:space="preserve">
+    <value>Software Engineer</value>
+  </data>
+  <data name="Blog_Title_1" xml:space="preserve">
+    <value>Welcome to</value>
+  </data>
+  <data name="Blog_Title_2" xml:space="preserve">
+    <value>Gobi Desert</value>
+  </data>
+  <data name="Brave" xml:space="preserve">
+    <value>Brave</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="ContactMe" xml:space="preserve">
+    <value>Contact me</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Copyright &amp;copy; Personal Website 2015 Designed by jerry</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="DescribeYourself" xml:space="preserve">
+    <value>Describe Yourself</value>
+  </data>
+  <data name="Education" xml:space="preserve">
+    <value>Education</value>
+  </data>
+  <data name="Education_Desc_1" xml:space="preserve">
+    <value>Two years’ study in IIT, let me touch a lot of genius and top students in different fields. They influent my thought and my perspective to study, from an original passive receiver to now, an enthusiastic self-learner. Also, heavy homework and projects make me study more efficient and more result-oriented  than before.</value>
+  </data>
+  <data name="Education_Desc_2" xml:space="preserve">
+    <value>I got my bachelor degree in china. I still remember it was my second semester that the first time I encountered the C language which is so attractive to me. I treated it as the Lego, which I could use to build anything from scratch, I start addicting in programming and science about computer. Four years’ electronic study let me better understand the structure of the computer and gain the ability to program in a lower level like the assembly language which is a great help to me in my future work and study.</value>
+  </data>
+  <data name="Education_MajorName_1" xml:space="preserve">
+    <value>Master of Science in Computer Science    GPA3.75/4</value>
+  </data>
+  <data name="Education_MajorName_2" xml:space="preserve">
+    <value>Bachelor of Electronic Engineering and its Automation   GPA3.75/4</value>
+  </data>
+  <data name="Education_SchoolDuration_1" xml:space="preserve">
+    <value>15 Aug 2013 - 15 May 2015</value>
+  </data>
+  <data name="Education_SchoolDuration_2" xml:space="preserve">
+    <value>01 Sep 2008 - 01 June 2012</value>
+  </data>
+  <data name="Education_SchoolName_1" xml:space="preserve">
+    <value>Illinois Institute of Technology    </value>
+  </data>
+  <data name="Education_SchoolName_2" xml:space="preserve">
+    <value>JiangSu University    </value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Faith" xml:space="preserve">
+    <value>Faith</value>
+  </data>
+  <data name="Gallery" xml:space="preserve">
+    <value>Gallery</value>
+  </data>
+  <data name="HaveAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+  <data name="Horse_soulmate" xml:space="preserve">
+    <value>Horse's Soulmate</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Index_ArticleDescription" xml:space="preserve">
+    <value>This a place to share my thoughts, my experience and my ideas.</value>
+  </data>
+  <data name="Index_GalleryDescription" xml:space="preserve">
+    <value>Photography is a way of feeling, of touching, of loving. it remembers little things, long after you have forgotten everything.</value>
+  </data>
+  <data name="Index_ViewMore" xml:space="preserve">
+    <value>View More</value>
+  </data>
+  <data name="I_am_rich" xml:space="preserve">
+    <value>I am rich</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="MostPopularTopics" xml:space="preserve">
+    <value>Most Popular Topics</value>
+  </data>
+  <data name="NickName" xml:space="preserve">
+    <value>Nick Name</value>
+  </data>
+  <data name="NoAccount" xml:space="preserve">
+    <value>Don't have an account?</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Pg_ArduinoWebcam" xml:space="preserve">
+    <value>Arduino Webcam ( Need Login)</value>
+  </data>
+  <data name="Pg_ArduinoWebcam_Desc" xml:space="preserve">
+    <value>An Arduino based webcam to monitor the cat at home.</value>
+  </data>
+  <data name="Pg_TextBasedMazeGame" xml:space="preserve">
+    <value>Text based Maze game</value>
+  </data>
+  <data name="Pg_TextBasedMazeGame_desc" xml:space="preserve">
+    <value>A simple and interesting terminal style endless maze game.</value>
+  </data>
+  <data name="Playground" xml:space="preserve">
+    <value>Playground</value>
+  </data>
+  <data name="Project" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="Project_List" xml:space="preserve">
+    <value>Project List</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Self_Desc" xml:space="preserve">
+    <value>Software Engineer with 3+ years of professional experience in software pattern design and object-oriented programming, and with 1+ year of enterprise project experience in architecture design and code optimization.  Highly familiar with the SQL Server and .NET framework.</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="ShowComment" xml:space="preserve">
+    <value>Show Comment</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="Skills" xml:space="preserve">
+    <value>Skills</value>
+  </data>
+  <data name="Skills_1" xml:space="preserve">
+    <value>C# .Net Development</value>
+  </data>
+  <data name="Skills_2" xml:space="preserve">
+    <value>Web Design</value>
+  </data>
+  <data name="Skills_3" xml:space="preserve">
+    <value>SQL Server Development</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Subtitle</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="WorkExperience" xml:space="preserve">
+    <value>Work experience</value>
+  </data>
+  <data name="Work_Desc_1" xml:space="preserve">
+    <value>As a software developer in&lt;a href="http://healthonellc.com/"&gt; Health One Alliance&lt;/a&gt;, which offers the health service for the whole north Georgia. 60 percentage of my daily job is focusing on implementing an efficient, accurate and secure solution to automatically process all the inbound and outbound EDI Files for company. The rest of my part is to play a key role as a full stack web developer to develop a &lt;a href="http://getbootstrap.com/"&gt;Bootstrap&lt;/a&gt; based admin portal which including architecture design, coding review and programming.</value>
+  </data>
+  <data name="Work_Desc_2" xml:space="preserve">
+    <value>One year homestay experience living with an IIT chemical professor gives me the chance to join his academic research group. By utilizing the knowledge learn from the advanced algorithm, I successfully   implemented a Complex 3D interpolation algorithm into his alchemical interaction grids, and gained high recommendations by the professor in his LinkedIn page.</value>
+  </data>
+  <data name="Work_Duration_1" xml:space="preserve">
+    <value>July 1 2015 - Now</value>
+  </data>
+  <data name="Work_Duration_2" xml:space="preserve">
+    <value>Sep 1 2014 - May 1 2015</value>
+  </data>
+  <data name="Work_PlaceName_1" xml:space="preserve">
+    <value>Dallas, TX</value>
+  </data>
+  <data name="Work_PlaceName_2" xml:space="preserve">
+    <value>Chicago, IL</value>
+  </data>
+  <data name="Work_Title_2" xml:space="preserve">
+    <value>Open-source Programer</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="YouJumpIJump" xml:space="preserve">
+    <value>You jump I jump</value>
+  </data>
+  <data name="Pg_RollABall" xml:space="preserve">
+    <value>Roll A Ball</value>
+  </data>
+  <data name="Pg_RollABall_Desc" xml:space="preserve">
+    <value>a simple rolling ball game</value>
+  </data>
+  <data name="Pg_SpaceShooter" xml:space="preserve">
+    <value>a simple top down arcade style shooter.</value>
+  </data>
+  <data name="Pg_SpaceShooter_Desc" xml:space="preserve">
+    <value>Based on Unity 3D to build a shooter game.</value>
+  </data>
+  <data name="Pg_SurvivalShooter" xml:space="preserve">
+    <value>Survival Shooter</value>
+  </data>
+  <data name="Pg_SurvivalShooter_Desc" xml:space="preserve">
+    <value>an isometric 3D survival shooter game</value>
+  </data>
+  <data name="Certification" xml:space="preserve">
+    <value>Certification</value>
+  </data>
+  <data name="Project_AdminPortal_Description" xml:space="preserve">
+    <value>This Admin portal was implemented to help our inner stuffs to manage the  insurance data  includng Member Management, Group Management, Agency Management, EDI File Monitor and  Report.</value>
+  </data>
+  <data name="Project_AdminPortal_Duration" xml:space="preserve">
+    <value>Jan 1 2016 - Now</value>
+  </data>
+  <data name="Project_AdminPortal_Title" xml:space="preserve">
+    <value>Admin Portal</value>
+  </data>
+  <data name="Project_LiveSite" xml:space="preserve">
+    <value>Live Site</value>
+  </data>
+  <data name="Project_ProviderSearch_Detail" xml:space="preserve">
+    <value>Provider Search was a website let users to quickly find a doctor or hospital in Health One Alliance network. You can either  search  by name, by location or by speciality. As the project leader, I designed the architecture of this website and strictly following the MVC pattern and 3-tier architecture style. For more details, you can click the following button.</value>
+  </data>
+  <data name="Project_ProviderSearch_Duration" xml:space="preserve">
+    <value>Sep 1 2016 - Now</value>
+  </data>
+  <data name="Project_ProviderSearch_Title" xml:space="preserve">
+    <value>Provider Search</value>
+  </data>
+  <data name="Project_TechnicalDetail" xml:space="preserve">
+    <value>Technical Detail</value>
+  </data>
+  <data name="AboutMe_Quotes" xml:space="preserve">
+    <value>Yangyang not only possesses technical ability and a passion for programming, but has shown himself to be a good team member. He gets along with everybody else in the research group and has a helpful personality; he has periodically helped weaker programmers with their projects. His English communication skills compare favorably with other international students.I believe that Yangyang will make an excellent addition to a software development organization.</value>
+  </data>
+  <data name="AboutMe_Quotes_Author" xml:space="preserve">
+    <value>David Minh - Assistant Professor at Illinois Institute of Technology</value>
+  </data>
+  <data name="AboutMe_PushHere" xml:space="preserve">
+    <value>Push Here</value>
+  </data>
+  <data name="Pg_JobSearch" xml:space="preserve">
+    <value>Angular JS 2 Designed Web portal for Job Search</value>
+  </data>
+  <data name="Pg_JobSearch_Desc" xml:space="preserve">
+    <value>This is my Individual project to help people easily find the dream jobs. In the backend, there is a web crawler keep grabing the data from Dice, Indeed and Monster hourly. Search Algorithm is using the full-text search, more accurate and efficient. You don't need go to each website to apply job repeatly. here is the solution, all in one. Give a vote, if you like it. It is still in development phase.  Welcome for advice. </value>
+  </data>
+  <data name="Project_JobSearch_Detail" xml:space="preserve">
+    <value>This is an awsome web project. I used all the most popular technologies  in my project. The front-side framework is the Angular JS 2. The communication between the client side and server side is totally through the RESTful API. The login system is utilzing the OAuth 2.0 --token based authorization. The back-end is using the MVC framework with the Entity framework.</value>
+  </data>
+  <data name="Project_JobSearch_Duration" xml:space="preserve">
+    <value>Nov 1 2016 - Dec 1 2016</value>
+  </data>
+  <data name="Project_JobSearch_Title" xml:space="preserve">
+    <value>Job Search</value>
+  </data>
+  <data name="Skills_4" xml:space="preserve">
+    <value>Advanced Algorithm</value>
+  </data>
+  <data name="Skills_5" xml:space="preserve">
+    <value>Java Development</value>
+  </data>
+  <data name="Music" xml:space="preserve">
+    <value>Music</value>
+  </data>
+  <data name="MusicSearch" xml:space="preserve">
+    <value>Music Search</value>
+  </data>
+  <data name="Statement" xml:space="preserve">
+    <value>This searching tool is only for &lt;b&gt;study purpose&lt;/b&gt;, Any commerical activities will be &lt;b&gt;prohibited&lt;/b&gt;!</value>
+  </data>
+  <data name="BackToTop" xml:space="preserve">
+    <value>Back to top</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>Keywords</value>
+  </data>
+  <data name="SongListSummary" xml:space="preserve">
+    <value>&lt;p&gt;Showing &lt;span id="songsNum"&gt;&lt;/span&gt; of &lt;span id="totalNum"&gt;&lt;/span&gt; related Songs&lt;/p&gt;</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="TotalSongsInFavorite" xml:space="preserve">
+    <value>Total &lt;span id="favoriteTotal"&gt;&lt;/span&gt; songs in the list</value>
+  </data>
+  <data name="PublicGallery" xml:space="preserve">
+    <value>Public Gallery</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Billboard" xml:space="preserve">
+    <value>Billboard</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="DonateRequest" xml:space="preserve">
+    <value>Help you a lot? I need your support !</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="EmailPrivacyPolicy" xml:space="preserve">
+    <value>We do not expose your email address without your permission</value>
+  </data>
+  <data name="LeaveComment" xml:space="preserve">
+    <value>Leave Comment</value>
+  </data>
+  <data name="PicturesSelected" xml:space="preserve">
+    <value>Pictures Selected</value>
+  </data>
+  <data name="PleaseRate" xml:space="preserve">
+    <value>Please Rate</value>
+  </data>
+  <data name="PostTime" xml:space="preserve">
+    <value>Post Time</value>
+  </data>
+  <data name="ShowAll" xml:space="preserve">
+    <value>Show All</value>
+  </data>
+  <data name="Showing" xml:space="preserve">
+    <value>Showing</value>
+  </data>
+  <data name="TodayMostPopularPictures" xml:space="preserve">
+    <value>Today‘s Most Popular Pictures</value>
+  </data>
+  <data name="TopPictures" xml:space="preserve">
+    <value>Top Pictures</value>
+  </data>
+  <data name="WeekMostPopularPictures" xml:space="preserve">
+    <value>Week's Most Popular Pictures</value>
+  </data>
+  <data name="ShareToMyWechat" xml:space="preserve">
+    <value>Share to my wechat</value>
+  </data>
+  <data name="ShareToMyWechatHelper" xml:space="preserve">
+    <value>Open the wechat, click the "discover" in the buttom or "plus" in the right top corner, then using the "Scan QR Code"  to scan the above picture, you would see the content in wechat browser. On the right top corner, click the "three dots" to share this web to my friend cycle</value>
+  </data>
+  <data name="Photo" xml:space="preserve">
+    <value>Photo</value>
+  </data>
+  <data name="RecentPublish" xml:space="preserve">
+    <value>Recent Publish</value>
+  </data>
+  <data name="Reply" xml:space="preserve">
+    <value>Reply</value>
+  </data>
+  <data name="AboutMe" xml:space="preserve">
+    <value>About Me</value>
+  </data>
+  <data name="CodingPad" xml:space="preserve">
+    <value>Coding Pad</value>
+  </data>
+  <data name="Entertainment" xml:space="preserve">
+    <value>Entertainment</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Personal Profile</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Calendar" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
+  <data name="Pg_CaseTracker" xml:space="preserve">
+    <value>Immigration Case Tracker</value>
+  </data>
+  <data name="Pg_CaseTracker_Desc" xml:space="preserve">
+    <value>This page is used to track your case information. Basic idea is querying the offical website periodically. Once your case status got changed, it would pop out an alert immediately</value>
+  </data>
+</root>

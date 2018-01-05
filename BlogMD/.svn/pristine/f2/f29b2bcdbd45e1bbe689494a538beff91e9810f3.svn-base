@@ -1,0 +1,94 @@
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using System.Web.Routing;
+using RouteLocalization.Mvc.Extensions;
+using RouteLocalization.Mvc.Setup;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using RouteLocalization.Mvc;
+using Blog.Controllers;
+
+namespace Blog
+{
+    public class RouteConfig
+    {
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            // For less code preparation use the static provider stored in Localization class
+            routes.MapMvcAttributeRoutes(Localization.LocalizationDirectRouteProvider);
+
+            const string defaultCulture = "en";
+            ISet<string> acceptedCultures = new HashSet<string>() { defaultCulture, "en-US", "zh", "zh-CN" };
+
+            // Add translations
+            // You can translate every specific route that contains default Controller and Action (which MapMvcAttributeRoutes does)
+            routes.Localization(configuration =>
+            {
+                // Important: Set the route collection from LocalizationDirectRouteProvider if you specify your own
+                //// configuration.LocalizationCollectionRoutes = provider.LocalizationCollectionRoutes;
+
+                configuration.DefaultCulture = defaultCulture;
+                configuration.AcceptedCultures = acceptedCultures;
+
+                              configuration.AttributeRouteProcessing = AttributeRouteProcessing.AddAsNeutralAndDefaultCultureRoute;
+
+                // Uncomment if you do not want the culture (en, de, ...) added to each translated route as route prefix
+                configuration.AddCultureAsRoutePrefix = true;
+
+                configuration.AddTranslationToSimiliarUrls = true;
+            }).TranslateInitialAttributeRoutes().Translate(localization =>
+            {
+                // Use extension methods if you want to separate route configuration
+                localization.AddNeutralTranslationForNamedRoute("HomeControllerIndexRoute");
+
+                //DefaultRoutes.cs
+                localization.ForCulture("zh")
+                    .ForController<HomeController>()
+                    .ForAction(x => x.Index())
+                        .AddTranslation("Willkommen");
+
+                ////localization.ForCulture("de")
+                ////	.ForController<HomeWithRoutePrefixAttributeController>()
+                ////	.SetRoutePrefix("RoutePrefixDE")
+                ////		.ForAction(x => x.Index())
+                ////			.AddTranslation("Willkommen")
+                ////		.ForAction(x => x.Book())
+                ////			.AddTranslation("Buch/{chapter}/{page}");
+
+                ////localization.ForCulture("de")
+                ////	.SetAreaPrefix("AreaPrefixDE")
+                ////	.ForController<HomeWithRouteAreaAttributeController>()
+                ////		.ForAction(x => x.Index())
+                ////			.AddTranslation("Willkommen")
+                ////		.ForAction(x => x.Book())
+                ////			.AddTranslation("Buch/{chapter}/{page}");
+
+                // AreaRoutes.cs
+                ////localization.ForCulture("de")
+                ////	.SetAreaPrefix("Area")
+                ////	.ForController<Areas.Area.Controllers.HomeController>()
+                ////	.ForAction(x => x.Index())
+                ////		.AddTranslation("Willkommen")
+                ////	.ForAction(x => x.Book())
+                ////		.AddTranslation("Buch/{chapter}/{page}");
+            });
+            routes.MapRoute(
+                name :"DefaultLocalized",
+                url:"{lang}/{controller}/{action}/{id}",
+                constraints:new {lang =@"(\w{2})|(\w{2}-\w{2})"}, //en-US or zh-CN
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, lang="en-US" }
+                );
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+           
+        }
+    }
+}

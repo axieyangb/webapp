@@ -1,0 +1,105 @@
+﻿
+ var playControl =function (e) {        
+     var video = $(e).next('audio,video')[0];
+        var playControlIcon = $(e).children('i');
+        if (video.played.length === 0) {
+            //initialize the audio player
+            var seekBar = $(e).parent('header').next('div').children('div[class="mdl-card__actions"]').children('div').children('input');
+            var timeStamp = $(e).parent('header').next('div').children('div[class="mdl-card__actions"]').children('span[class="playTimeDisplay"]').children('span[class="current"]');
+            seekBar[0].MaterialSliderEnhance.change(0,0);
+            seekBar.change(function () {
+                var time = video.duration * (seekBar[0].value / 100);
+                video.currentTime = time;
+            });
+            seekBar.mousedown(function() {
+                video.pause();
+            });
+            seekBar.mouseup(function () {
+                if (playControlIcon.html() === "pause" && video.paused === true) {
+                    var checkloading = setInterval(function (t) {
+                        if (video.readyState > 0) {
+                            video.play();
+                            clearInterval(checkloading);
+                        } else {
+                            alert('loading');
+                        }
+                    }, 500);
+                    video.play();
+                }   
+            });
+            video.addEventListener("timeupdate", function () {
+                var value = Math.round(video.currentTime / video.duration * 100);
+                var bufferedPercentage = Math.round(video.buffered.end(0) / video.duration * 100);
+                seekBar[0].MaterialSliderEnhance.change(value, bufferedPercentage);
+                timeStamp[0].innerHTML = secondsFormat(video.currentTime);
+                 
+            });
+            video.addEventListener("ended", function () {
+                video.currentTime = 0;
+                video.pause();
+                playControlIcon.html("play_arrow");
+            });
+            video.play();
+            playControlIcon.html("pause");
+        }
+        else if (video.paused === true) {
+                video.play();
+                playControlIcon.html("pause");
+            } else {
+                video.pause();
+                playControlIcon.html("play_arrow");
+            }         
+    };
+
+ var findVideoBoxAndFullScreen= function(e) {
+     var video = $(e).parent().parent().prev('header').children('video')[0];
+     fullScreen(video);
+ }
+
+
+
+    $('.mediaContainers').each(function () {
+        var video = this;
+        var getDuration=setInterval(function (t) {
+            if (video.readyState > 0) {
+                var timescope = $(video).parent('header').next('div').children('div[class="mdl-card__actions"]').children('span[class="playTimeDisplay"]');
+                timescope[0].innerHTML = '<span class="current">00:00</span>/' + secondsFormat(video.duration);
+                clearInterval(getDuration);
+            }
+        }, 500);
+    });
+    $('.cover').each(function () {
+        var header = $(this).parent();
+        $(this).offset(header.offset());
+        $(this).width(header.width());
+        $(this).height(header.height());
+    });
+    $(window).resize(function () {
+        $('.cover').each(function () {
+            var header = $(this).parent();
+            $(this).offset(header.offset());
+            $(this).width(header.width());
+            $(this).height(header.height());
+        });
+    });
+
+     /*Component functions*/
+    function secondsFormat(seconds) {
+        var min = parseInt(Math.floor(seconds / 60));
+        var sec = parseInt(Math.floor(seconds% 60));
+        return (padding(min) + ":" + padding(sec));
+    }
+    function padding(num) {
+        var s = num + "";
+        while (s.length < 2) s = "0" + s;
+        return s;
+    }
+    function fullScreen(video) {
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.mozRequestFullScreen) {
+            video.mozRequestFullScreen(); // Firefox
+        } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen(); // Chrome and Safari
+        }
+    }

@@ -1,0 +1,6 @@
+.header {
+    position: absolute;
+    top: 15px;
+    -webkit-transition: opacity 130ms;
+    width: 100%;
+}

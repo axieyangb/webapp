@@ -1,0 +1,83 @@
+﻿@model Blog.Models.ViewModel.RegisiterViewModel
+@{
+    ViewBag.Title = "Signin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var lang = Blog.Helper.CultureHelper.GetCurrentCulture();
+}
+
+
+<div class="wrapper">
+    @using (Html.BeginForm("Signup", "Admin", FormMethod.Post, new {@class = "form-signup"}))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <h2 class="form-signup-heading">@Blog.Resources.Global.SignUp</h2>
+        <div class="form-group label-floating @(Model == null || string.IsNullOrEmpty(Model.UserName) ? Html.Raw("is-empty") : Html.Raw(""))">
+            @Html.LabelFor(a => a.UserName, Blog.Resources.Global.Username, new {@class = "control-label"})
+            @Html.TextBoxFor(a => a.UserName, new {@class = "form-control"})
+        </div>
+        <div class="form-group label-floating @(Model == null || string.IsNullOrEmpty(Model.Password) ? Html.Raw("is-empty") : Html.Raw(""))">
+            @Html.LabelFor(a => a.Password, Blog.Resources.Global.Password, new {@class = "control-label"})
+            @Html.TextBoxFor(a => a.Password, new {@class = "form-control", type = "password"})
+        </div>
+        <div class="form-group label-floating @(Model == null || string.IsNullOrEmpty(Model.NickName) ? Html.Raw("is-empty") : Html.Raw(""))">
+            @Html.LabelFor(a => a.NickName, Blog.Resources.Global.NickName, new {@class = "control-label"})
+            @Html.TextBoxFor(a => a.NickName, new {@class = "form-control"})
+        </div>
+        <div class="form-group label-floating @(Model == null || string.IsNullOrEmpty(Model.Email) ? Html.Raw("is-empty") : Html.Raw(""))y">
+            @Html.LabelFor(a => a.Email, Blog.Resources.Global.Email, new {@class = "control-label"})
+            @Html.TextBoxFor(a => a.Email, new {@class = "form-control", type = "email"})
+        </div>
+        <div class="form-group label-floating @(Model == null || string.IsNullOrEmpty(Model.Description) ? Html.Raw("is-empty") : Html.Raw(""))">
+            @Html.LabelFor(a => a.Description, Blog.Resources.Global.DescribeYourself, new {@class = "control-label"})
+            @Html.TextAreaFor(a => a.Description, new {@class = "form-control"})
+        </div>
+        @Html.TextBox("Token", "", new {style = "display:none"})
+        <div class="g-recaptcha" id="recapchaWidget"></div>
+        <button class="btn btn-raised btn-lg btn-primary btn-block disabled" type="submit">@Blog.Resources.Global.SignUp</button>
+        if (Model != null)
+        {
+
+            <div>
+                @if (Model.ReturnInfo.IsFormValid)
+                {
+                    @Html.Raw("<span class='text-success'>" + Model.ReturnInfo.SucessInfo + "</span>")
+                   
+                }
+                else
+                {
+                    string errorInfo = "";
+                    foreach (var error in Model.ReturnInfo.ErrorInfo)
+                    {
+                        errorInfo += "<span class='text-danger'>[Error: " + error.Key + "] " + error.Value + "</span><br />";
+                    }
+                    @Html.Raw(errorInfo)
+                    
+                }
+            </div>
+
+        }
+        <br/>
+        <a href='@Url.Action("Login", "Admin")' class="">@Blog.Resources.Global.HaveAccount</a>
+    }
+</div>
+
+
+@section scripts{
+    <script>
+        var verifyCallback = function (token) {
+            $('#Token').val(token);
+            $('button[type="submit"]').removeClass('disabled');
+        }
+        var widgetId1;
+        var onloadCallback = function () {
+            widgetId1 = grecaptcha.render('recapchaWidget',
+                {
+                    'sitekey': '6LfBjBEUAAAAAJntYcb9lG3_Wr6qNL0LC1sTRQal',
+                    'callback': verifyCallback,
+                    'theme': 'light'
+                });
+        };
+    </script>
+    <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=@lang' async defer></script>
+}

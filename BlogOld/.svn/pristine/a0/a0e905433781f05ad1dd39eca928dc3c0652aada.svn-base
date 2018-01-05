@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "SyncUpRecoder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2 id="sub-title">Trip Recoder</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-10 col-md-offset-1" id="mapSection">
+            <div id="map"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 panel">
+            <div class="panel-body">
+                <div class="col-sm-12">
+                    <table id="tripRecordTable" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Duration (mins)</th>
+                            <th>Distance (miles)</th>
+                            <th>Start Address</th>
+                            <th>End Address</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                       
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+    <script src="~/Scripts/PlayGround/SyncUpRecorder.js"></script>
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyDEPrEhxtNITmMlCuwi_k2_lmqDRUhRYVw"></script>
+
+}
+@section styles{
+    <link href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Content/css/page/SyncUpRecorder.css" rel="stylesheet" />
+}

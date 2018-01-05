@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "CaseTracker";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Case Tracker</h2>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="form-group label-floating is-empty">
+                    <label class="control-label" for="caseNumber">Case Number</label>
+                    <input class="form-control " data-val="true" data-val-required="Case number is required." id="caseNumber" name="caseNumber" type="text" value="">
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-raised btn-sm" onclick="startTracking(this)">Start Tracking</button>
+                    <div class="text-info">Current frequency setting:  querying per 30 seconds</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel">
+            <div class="panel-body">
+                <h3>Result:</h3>
+                <div id="resultBody"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+        var interval = 30 * 1000;
+        var Status = {
+            Stop: 0,
+            Tracking: 1
+        }
+        var trackingQueue = [];
+        var caseItem = {
+        }
+
+        function startTracking(target) {
+            var caseNumber = $('#caseNumber').val();
+            var caseItem = {
+                caseNumber: caseNumber,
+                status: Status.Tracking,
+                content: '',
+                count: 0
+            }
+            trackingQueue.push(caseItem);
+            var caseBlock = $('<span class="list-group-item" data-casenumber="' +
+                caseItem.caseNumber +
+                '"><span>[ ' +
+                caseItem.caseNumber +
+                ' ]:</span>' +
+                ' <b class="detail"></b>' +
+                '<span class="pull-right status label label-success" onclick="switchStatus(this,0)">Tracking</span>' +
+                '<span class="pull-right count label">fetching times: 0</span>' +
+                '</span>');
+            $('#resultBody').append(caseBlock);
+            getCaseInfo(caseItem);
+        }
+
+
+        function switchStatus(target, flag) {
+            flag = parseInt(flag);
+            if (flag == 0) {
+                $(target).removeClass('label-success');
+                $(target).addClass('label-danger');
+                $(target).text('Paused');
+            } else {
+                $(target).removeClass('label-danger');
+                $(target).addClass('label-success');
+                $(target).text('Tracking');
+            }
+            var caseNumber = $(target).parent().attr('data-casenumber');
+            $(target).attr('onclick', 'switchStatus(this,'+(1-flag)+')');
+            for (var i = 0; i < trackingQueue.length; i++) {
+                if (trackingQueue[i].caseNumber == caseNumber) {
+                    trackingQueue[i].status = flag;
+                    return;
+                }
+            }
+
+        }
+
+        function setIntervalTracker() {
+            setInterval(function() {
+                    for (var i = 0; i < trackingQueue.length; i++) {
+                        getCaseInfo(trackingQueue[i]);
+                    }
+
+                },
+                interval);
+        }
+
+        $(document).ready(function() {
+            setIntervalTracker();
+        });
+
+        function getCaseInfo(caseItem) {
+            if (caseItem.status == Status.Stop) {
+                return;
+            }
+            $.ajax({
+                url: 'GetStatus',
+                data: {
+                    caseNumber: caseItem.caseNumber
+                }
+            }).done(function (res) {
+                if (caseItem.content !='' && res != caseItem.content) {
+                    alert('Your case status has changed:\nFrom: \t' + caseItem.content + '\nTo:\t' + res);
+                }
+                caseItem.content = res;
+                $('span[data-casenumber="' + caseItem.caseNumber + '"]').children('b.detail').html(caseItem.content);
+                caseItem.count += 1;
+                $('span[data-casenumber="' + caseItem.caseNumber + '"]').children('span.count')
+                    .html("fetching times: " + caseItem.count);
+            });
+        }
+
+
+    </script>
+}
+
+
+@section styles{
+    <style>
+        .label {
+            margin-right: 15px;
+        }
+         .status {
+             cursor: pointer
+         }
+    </style>
+}

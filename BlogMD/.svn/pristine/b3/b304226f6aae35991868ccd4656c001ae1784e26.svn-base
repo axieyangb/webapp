@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-grid">
+        <div class="mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet">
+            <div class="mdl-color--white  mdl-color-text--grey-800 mdl-shadow--2dp">
+                <img src="~/Content/Imgs/AuthorInfo/Me.png" class="img-circle mdl-js-button" />
+                <div class="text-center">
+                    <h4>@Resources.Global.AuthorInfo_Name</h4>
+                    <p>@Resources.Global.AuthorInfo_Pos</p>
+                </div>
+            </div>
+            <div class="mdl-color--white  mdl-color-text--grey-800 mdl-shadow--2dp">
+                <h4 class="left-align">
+                    <i class="material-icons">person</i> @Resources.Global.AboutMe
+                </h4>
+                <p>@Resources.Global.Self_Desc</p>
+            </div>
+            <div class="mdl-color--white  mdl-color-text--grey-800 mdl-shadow--2dp">
+                <h4 class="left-align">
+                    <i class="material-icons">contact_phone</i> @Resources.Global.ContactMe
+                </h4>
+                <p>
+                    <i class="material-icons small">place</i>7421 Frankford Apt.1637, Dallas, TX
+                    <br />
+                    <i class="material-icons small">phone</i>+01 312-709-6998
+                    <br/>
+                    <i class="material-icons small" id="SkypeButton_Call_yang.yang.xie_1" style="height: 13px;"></i> yang.yang.xie
+                    <br />
+                    <i class="material-icons small">mail_outline</i> <a href="mailto:yyangxie@gmail.com">yyangxie@gmail.com</a>
+                    <br/>             
+                    <i class="material-icons small">insert_link</i> <a href="http://www.nowtoshare.com" target="_blank">http://www.nowtoshare.com</a>
+                </p>
+            </div>
+            <div class="mdl-color--white  mdl-color-text--grey-800 mdl-shadow--2dp">
+                <h4 class="left-align">
+                    <i class="material-icons">laptop_windows</i> @Resources.Global.Skills
+                </h4>
+                <h6>@Resources.Global.Skills_1</h6>
+                <div id="p1" class="mdl-progress mdl-js-progress"></div>
+                <h6>@Resources.Global.Skills_2</h6>
+                <div id="p2" class="mdl-progress mdl-js-progress"></div>
+                <h6>@Resources.Global.Skills_3</h6>
+                <div id="p3" class="mdl-progress mdl-js-progress"></div>
+            </div>
+
+
+        </div>
+        <div class="mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet">
+            <div class="mdl-color--white  mdl-color-text--grey-800 mdl-shadow--2dp">
+                <h3 class="left-align">
+                    <i class="material-icons">work</i> @Resources.Global.WorkExperience
+                </h3>
+                <div>
+                    <h5>@Resources.Global.AuthorInfo_Pos</h5>
+                    <p class="helping-text small">
+                        <i class="material-icons small">place</i> @Resources.Global.Work_PlaceName_1 <i class="material-icons small">date_range</i> @Resources.Global.Work_Duration_1
+                    </p>
+                    <p>@Html.Raw(Resources.Global.Work_Desc_1)</p>
+                </div>
+                <div>
+                    <h5>@Resources.Global.Work_Title_2</h5>
+                    <p class="helping-text small">
+                        <i class="material-icons small">place</i> @Resources.Global.Work_PlaceName_2 <i class="material-icons small">date_range</i> @Resources.Global.Work_Duration_2
+                    </p>
+                    <p>@Resources.Global.Work_Desc_2 <a class="mdl-button mdl-js-button" id="showMore">@Resources.Global.ShowComment</a></p>
+                    <div id="hideInfo"><img class="content-fit" src="~/Content/Imgs/AuthorInfo/Recommendation.png" /></div>
+                </div>
+            </div>
+            <div class="mdl-color--white  mdl-color-text--grey-800 mdl-shadow--2dp">
+                <h3 class="left-align">
+                    <i class="material-icons">school</i> @Resources.Global.Education
+                </h3>
+                <div>
+                    <h5>@Resources.Global.Education_MajorName_1</h5>
+                    <p class="helping-text small">
+                        <i class="material-icons small">place</i> @Resources.Global.Education_SchoolName_1<i class="material-icons small">date_range</i>@Resources.Global.Education_SchoolDuration_1
+                    </p>
+                    <p>@Resources.Global.Education_Desc_1</p>
+                </div>
+                <div>
+
+                    <h5>@Resources.Global.Education_MajorName_2</h5>
+                    <p class="helping-text small"><i class="material-icons small">place</i> @Resources.Global.Education_SchoolName_2 <i class="material-icons small">date_range</i>@Resources.Global.Education_SchoolDuration_2</p>
+                    <p>@Resources.Global.Education_Desc_2</p>
+                </div>
+            </div>
+            <div class="mdl-color--white  mdl-color-text--grey-800 mdl-grid mdl-shadow--2dp">
+                <div class="mdl-cell mdl-cell--12-col"> <h3><i class="material-icons">folder_shared</i>@Resources.Global.Project</h3></div>
+                <div  class="mdl-cell--6-col-desktop mdl-cell--4-col-phone mdl-cell--8-col-tablet">
+                    <div id="project1"  class="mdl-card mdl-card--border">
+
+                        <div class="mdl-card__title"></div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">@Resources.Global.Skills_1</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-cell--6-col-desktop mdl-cell--4-col-phone mdl-cell--8-col-tablet">
+                    <div id="project2" class="mdl-card mdl-card--border">
+
+                        <div class="mdl-card__title"></div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">@Resources.Global.Skills_3</a>
+
+                        </div>
+                    </div>
+</div>
+                </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <link href="~/Content/Css/AboutMe/Index.css" rel="stylesheet"/>
+<script src="~/Scripts/skype-uri.js"></script>
+<script>
+  document.querySelector('#p1').addEventListener('mdl-componentupgraded', function() {
+    this.MaterialProgress.setProgress(88);
+  });
+  document.querySelector('#p2').addEventListener('mdl-componentupgraded', function () {
+      this.MaterialProgress.setProgress(60);
+  });
+  document.querySelector('#p3').addEventListener('mdl-componentupgraded', function () {
+      this.MaterialProgress.setProgress(75);
+  });
+  $('#showMore').click(function () {
+      $('#hideInfo').slideToggle(500);
+  });
+
+  Skype.ui({ "name": "chat", "element": "SkypeButton_Call_yang.yang.xie_1", "participants": ["yang.yang.xie"], "imageSize": 14 });
+
+</script>
+}

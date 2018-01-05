@@ -1,0 +1,128 @@
+﻿@using System.Diagnostics
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="/Content/Imgs/favicon.ico" />
+    <link href="~/Content/mdl-v1.1.2/material.min.css" rel="stylesheet" />
+    @Styles.Render("~/bundles/css")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    @{
+        string lang = Blog.Helper.CultureHelper.GetCurrentNeutralCulture();
+    }
+</head>
+<body class="mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+    <div class="demo-layout-waterfall mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header mdl-layout__header--waterfall mdl-layout__header--scroll mdl-color--primary mdl-shadow--4dp">
+            <!-- Top row, always visible -->
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title" id="siteIcon">
+                    <img src="~/Content/Imgs/favicon.ico" />
+                    &nbsp;
+                </span>
+                <span class="mdl-layout-title" id="siteTitle">@Resources.Global.Blog_Title</span>
+                
+                <div class="mdl-layout-spacer"></div>
+                <span class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--white" id="mediaIsPlaying" style="display: none">
+                    <img src="~/Content/Imgs/MediaController/playing.gif"/>
+                </span>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">
+                    <label class="mdl-button mdl-js-button mdl-button--icon"
+                           for="waterfall-exp">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" name="sample"
+                               id="waterfall-exp">
+                    </div>
+                </div>
+                <span class="mdl-button mdl-button--icon mdl-js-button mdl-color-text--white" id="nationSelector-menu-lower-right">
+                    @if (lang.Equals("zh"))
+                    {
+                        <img src="~/Content/Imgs/CountryFlags/China.png" />
+                    }
+                    else
+                    {
+                        <img src="~/Content/Imgs/CountryFlags/UnitedStatesofAmerica.png" />
+                    }
+                </span>
+            </div>
+
+            <!-- Bottom row, not visible on scroll -->
+            <div class="mdl-navigation">
+                <div class="mdl-layout-spacer"></div>
+                <a href="@Url.Action("Index", "Home")" class="mdl-layout__tab">@Resources.Global.Index</a>
+                <a href="@Url.Action("Article", "Home")" class="mdl-layout__tab">@Resources.Global.Article</a>
+                <a href="#" class="mdl-layout__tab">@Resources.Global.Gallery</a>
+                <a href="#" class="mdl-layout__tab">@Resources.Global.Contact</a>
+            </div>
+        </header>
+        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+            for="nationSelector-menu-lower-right">
+            @{
+            string[] segments = Request.Url?.Segments.Where(a => !a.Equals("zh/") && !a.Equals("zh") && !a.Equals("en/") && !a.Equals("en")).ToArray();
+            segments = segments ?? new string[0];}
+            @if (lang.Equals("zh"))
+        {
+        <li><a class="mdl-menu__item" href="@Html.Raw("/en" + string.Join("", segments))"><img src="~/Content/Imgs/CountryFlags/UnitedStatesofAmerica.png" /> &nbsp;&nbsp;English</a> </li>
+        }
+        else
+        {
+        <li><a class="mdl-menu__item" href="@Html.Raw("/zh" + string.Join("", segments))"><img src="~/Content/Imgs/CountryFlags/China.png" /> &nbsp;&nbsp;中文</a></li>
+        }
+        </ul>
+        <div class="mdl-layout__drawer mdl-shadow--8dp">
+            <span class="mdl-list__item mdl-list__item--two-line">
+                <span class="mdl-list__item-primary-content">
+                    <img class="material-icons mdl-list__item-avatar" id="authorThumbnail" src="~/Content/Imgs/AuthorInfo/me_40_40.png" style="width: 40px; height: 40px;" />
+                    @Resources.Global.AuthorInfo_Name
+                    <span class="mdl-list__item-sub-title">@Resources.Global.AuthorInfo_Pos</span>
+
+                </span>
+                <span class="mdl-list__item-secondary-content">
+                    <span class="mdl-list__item-secondary-info"></span>
+                    <i class="mdl-button mdl-js-button mdl-button--icon mdl-list__item-secondary-action" id="author-menu-lower-left"><i class="material-icons">more_vert</i></i>
+                </span>
+            </span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+            </nav>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                for="author-menu-lower-left">
+                <li><a class="mdl-menu__item" href="@Url.Action("Index", "AboutMe")">@Resources.Global.AboutMe</a></li>
+                <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Another Action</li>
+                <li disabled class="mdl-menu__item">Disabled Action</li>
+                <li class="mdl-menu__item">Yet Another Action</li>
+            </ul>
+        </div>
+
+        <main class="mdl-layout__content main-panel">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!--No script -->
+    <noscript><div id="noscript">Please enable the Javascript to better enjoy the website !</div></noscript>
+
+
+    <button id="Global_LeaveMessage" style="display: none" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--6dp mdl-color--accent">
+        <i class="material-icons" role="presentation">mode_edit</i>
+        <span class="visuallyhidden">Edit</span>
+    </button>
+    <button id="Global_UserAction" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--6dp mdl-color--accent">
+        <i class="material-icons" role="presentation">add</i>
+        <span class="visuallyhidden">Add</span>
+    </button>
+
+    <script src="~/Content/mdl-v1.1.2/material.min.js"></script>
+    @Scripts.Render("~/bundles/js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

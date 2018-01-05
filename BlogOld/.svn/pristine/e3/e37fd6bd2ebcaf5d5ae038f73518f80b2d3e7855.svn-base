@@ -1,0 +1,146 @@
+﻿@using Blog.Helper
+@{
+    ViewBag.Title = Blog.Resources.Global.PublicGallery + " | Now to share";
+    ViewBag.PageDescription = "Here are all your precious memory and moments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var lang = CultureHelper.GetCurrentCulture();
+}
+<link href="~/Content/css/page/gallery.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="row">
+        <h1 class="pag-header">@Blog.Resources.Global.PublicGallery        <button type="button" class="btn btn-xs btn-raised" onclick="submitDonateForm()" name="submit" ><span class="fa fa-money" aria-hidden="true"></span>&nbsp;@Blog.Resources.Global.Donate</button></h1>
+
+        <br />
+        <span>@Blog.Resources.Global.Showing &nbsp;<span id="showing"></span> / <span id="total"></span> <button class="btn btn-xs btn-success" onclick="showMore(-1)"> @Blog.Resources.Global.ShowAll</button></span>
+         <button class="btn btn-xs btn-danger btn-raised" onclick="showTopModal()"><span class="fa fa-fire" aria-hidden="true"></span>&nbsp;@Blog.Resources.Global.Billboard</button>
+        <br />
+        <button type="button" class="btn btn-sm btn-raised" id="downloadChoice" onclick="download(this)" data-flag="0"><span class="glyphicon glyphicon-save"> </span></button>
+        <span style="display:none" id="downloadOption"><span id="downloadSelectNum">0</span> @Blog.Resources.Global.PicturesSelected&nbsp; <button class="btn btn-xs btn-success" onclick="selectAll(this)" data-flag="0">@Blog.Resources.Global.All</button><button onclick="$('#downloadForm').submit()" class="btn btn-xs btn-info disabled" id="downloadBtn">@Blog.Resources.Global.Download</button></span>
+        <div class="btn-group pull-right" role="group" aria-label="sort_by" id="sortBy">
+            <button type="button" class="btn btn-sm btn-raised" onclick="sortBy(this)" data-flag="1"><span class="glyphicon glyphicon-time"></span>&nbsp;<span class="glyphicon glyphicon-sort-by-attributes-alt"></span></button>
+            <button type="button" class="btn btn-sm btn-raised" onclick="sortBy(this)" data-flag="0">
+                <span class="glyphicon glyphicon-time"></span>&nbsp;<span class="glyphicon glyphicon-sort-by-attributes"> </span>
+            </button>
+            <button type="button" class="btn btn-sm btn-raised" onclick="sortBy(this)" data-flag="2"><span class="glyphicon glyphicon-glyphicon glyphicon-star"></span>&nbsp;<span class="glyphicon glyphicon-sort-by-attributes-alt"></span></button>
+            <button type="button" class="btn btn-sm btn-raised" onclick="sortBy(this)" data-flag="3"><span class="glyphicon glyphicon-glyphicon glyphicon-star"></span>&nbsp;<span class="glyphicon glyphicon-sort-by-attributes"> </span></button>
+
+        </div>
+
+        <div>
+            @*<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" target="_blank" id="donateForm">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="M93NWBD34T852">
+                </form>*@
+            <form action="@Url.Action("Download")" method="post"  target="_blank" id="downloadForm">
+                <input type="hidden" name="pictureStr" value="">
+
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class='list-group gallery'>
+            @*<div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                    <a class="thumbnail fancybox" rel="ligthbox" href="@pic.Url" data-thumbnail="/Content/Users/@pic.UserId/thumbtail/@pic.FileName">
+                        <img class="img-responsive fancybox-thumb" rel="fancybox-thumb" alt="" src="/Content/Users/@pic.UserId/thumbtail/@pic.FileName"/>
+                        <div class='text-right'>
+                            <small class='text-muted'>@(string.IsNullOrEmpty(pic.CaptureTime) ? Html.Raw("Unknown") : Html.Raw(pic.CaptureTime))</small>
+                        </div>  text-right / end
+                    </a>
+                </div>*@
+
+        </div> <!-- list-group / end -->
+    </div> <!-- row / end -->
+</div>
+
+<a href="javascript:animatedScoll()" id="return-to-top" title="Return to top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+<div id="fullscreenImgSection" style="display:none"></div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="rateModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Blog.Resources.Global.PleaseRate</h4>
+            </div>
+            <div class="modal-body" id="rateBody">
+
+            </div>
+            <div class="modal-footer row">
+                <div class='g-recaptcha col-xs-12' id='recapchaWidget'></div>
+                <button type="button" class="btn btn-default closeModal" data-dismiss="modal">@Blog.Resources.Global.Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="topModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@Blog.Resources.Global.TopPictures</h4>
+            </div>
+            <div class="modal-body" id="topBody">
+                <div class="row">
+                    <div class="col-xs-12 row" id="dailyHotest">
+                        <h3 class="col-xs-12 text-center">@Blog.Resources.Global.TodayMostPopularPictures</h3>
+                        <div id="dailyHotestPic" class="col-xs-12 text-center">
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 row" id="weeklyHotest">
+                        <h3 class="col-xs-12 text-center">@Blog.Resources.Global.WeekMostPopularPictures</h3>
+                        <div id="weeklyHotestPic" class="col-xs-12 text-center">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer row">
+                <button type="button" class="btn btn-default closeModal" data-dismiss="modal">@Blog.Resources.Global.Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<input type="hidden" id="Token" value="">
+@section scripts{
+
+    <script>
+        var verifyCallback = function (token) {
+            $('#Token').val(token);
+        }
+        var widgetId1;
+        var onloadCallback = function () {
+            widgetId1 = grecaptcha.render('recapchaWidget',
+            {
+                'sitekey': '6LfBjBEUAAAAAJntYcb9lG3_Wr6qNL0LC1sTRQal',
+                'callback': verifyCallback,
+                'theme': 'light'
+            });
+        };
+    </script>
+    <script src="~/Scripts/Gallery/jquery.fullscreen.js"></script>
+    <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.fancybox.pack.js"></script>
+
+
+    <link href="~/Content/jquery.fancybox-buttons.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.fancybox-buttons.js"></script>
+    <script src="~/Scripts/jquery.fancybox-media.js"></script>
+
+    <link href="~/Content/jquery.fancybox-thumbs.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.fancybox-thumbs.js"></script>
+    <script src="~/Scripts/Gallery/gallery.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+}
+
+
+
+
+

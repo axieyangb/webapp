@@ -1,0 +1,145 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Http;
+using System.Web.Http.Cors;
+using System.Web.Http.Description;
+using System.Web.Http.Results;
+using JobSearchAPI.BALModels;
+using JobSearchAPI.DBModels;
+
+namespace JobSearchAPI.Controllers
+{
+    [EnableCors("*","*","*")]
+    [RoutePrefix("jobs")]
+    public class JobsController : ApiController
+    {
+        [HttpGet]
+        [Route("")]
+        [ResponseType(typeof(JobItem))]
+        public async Task<IHttpActionResult> Get()
+        {
+            return await Get(num: 0);
+        }
+        [HttpGet]
+        [Route("")]
+        [ResponseType(typeof(JobItem))]
+        public async Task<IHttpActionResult> Get(int? num)
+        {
+            using (var data = new JobContext())
+            {
+
+                return Ok(data.GetJobs(num));
+            }
+        }
+        [HttpGet]
+        [Route("{id:int}")]
+        [ResponseType(typeof(JobItem))]
+        public async Task<IHttpActionResult> Get(int id)
+        {
+            using (var data = new JobContext())
+            {
+                var job = (from j in data.Jobs
+                    join jd in data.JobDetails on j.Id equals jd.JobId
+                    where j.Id == id
+                    select new JobItem
+                    {
+                        Id = j.Id,
+                        JobDescription = j.JobDescription,
+                        URL = j.URL,
+                        Note = j.Note,
+                        LastUpdateDate = j.LastUpdateDate,
+                        DetailId = jd.Id,
+                        Status = jd.Status,
+                        InValidNum = jd.InValidNum,
+                        ThumbsUpNum = jd.ThumbsUpNum,
+                        VisitedNum = jd.VisitedNum
+                    }).FirstOrDefault();
+                if (job == null)
+                    return NotFound();
+                return Ok(job);
+            }
+        }
+
+        [HttpGet]
+        [Route("")]
+        [ResponseType(typeof(JobItem))]
+        public async Task<IHttpActionResult> Get(string keywords)
+        {
+            if (string.IsNullOrEmpty(keywords))
+                return BadRequest();
+            using (var data = new JobContext())
+            {
+              return  Ok(data.SearchJobsByKeywords(keywords));
+            }
+        }
+
+        [HttpPut]
+        [Route("{id:int}/{operation}")]
+        public async Task<IHttpActionResult> Put(int id,string operation)
+        {
+            if (operation.ToLower() == "visited")
+            {
+                return await UpdateVistitedNum(id);
+            }
+            if (operation.ToLower() == "thumbsup")
+            {
+                return await UpdateThumbsUpNum(id);
+            }
+            return BadRequest();
+        }
+
+        private async Task<IHttpActionResult> UpdateVistitedNum(int id)
+        {
+            using (var data = new JobContext())
+            {
+                var detail = data.JobDetails.FirstOrDefault(a => a.JobId == id);
+                if (detail != null)
+                {
+                    detail.VisitedNum++;
+                    data.SaveChanges();
+                    return Ok();
+                }
+                return BadRequest();
+
+            }
+        }
+
+        public async Task<IHttpActionResult> UpdateThumbsUpNum(int id)
+        {
+            using (var data = new JobContext())
+            {
+                var detail = data.JobDetails.FirstOrDefault(a => a.JobId == id);
+                if (detail != null)
+                {
+                    detail.ThumbsUpNum++;
+                    data.SaveChanges();
+                    return Ok();
+                }
+                return BadRequest();
+
+            }
+        }
+
+        //private string GetUserIp()
+        //{
+        //    string visitorsIpAddr = string.Empty;
+        //    if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+        //    {
+        //        visitorsIpAddr = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+        //    }
+        //    else if (HttpContext.Current.Request.UserHostAddress?.Length != 0)
+        //    {
+        //        visitorsIpAddr = HttpContext.Current.Request.UserHostAddress;
+        //    }
+        //    return visitorsIpAddr;
+        //}
+
+    }
+
+  
+}

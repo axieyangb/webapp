@@ -1,0 +1,446 @@
+﻿@using Blog.Helper
+@model Blog.Models.ArticleStruct
+@{
+    ViewBag.Title = Model.Article.Title + " | Now to Share";
+    ViewBag.PageDescription = Model.Article.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var lang = Blog.Helper.CultureHelper.GetCurrentCulture();
+    Dictionary<string, string> tags = new Dictionary<string, string>();
+    string tagStr = "";
+    if (ViewBag.tag1 != null)
+    {
+        tags.Add(ViewBag.tagId1.ToString(), ViewBag.tag1.ToString());
+        tagStr += "," + ViewBag.tag1.ToString();
+    }
+    if (ViewBag.tag2 != null)
+    {
+        tags.Add(ViewBag.tagId2.ToString(), ViewBag.tag2.ToString());
+        tagStr += "," + ViewBag.tag2.ToString();
+    }
+    if (ViewBag.tag3 != null)
+    {
+        tags.Add(ViewBag.tagId3.ToString(), ViewBag.tag3.ToString());
+        tagStr += "," + ViewBag.tag3.ToString();
+    }
+    if (ViewBag.tag4 != null)
+    {
+        tags.Add(ViewBag.tagId4.ToString(), ViewBag.tag4.ToString());
+        tagStr += "," + ViewBag.tag4.ToString();
+    }
+    if (ViewBag.tag5 != null)
+    {
+        tags.Add(ViewBag.tagId5.ToString(), ViewBag.tag5.ToString());
+        tagStr += "," + ViewBag.tag5.ToString();
+    }
+    if (tagStr.Length > 0)
+    {
+        tagStr = tagStr.Substring(1);
+    }
+
+}
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<div itemscope itemtype="http://schema.org/BlogPosting">
+    <meta itemscope='itemscope' itemprop='mainEntityOfPage' itemType='https://schema.org/WebPage' itemid='@Request.Url.ToString()'/>
+<span itemprop="dateModified" style="display: none" content="@Model.Article.ModifyDate"></span>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-10 col-md-offset-1 col-sm-10  col-xs-offset-1 ">
+                <div class="col-xl-12 col-lg-12 col-md-12  col-sm-12  col-xs-12 ">
+                    <div class="post-heading">
+                        <a class="pull-right btn btn-xs btn-raised btn-info" id="TitleEditButton" style="display: none;" data-toggle="modal" data-target="#modalEditTitle" data-operation="edit" @if (ViewBag.isPreView != null && ViewBag.isPreView)
+                                                                                                                                                                                                 {
+                                                                                                                                                                                                     @Html.Raw("disabled = 'disabled'")
+                                                                                                                                                                                                 }><span class="glyphicon glyphicon-edit"></span>&nbsp;<span>Edit</span></a>
+                        <h1 itemprop="name">@Html.DisplayFor(item => Model.Article.Title)</h1>
+                        <h2 itemprop="headline" class="subheading">@Html.DisplayFor(item => Model.Article.SubTitle)</h2>
+                        <span itemprop="publisher" style="display: none" itemscope itemtype="http://schema.org/Organization">
+                            <span itemprop="name">nowtoshare.com</span>
+                            <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+                                <link itemprop="url" href="/Content/img/home-horseBrain.png"/>
+                                <span itemprop="width">40</span>
+                                <span itemprop="height">40</span>
+                            </span>
+                        </span>
+                        <span class="meta">Posted by <a href="@Html.Raw("/" + lang + "/User/Index/" + Model.Article.AuthorId)" title="author name"><span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">@ViewBag.AuthorName</span></span></a> <span class="postdate" itemprop="datePublished" content="@Model.Article.PostDate">@Html.DisplayFor(item => Model.Article.PostDate)</span> </span>
+                        <div id="tags">
+                            @foreach (KeyValuePair<string, string> tag in tags)
+                            {
+                                <a href="/@lang/Home/Index/@tag.Key" target="_blank" title="@tag.Value tag">
+                                    <span class="label label-default">
+                                        <span class="glyphicon glyphicon-tags"></span> &nbsp;@tag.Value
+                                    </span>
+                                </a>
+                            }
+                        </div>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article>
+    <div class="container">
+        <div class="row">
+            <a class="pull-right btn btn-xs btn-raised btn-info" id="ContentEditButton" style="display: none" data-operation="edit" @if (ViewBag.isPreView != null && ViewBag.isPreView)
+                                                                                                                                    {
+                                                                                                                                        @Html.Raw("disabled = 'disabled'")
+                                                                                                                                    }><span class="glyphicon glyphicon-edit"></span>&nbsp;<span>Edit</span></a>
+        </div>
+        <div class="row">
+            <div class="pull-left">
+                <label class="btn btn-xs btn-raised" onclick="hideAllInlineComments(this)"><span class="glyphicon glyphicon-eye-open"></span>&nbsp; highlights</label>
+            </div>
+            <div class="pull-right">
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a class="btn" title="share to facebook" onclick="shareFacebook(this)" data-url="https://www.nowtoshare.com/en/Article/Index/@(Model.Article.ArticleId)"><span class="fa fa-facebook" aria-hidden="true"></span></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn" title="share to twitter" href="https://twitter.com/intent/tweet?text=@Uri.EscapeDataString(ViewBag.Title)&&url=https://www.nowtoshare.com/en/Article/Index/@(Model.Article.ArticleId)&hashtags=@tagStr"><span class="fa fa-twitter" aria-hidden="true"></span></a></li>
+                    <li class="list-inline-item">
+                        <a class="btn" title="share to wechat" onclick="showShareWeChatModal()"> <span class="fa fa-weixin" aria-hidden="true"></span></a></li>
+                    <li class="list-inline-item">
+                        <a class="btn" title="share to weibo" href="http://service.weibo.com/share/share.php?url=https://www.nowtoshare.com/en/Article/Index/@(Model.Article.ArticleId)&appkey=&title=@Uri.EscapeDataString(ViewBag.Title)&pic=http://@(Request.Url.Host)/Content/img/home-bg.png&language=zh_cn"><span class="fa fa-weibo" aria-hidden="true"></span></a></li>
+                </ul>
+            </div>
+            <span class="label label-info pull-right" style="margin: 15px;">
+                @Blog.Resources.Global.DonateRequest
+                <a href="javascript:submitDonateForm()" title="donate, redirect to paypal" id="donateBtn" class="btn-link"><span class="fa fa-money" aria-hidden="true"></span>&nbsp;<b>@Blog.Resources.Global.Donate</b></a>
+            </span>
+
+
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 col-md-12">
+                <span style="display: none" itemprop='image' itemscope itemtype='http://schema.org/ImageObject'>
+                    <link itemprop="url" href="@ScreencaptureHelper.GetInstance().GetImageRelativePathByUrl(Request.Url.ToString())"/>
+                </span>
+                <a itemprop="url" href="@Request.Url.ToString()" style="display: none"></a>
+
+
+                <div id="articleContent" class="cell shadow--2dp" itemprop="articleBody">@Html.Raw(HttpUtility.HtmlDecode(Model.Article.Content))</div>
+                <br/>
+                <hr/>
+
+
+                <!-- Blog Comments -->
+                <button class="btn btn-primary btn-raised btn-block" data-toggle="modal" data-target="#Comment" id="LeaveComment" @if (ViewBag.isPreView != null && ViewBag.isPreView)
+                                                                                                                                  {
+                                                                                                                                      @Html.Raw("disabled = 'disabled'")
+                                                                                                                                  }><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;&nbsp;@Blog.Resources.Global.LeaveComment</button>
+                <a id="expandCommentsBtn" class="btn btn-primary btn-raised btn-block" data-toggle="collapse" href="#comments" @if (ViewBag.isPreView != null && ViewBag.isPreView)
+                                                                                                                               {
+                                                                                                                                   @Html.Raw("disabled = 'disabled'")
+                                                                                                                               }>@Blog.Resources.Global.Comments &nbsp;<span class="badge">@Model.RootComments.Count</span><span class="pull-right glyphicon glyphicon-chevron-down" id="expandIcon"></span></a>
+                <hr/>
+                <!-- Comment -->
+                <div class="collapse" id="comments">
+                    @if (Model.RootComments != null)
+                    {
+                        for (int i = 0; i < Model.RootComments.Count; i++)
+                        {
+                            var item = Model.RootComments.ElementAt(i);
+                            <!-- Comment -->
+                            <div class="media panel">
+                                <a class="pull-left btn" href="@(item.ParentComment.CommenterId == 0 ? Html.Raw("javascript:void()") : Html.Raw("/" + lang + "/User/Index/" + item.ParentComment.CommenterId))">
+                                    <img class="media-object" src="@(item.ParentComment.ProfileImage == null ? @Html.Raw("http://placehold.it/64x64") : Html.Raw("/Content/users/" + item.ParentComment.CommenterId + "/profile/" + item.ParentComment.ProfileImage))" alt="">
+                                </a><span class="badge pull-right">
+                                    @(i + 1)@switch ((i + 1) % 10)
+                                            {
+                                                case 2:
+                                                    WriteLiteral("nd");
+                                                    break;
+                                                case 3:
+                                                    WriteLiteral("rd");
+                                                    break;
+                                                case 1:
+                                                    WriteLiteral("st");
+                                                    break;
+                                                default:
+                                                    WriteLiteral("th");
+                                                    break;
+                                            } Floor
+                                </span>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        @item.ParentComment.CommentName
+
+                                        <small>
+                                            <em>
+                                                From @if (item.ParentComment.Country == null)
+                                                     {
+                                                         @Html.Raw("Mars")
+                                                     }
+                                                     else
+                                                     {
+                                                         @item.ParentComment.Country
+                                                     }
+                                            </em>
+                                            <p class="postdate">@item.ParentComment.CreateDate</p>
+                                        </small>
+                                    </h4>
+
+                                    <a class="pull-right btn replyBtn" data-value="@item.ParentComment.CommentId" data-content="@HttpUtility.HtmlDecode(item.ParentComment.Content)" data-contentName="@item.ParentComment.CommentName" data-toggle="modal" data-target="#Comment"><span class="glyphicon glyphicon-comment"></span></a>
+                                    @Html.Raw(HttpUtility.HtmlDecode(@item.ParentComment.Content))
+
+                                    <!-- Nested Comment -->
+                                    @if (item.ChildComments != null)
+                                    {
+                                        foreach (var subitem in item.ChildComments)
+                                        {
+                                            <div class="media">
+                                                <a class="pull-left" href="@(subitem.CommenterId == 0 ? Html.Raw("javascript:void()") : Html.Raw("/" + lang + "/User/Index/" + subitem.CommenterId))">
+                                                    <img class="media-object" src="@(subitem.ProfileImage == null ? @Html.Raw("http://placehold.it/64x64") : Html.Raw("/Content/users/" + subitem.CommenterId + "/profile/" + subitem.ProfileImage))" alt="">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">
+                                                        @subitem.CommentName
+                                                        <small>@subitem.CreateDate</small>
+                                                    </h4>
+                                                    @Html.Raw(HttpUtility.HtmlDecode(subitem.Content))
+                                                </div>
+                                            </div>
+                                            <!-- End Nested Comment -->
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<div class="modal fade" id="modalEditTitle" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Title Edit</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group  input-group-sm">
+                    <span class="input-group-addon">Title</span>
+                    <input type="text" class="form-control" id="titleModified" value="@Model.Article.Title">
+                </div>
+                <br/>
+                <div class="input-group  input-group-sm">
+                    <span class="input-group-addon">SubTitle</span>
+                    <input type="text" class="form-control" id="subTitleModified" value="@Model.Article.SubTitle">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="pop-up-confirm" class="btn btn-primary btn-raised btn-sm" onclick="updateTitle()">Comfirm</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="Comment" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@Model.Article.Title</h4>
+            </div>
+            <div class="modal-body">
+                <!-- Comments Form -->
+                <div class="panel" style="padding: 10px;">
+                    @*<h4 id="CommentTitle">Leave a Comment:</h4>*@
+                    <blockquote id="CommentContext" hidden></blockquote>
+                    @using (Html.BeginForm("CommentPost", "Article", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(a => a.CommentArticle.ReplyId, new {id = "ReplyId"})
+                            <div class="form-group">
+                                @Html.LabelFor(a => a.CommentArticle.Content)
+                                @Html.TextAreaFor(a => a.CommentArticle.Content, new {name = "Content", id = "CommentArticle_Content", rows = "3"})
+                                <a class="btn btn-xs btn-raised" id="emojiEntry" href="#" data-toggle="popover" data-placement="buttom"><span class="glyphicon glyphicon-picture"></span></a>
+                            </div>
+                            @Html.HiddenFor(a => a.Article.ArticleId, new {value = Model.Article.ArticleId, id = "commentArea"})
+                            @Html.HiddenFor(a => a.Token, new {id = "Token"})
+                            <div class="form-group label-floating is-empty">
+                                @Html.LabelFor(a => a.CommentArticle.Email, new {@class = "control-label"})
+                                @Html.TextBoxFor(a => a.CommentArticle.Email, new {@class = "form-control", name = "Email", id = "CommentArticle_Email", type = "email"})
+                                <p class="help-block text-warning">@Blog.Resources.Global.EmailPrivacyPolicy</p>
+                            </div>
+                            @*<textarea class="form-control" ,name="Content", id="Content",rows="3"></textarea>*@
+                        </div>
+                        <button type="submit" id="commentSubmit" class="btn btn-raised btn-primary" style="display: none">Submit</button>
+                        <div class="g-recaptcha" id="recapchaWidget"></div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="emojiPack" class="popper-content hide">
+    <div class="panel panel-default">
+        <div class="panel-heading" id="emojiheader">
+            <ul class="nav nav-tabs">
+                @for (var i = 0; ViewBag.emoji != null && i < ViewBag.emoji.Length; i++)
+                {
+                    <li role="presentation"><a class="btn" onclick="getEmoji(this);" lang="@lang" data-value="@i">@ViewBag.emoji[i]</a></li>
+                }
+                <li><button type="button" class="close emojiCloseBtn pull-right" onclick="$('#emojiEntry').click()">&times;</button></li>
+            </ul>
+        </div>
+        <div class="panel-body" id="emojicontent">
+            <div class="row emoji">
+
+                <div id="emojisList">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<div class="modal fade" id="wechatshare">
+    <div class="modal-dialog  modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">@Blog.Resources.Global.ShareToMyWechat</h5>
+            </div>
+            <div class="modal-body">
+                <img class="center-block" src="" id="qrcode" alt="QR Code">
+                <hr/>
+                <p>@Blog.Resources.Global.ShareToMyWechatHelper</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Blog.Resources.Global.Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="codeRun">
+    <div class="modal-dialog  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Code online Compiler - Current Language: <b id="currentLanguage"></b></h4>
+            </div>
+            <div class="modal-body">
+
+                <button class="btn btn-raised pull-right" onclick="resize(1)" id="resizeBtn"><span class="glyphicon glyphicon-resize-full"></span></button>
+                <button class="btn btn-raised pull-left" onclick="resetCode()"><span class="glyphicon glyphicon-repeat"></span></button>
+                <div class="form-group">
+                    <label class="control-label">Adding Template:</label>
+                    <select class="form-control" id="templateSelector" onchange="addTemplate(this)">
+                        <option value="-1">No template</option>
+                        <option value="0">Java Main Class Template</option>
+                        <option value="1">C# Main Class Template</option>
+                    </select>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div id="codeEditor"></div>
+                </div>
+
+                <br/>
+                <textarea id="rawCode" style="display: none"></textarea>
+                <label for="execute-result"><b>Result: </b></label>
+                <div class="panel panel-default">
+                    <div ><pre id="execute-result"></pre>
+                    </div>
+                </div>
+                <span class="text-danger">Current compiler only supports java and C#. Other languages will come soon.</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal" onclick="executeCode(this)" id="executeBtn">Execute</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Blog.Resources.Global.Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<input hidden id="userId" value="@Session["LoggedUserID"]"/>
+<input hidden id="articleId" value="@Model.Article.ArticleId"/>
+<input hidden id="authorId" value="@Model.Article.AuthorId"/>
+</div>
+@* ReSharper disable once MisuseOfOwnerFunctionThis *@
+
+
+@section styles{
+    @*<link href="/Scripts/TextEditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet" />*@
+<link href="~/Content/code-pretty/code-pretty.css" rel="stylesheet" />
+    <link href="/Content/css/page/Article.css" rel="stylesheet" />
+}
+@section scripts{
+    <script>
+        var verifyCallback = function(token) {
+            $('#Token').val(token);
+            $('#commentSubmit').show();
+        }
+        var widgetId1;
+        var onloadCallback = function() {
+            widgetId1 = grecaptcha.render('recapchaWidget',
+            {
+                'sitekey': '6LfBjBEUAAAAAJntYcb9lG3_Wr6qNL0LC1sTRQal',
+                'callback': verifyCallback,
+                'theme': 'light'
+            });
+        };
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1912251295679877',
+                autoLogAppEvents: true,
+                xfbml: true,
+                mobile_iframe: true,
+                version: 'v2.9'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    @{
+        var languageCode = lang == "zh" ? "zh-CN" : "en";
+    }
+    @*<script src="/Scripts/TextEditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>*@
+<script src="~/Scripts/prettify.min.js"></script>
+    <script src="~/Scripts/Article/Index.js"></script>
+    @*<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>*@
+    <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit&hl=@languageCode' async defer></script>
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+}
+

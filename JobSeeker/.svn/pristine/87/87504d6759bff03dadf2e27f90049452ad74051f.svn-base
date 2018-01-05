@@ -1,0 +1,5 @@
+.index-pic{
+        height: 231px;
+    margin-top: 45px;
+    text-align: -webkit-center;
+}

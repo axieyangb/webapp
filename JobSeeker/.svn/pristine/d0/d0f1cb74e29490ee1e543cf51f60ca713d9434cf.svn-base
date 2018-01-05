@@ -1,0 +1,10 @@
+export class Job {
+    Id: number;
+    JobDescription: string;
+    URL: string
+    Depth: number
+    IsVisited: boolean
+    Note: string
+    CreateDate: string
+    LastUpdateDate: string
+}

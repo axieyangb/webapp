@@ -1,0 +1,35 @@
+﻿@model Blog.Models.Member
+@{ 
+    ViewBag.Title = "Login | Now to share";
+    ViewBag.PageDescription = "Login page. Once you login, you will find a new world";
+}
+<div class="wrapper well">
+    @* ReSharper disable once UnknownCssClass *@
+      @using (Html.BeginForm("Login", "Admin", FormMethod.Post, new {@class= "form form-signin shadow--2dp" }))
+      {
+          <h2 class="form-signin-heading"><span class="glyphicon glyphicon-user"></span>&nbsp;@Blog.Resources.Global.Login</h2>
+            @Html.AntiForgeryToken()
+          @Html.ValidationSummary(true)
+        <div class="form-group label-floating is-empty">
+            @Html.LabelFor(a => a.UserName,Blog.Resources.Global.Username, new {@class= "control-label" })
+            @Html.TextBoxFor(a => a.UserName, new { @class = "form-control username-field"})
+           </div>
+          <div class="form-group label-floating is-empty">
+              @Html.LabelFor(a => a.Password, Blog.Resources.Global.Password, new { @class = "control-label" })
+              @Html.PasswordFor(a => a.Password, new {@class = "form-control password password-field",})
+          </div>
+            @Html.ValidationMessageFor(a => a.Password)
+            @*<div class="checkbox">
+                <label>
+                    <input type="checkbox">&nbsp;<span id="checkBoxInfo"> @Blog.Resources.Global.RememberMe</span>
+                </label>
+            </div>*@
+            <br>
+            <br>
+          <button type="submit" class="btn btn-lg btn-raised btn-primary btn-block"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;@Blog.Resources.Global.Login</button>
+            <br><a id="noAccount" href='@Url.Action("Signup","Admin")'>@Blog.Resources.Global.NoAccount</a>
+            }
+
+
+        </div>
+

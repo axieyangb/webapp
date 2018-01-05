@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container col-xs-12 col-sm-4 col-sm-offset-4">
+
+        <form class="form-signin" action="@Url.Action("SignIn","WebCam")" method="post">
+            <h2 class="form-signin-heading">@Blog.Resources.Global.SignIn:</h2>
+            <label for="inputEmail" class="sr-only">@Blog.Resources.Global.Username</label>
+            <input type="text" name="inputUserName" class="form-control" placeholder="User Name" required autofocus>
+            <br/>
+            <label for="inputPassword" class="sr-only">@Blog.Resources.Global.Password</label>
+            <input type="password" name="inputPassword" class="form-control" placeholder="Password" required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me">@Blog.Resources.Global.RememberMe
+                </label>
+            </div>
+            <button class="btn btn-lg btn-block" type="submit">@Blog.Resources.Global.SignIn</button>
+        </form>
+
+    </div> <!-- /container -->

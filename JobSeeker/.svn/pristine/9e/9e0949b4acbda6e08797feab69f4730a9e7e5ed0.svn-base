@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using JobSeeker.BAL.UrlHandlerPatterns;
+using JobSeeker.Model;
+
+namespace JobSeeker.BAL
+{
+    public class Entry
+    {
+        private UrlHandler<JobContext.Job> _handler;
+        private readonly UrlStorage _storage;
+        public Entry(LinkedList<string> urls)
+        {
+            _storage = new UrlStorage(urls);
+        }
+
+        public void Start()
+        {
+            do
+            {
+                try
+                {
+                    string url = _storage.GetUrl();
+                    _handler = new MonsterRegexHandler(url);
+                    
+                    //find deeper urls for further data grabing
+                    var moreUrls = _handler.GetHtmlUrlList();
+                    foreach (var one in moreUrls)
+                    {
+                        _storage.AddToUnVisted(one);
+                    }
+
+                    //find the useful urls for target data
+                    var detailUrls = _handler.GetTargetUrlList();
+                    foreach (var one in detailUrls)
+                    {
+                        _storage.AddToTargetUrl(one);
+                    }
+                    _storage.AppendToFile(url);
+                }
+                catch (Exception e)
+                {
+
+                }
+            } while (!_storage.IsEmpty() && !_storage.IsFull());
+            var urls = _storage.GetTargetUrl();
+
+            HashSet<string> historyTargets = historyJobLinks();
+            using (var data =new JobContext())
+            {
+                foreach (var oneUrl in urls)
+                {
+                    if (historyTargets.Add(oneUrl))
+                    {
+                        var job = new JobContext.Job {URL = oneUrl, CreateDate = DateTime.Now,Note = ""};
+                        data.Jobs.Add(job);
+                        data.SaveChanges();
+                    }
+                }
+               
+
+            }
+  
+
+        }
+
+
+        public HashSet<string> historyJobLinks()
+        {
+            using (var data = new JobContext())
+            {
+                return (from a in data.Jobs select a.URL).ToHashSet();
+            }
+        } 
+        public void SaveToFile(LinkedList<string> urls)
+        {
+            FileInfo oneFile = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), "output.txt"));
+            var st = oneFile.AppendText();
+            foreach (var one in urls)
+            {
+                st.WriteLine(one);
+            }
+            st.Close();
+        }
+
+    }
+}

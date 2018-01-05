@@ -1,0 +1,102 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using JobSeeker.DBModel;
+
+namespace JobSeeker.BAL
+{
+    public static class Extensions
+    {
+        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source)
+        {
+            return new HashSet<T>(source);
+        }
+    }
+   public class UrlStorage
+   {
+       private readonly HashSet<string> _urlContainer;
+       private readonly LinkedList<string> _unVisitedUrls;
+       private readonly LinkedList<string> _targetUrls;
+       private readonly HashSet<string> _historyTargetUrls;
+       private readonly int _upboundNum;
+        public UrlStorage(LinkedList<string> entries )
+       {
+           _urlContainer = new HashSet<string>();
+            _unVisitedUrls = entries;
+            _targetUrls = new LinkedList<string>();
+            _historyTargetUrls = GetAllHistoryTargetUrls();
+            _upboundNum = 1000;
+        }
+
+   
+        private HashSet<string> GetAllHistoryTargetUrls()
+       {
+           HashSet<string> ret;
+           using (var data = new JobContext())
+           {
+               ret = (from a in data.Jobs select a.URL).Distinct().ToHashSet();
+           }
+            return ret;
+       }
+
+       //private HashSet<string> GetAllvisitedUrl()
+       //{
+       //     var currentPath = Directory.GetCurrentDirectory();
+       //     var filePath = Path.Combine(currentPath, "visitedUrls.txt");
+       //     HashSet<string> entryUrls =new HashSet<string>();
+       //     using (var st = new StreamReader(filePath))
+       //     {
+       //         while (!st.EndOfStream)
+       //         {
+       //             entryUrls.Add(st.ReadLine());
+       //         }
+       //     }
+       //     return entryUrls;
+       // }
+
+       public void AppendToFile(string url)
+       {
+            FileInfo oneFile = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), "Files/visitedUrls.txt"));
+           using (var st = oneFile.AppendText())
+           {
+               st.WriteLine(DateTime.Now+"\t"+url);
+           }
+        }
+       public void AddToUnVisted(string url)
+       {
+            if(IsFull()) return;
+            if (_urlContainer.Contains(url)) return;
+           _unVisitedUrls.AddLast(url);
+           _urlContainer.Add(url);
+       }
+
+       public bool IsEmpty()
+       {
+           return _unVisitedUrls.Count == 0;
+       }
+
+       public bool IsFull()
+       {
+           return _unVisitedUrls.Count >= _upboundNum;
+       }
+        public string GetUrl()
+        {
+            string ret = _unVisitedUrls.First.Value;
+            _unVisitedUrls.RemoveFirst();
+            return ret;
+        }
+
+       public void AddToTargetUrl(string url)
+       {
+            if (_targetUrls.Contains(url)) return;
+            Console.WriteLine(url);
+            _targetUrls.AddLast(url);
+        }
+
+       public LinkedList<string> GetTargetUrl()
+       {
+           return _targetUrls;
+       }
+    }
+}

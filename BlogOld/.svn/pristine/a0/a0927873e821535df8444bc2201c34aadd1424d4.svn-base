@@ -1,0 +1,46 @@
+﻿@model Blog.Models.ImageViewModel
+@if (Model != null)
+{
+    <div class="col-lg-3 col-md-4 col-xs-6 unit" id="@Model.ImageId">
+        <div class="thumb">
+            <div class="front">
+                @if (Model.ContentType.Contains("video"))
+                {
+                <img src="~/Content/img/video-icon.svg" alt="Hejsan" id="#image" data-source="@Model.Url" class="img-thumbnail" />
+                }
+                else
+                {
+                <img src="@Model.Url.Substring(0, Model.Url.Length - Model.FileName.Length)thumbtail/@Model.FileName" alt="Hejsan" data-source="@Model.Url" class="img-thumbnail" />
+                }
+            </div>
+            <div class="back">
+                <p class="alert alert-success">Post at @Model.UpdateDate</p>
+            </div>
+        </div>
+        <div class="detail row">
+            <div class="col-xs-12">
+                <span class="glyphicon glyphicon-copy input-group-addon btn btn-info" value="@Model.Url" onclick="copyToClipboard(this.getAttribute('value'))" data-toggle="tooltip" data-original-title="Copy to ClipBoard"> URL</span>
+            </div>
+                @using (Html.BeginForm("PicOperation", "DashBoard", FormMethod.Post))
+                {
+                    <input type="text" name="ImageID" id="imageID" value="@Model.ImageId" hidden/>
+                    <div class="col-xs-6 col-sm-4 ">
+                        <a class="btn  btn-xs  btn-primary btn-raised" data-src="@Model.Url" data-type="@Model.ContentType" data-toggle="modal" data-target="#MediaDetail">Large</a>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 ">
+                        <a class="btn btn-xs btn-raised btn-danger" data-toggle="modal" data-target="#modalPopMessage" name="DeletePicture" value="@Model.IsPublish">Delete</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 ">
+                        <a class="btn btn-xs btn-raised btn-info" onclick="showEditDescription(this)" value="@Model.IsPublish" data-imageId="@Model.ImageId">Edit</a>
+                    </div>
+                         <br />
+                        <span class="togglebutton">
+                            <label>
+                                <input type="checkbox" @(Model.IsPublish != 1 ? Html.Raw("") : Html.Raw("checked")) data-toggle="modal" data-target="#modalPopMessage" name="PublishOrPrivate" value="@Model.IsPublish" />@(Model.IsPublish == 1 ? Html.Raw("Be Private") : Html.Raw("Be Public"))
+                            </label>
+                        </span>
+                        @*<button type="button" class="btn btn-raised @(Model.IsPublish != 1 ? Html.Raw("btn-default") : Html.Raw("btn-primary")) btn-sm" data-toggle="modal" data-target="#modalPopMessage" name="PublishOrPrivate" value="@Model.IsPublish">@(Model.IsPublish == 1 ? Html.Raw("Be Private") : Html.Raw("Be Public"))</button>*@
+                        }
+                    </div>
+    </div>
+}

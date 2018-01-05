@@ -1,0 +1,33 @@
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Linq;
+using JobSearchAPI.BALModels;
+
+namespace JobSearchAPI.DBModels
+{
+    public  class JobContext : DbContext
+    {
+        public JobContext()
+            : base("name=JobContextDB")
+        {
+        }
+
+        public  DbSet<Job> Jobs { get; set; }
+        public DbSet<JobDetail> JobDetails { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("JobSeeker");
+        }
+
+        public List<JobSearchModel> SearchJobsByKeywords(string keywords)
+        {
+           return Database.SqlQuery<JobSearchModel>("JobSeeker.SearchJob @keywords", new SqlParameter("keywords",keywords)).ToList();
+        }
+        public List<JobItem> GetJobs(int? num)
+        {
+            return Database.SqlQuery<JobItem>("JobSeeker.GetJobs @num", new SqlParameter("num", num ?? 0)).ToList();
+        }
+    }
+}

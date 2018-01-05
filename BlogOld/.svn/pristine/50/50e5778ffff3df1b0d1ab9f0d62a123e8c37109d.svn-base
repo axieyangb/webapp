@@ -1,0 +1,139 @@
+﻿@model Blog.Models.Member
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "~/Views/Dashboard/_Layout.cshtml";
+}
+
+<script src="~/Scripts/FileUpload/bootstrap-filestyle.min.js"></script>
+
+                        <h1 class="page-header">
+                            Edit Profile <small>Update your profile</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i>Dashboard
+                            </li>
+                        </ol>
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-3">
+            <div class="text-center">
+                <img src="@(Model.Profile.ProfileImageName==null ? @Html.Raw("//placehold.it/100") : Html.Raw("/Content/users/"+Model.UserID+"/profile/"+Model.Profile.ProfileImageName))" class="avatar img-circle" alt="avatar" id="profileImg">
+                <h6>Upload Photo</h6>
+
+                <input class="filestyle form-control" id="imageFile" accept="image/gif, image/jpeg"  type="file" data-input="false" data-badge="false" onchange="selectFile(this)">
+                
+            </div>
+        </div>
+
+        <!-- edit form column -->
+        <div class="col-md-8 personal-info">
+            <div class="alert alert-info alert-dismissable">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <i class="fa fa-coffee"></i>
+                The size of the profile Image should not exceed <strong>5 MB</strong>, Only JPG/PNG is allowed
+            </div>
+            <div id="fileSelectedInfo" style="display: none"></div>
+            <h3>Personal info</h3>
+
+            <form class="form-horizontal" id="editForm" action="@Url.Action("SaveProfile")"  role="form">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Your User Name:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" value="@Model.UserName" disabled>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Title:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="text" name="Title" value="@Model.Profile.Title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Email:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" type="email" name="Email" value="@Model.Profile.Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Description:</label>
+                    <div class="col-lg-8">
+                       <textarea name="Description" class="form-control" rows="5">@Model.Profile.Description</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">NickName:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" name="NickName" type="text" value="@Model.Profile.NickName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">School:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" name="School" type="text" value="@Model.Profile.School">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Website:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" name="Website" type="text" value="@Model.Profile.Website">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Address:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" name="Address" type="text" value="@Model.Profile.Address">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">BirthDate:</label>
+                    <div class="col-md-8">
+                        @{
+                            string dateTimeStr = "";
+                            DateTime dateTime;
+                            if (DateTime.TryParse(Model.Profile.BirthDate.ToString(), out dateTime))
+                            {
+                                dateTimeStr = dateTime.ToString("yyyy-MM-dd");
+                            }
+                        }
+                        <input class="form-control" name="BirthDate" type="date" value="@dateTimeStr">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                        <input type="button" class="btn btn-primary" onclick="submitForm()" value="Save Changes">
+                        <span></span>
+                        <input type="reset" class="btn btn-default" value="Cancel">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+<div class="modal fade" id="profileChangeModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">       
+                    <span aria-hidden="true">&times;</span> 
+                </button>
+                
+                <h5 class="modal-title">Save Change</h5>
+            </div>
+            <div class="modal-body" id="resultBody">
+             
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+@section scripts{
+    <script src="~/Scripts/Dashboard/profileEdit.js"></script>
+}

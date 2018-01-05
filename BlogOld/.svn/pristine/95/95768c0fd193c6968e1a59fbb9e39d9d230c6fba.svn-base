@@ -1,0 +1,84 @@
+﻿@model Blog.Models.Profile
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<input style="display: none" id="userId" value="@Model.UserID"/>
+<div class="container profile">
+    <div class="row">
+        <br/>
+        <br />
+        <div class="well col-xs-12 row">
+            <div class="col-xs-12 col-md-3">
+                <img src="@(Model.ProfileImageName == null ? @Html.Raw("//placehold.it/100") : Html.Raw("/Content/users/" + Model.UserID + "/profile/" + Model.ProfileImageName))"/>
+                <div> <a class="btn btn-primary btn-sm" href="mailto:@Model.Email">@Blog.Resources.Global.ContactMe</a></div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <h2>@Model.NickName</h2>
+                <span data-toggle="tooltip" data-placement="top" title="Email" ><span class="glyphicon glyphicon-envelope"></span> &nbsp; @Model.Email</span>
+                <br/>
+                <span data-toggle="tooltip" data-placement="top" title="Title" ><span class="glyphicon glyphicon-briefcase"></span> &nbsp; @Model.Title</span>
+                <br/>
+                <span data-toggle="tooltip" data-placement="top" title="Website" ><span class="glyphicon glyphicon-globe"></span> &nbsp; <a href="@Model.Website" target="_blank">@Model.Website</a></span>
+                <br/>
+                <span data-toggle="tooltip" data-placement="top" title="Register Date" ><span class="glyphicon glyphicon-calendar"></span> &nbsp; @Model.CreateDate</span>
+                <br />
+                @{
+                    string ageStr ="";
+                    DateTime birthDate;
+                    if (DateTime.TryParse(Model.BirthDate.ToString(), out birthDate))
+                    {
+                        int age = (int) ((DateTime.Today - birthDate.Date).TotalDays / 365.2425);
+                        ageStr += age;
+                    }
+                }
+                <span data-toggle="tooltip" data-placement="top" title="Age"><span class="fa fa-birthday-cake"></span> &nbsp;@ageStr</span>
+                <br />
+                <span data-toggle="tooltip" data-placement="top" title="School"><span class="fa fa-graduation-cap"></span> &nbsp;@Model.School</span>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <ul class="list-inline stats">
+                    <li class="inline">
+                        <span id="articles">0 </span>@Blog.Resources.Global.Article
+                    </li>
+                    <li class="inline stats"><span id="photos">0 </span> @Blog.Resources.Global.Photo</li>
+                    <li class="inline stats"><span id="replies">0</span> @Blog.Resources.Global.Reply</li>
+                </ul>
+            </div>
+        </div>
+        <div class="well col-xs-12">
+            <h3>@Blog.Resources.Global.AboutMe :</h3>
+            @if (string.IsNullOrEmpty(Model.Description))
+            {
+                <p>
+                    This User has not left any description about himself.
+                </p>
+            }
+            else
+            {
+                <p>
+                    @Model.Description
+                </p>
+            }
+
+        </div>
+        <div class="col-xs-12 well">
+            <h3>
+                @Blog.Resources.Global.RecentPublish :
+            </h3>
+            <div id="articleList"></div>
+        </div>
+    </div>
+</div>
+    
+
+<a id="return-to-top" class="cursor-pointer" title="Return to top" onclick="animatedScoll()"><span class="glyphicon glyphicon-chevron-up"></span></a>
+
+@section styles{
+<link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/page/user.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Scripts/User/Index.js"></script>
+}

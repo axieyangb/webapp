@@ -1,0 +1,30 @@
+﻿
+    .customize-mdl-card__play-btn {
+    display: flex;
+        min-height: 210px;
+    }
+
+    .customize-mdl-card__play-btn > button {
+        margin: auto;
+    }
+    .mdl-button--icon .large {
+        height:64px;
+        width: 64px;
+    }
+
+    .mediaContainers {
+        display: none;
+    }
+    .withoutShadow {
+        box-shadow: none;
+    }
+    .withoutShadow :selection {
+        box-shadow: none;
+    }
+.playTimeDisplay {
+    margin: 0 20px;
+}
+.mdl-slider__background-middle{
+    background: rgb(255, 82, 82);
+    opacity: 0.4;
+}

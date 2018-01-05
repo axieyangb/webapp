@@ -1,0 +1,42 @@
+import { Component, OnInit } from '@angular/core';
+import {User} from '../user/user';
+import {UserService} from '../user/userservice';
+@Component({
+    moduleId: module.id,
+    selector: 'job-account',
+    templateUrl: 'accountComponent.html',
+    styleUrls:['accountComponent.css'],
+    providers:[UserService]
+})
+export class AccountComponent implements OnInit {
+    private user:User=new User();
+    private inputPassword:boolean=false;
+    private isExisted:boolean=true;
+    constructor(private userservice:UserService) { }
+
+    ngOnInit() { 
+
+    }
+
+    login(){
+          this.userservice.login(this.user).subscribe(res=> alert(res));
+    }
+
+    next(){
+        if(this.user.username.length>0)
+        {
+            this.findUser();
+            
+        }
+    }
+
+    back()
+    {
+        this.inputPassword=false;
+    }
+    findUser()
+    {
+        this.userservice.findUser(this.user).subscribe(res=>{this.isExisted=res;this.inputPassword=res});
+    }
+
+}

@@ -1,0 +1,101 @@
+﻿
+.customize-mdl-card__player {
+    min-height: 210px;
+    background: #000 url('/Content/Imgs/MediaController/play.svg') no-repeat center center;
+    -ms-background-size: 72px 72px;
+    background-size: 72px 72px;
+    bottom: 0;
+    content: '';
+    left: 0;
+    -ms-opacity: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -moz-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -ms-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -o-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.hoverShadow:hover > .customize-mdl-card__player {
+    -ms-opacity: 0.5;
+    opacity: 0.5;   
+}
+
+.customize-mdl-card__ui-video-player-playing {
+    min-height: 210px;
+    background: #000 url('/Content/Imgs/MediaController/pause.svg') no-repeat center center;
+    -ms-background-size: 72px 72px;
+    background-size: 72px 72px;
+    -ms-opacity: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),background 0 ease 0.2s;
+    -moz-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),background 0 ease 0.2s;
+    -ms-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),background 0 ease 0.2s;
+    -o-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),background 0 ease 0.2s;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),background 0 ease 0.2s;
+    cursor: pointer;
+}
+
+.mdl-slider__container,.playTimeDisplay  {
+    -ms-opacity: 0;
+    opacity: 0;
+}
+
+.hoverShadow:hover > .mdl-card > .mdl-card__actions>.mdl-slider__container,
+.hoverShadow:hover > .mdl-card > .mdl-card__actions>.playTimeDisplay  {
+    -ms-opacity: 1;
+    opacity: 1;
+}
+.customize-mdl-card__ui-video-player-playing ~.mdl-card > .mdl-card__actions >.mdl-slider__container,
+.customize-mdl-card__ui-video-player-playing ~.mdl-card > .mdl-card__actions >.playTimeDisplay  {
+    -ms-opacity: 1;
+    opacity: 1;
+}
+.customize-mdl-card__ui-video-player-playing:hover {
+        -ms-opacity: 0.2;
+        opacity: 0.2;
+    }
+
+/*.customize-mdl-card__play-btn > button {
+        margin: auto;
+    }*/
+.mdl-button--icon .large {
+    height: 64px;
+    width: 64px;
+}
+
+.mediaContainers {
+    display: none;
+}
+
+.withoutShadow {
+    -webkit-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none;
+}
+
+.withoutShadow :selection {
+        box-shadow: none;
+    }
+
+.playTimeDisplay {
+    margin: 0 20px;
+}
+
+.mdl-slider__background-middle {
+    background: rgb(255, 82, 82);
+    -ms-opacity: 0.4;
+    opacity: 0.4;
+}
+
+.cover {
+    position: absolute;
+    z-index: -10;
+    display: initial;
+}
+
+button.fullscreenButton {
+    float: right;
+    margin-right: 20px;
+}

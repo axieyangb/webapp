@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  
+<connectionStrings>
+  <add name="JobSeeker" connectionString="data source=sql5017.myasp.net;initial catalog=DB_9E0463_Blog;user id=DB_9E0463_Blog_admin;password=a6163484a;database=DB_9E0463_Blog;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" /><add name="Jobs" connectionString="data source=SQL5017.myASP.NET;initial catalog=DB_9E0463_Blog;user id=DB_9E0463_Blog_admin;password=a6163484a;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" /></connectionStrings>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="MySql.Data" publicKeyToken="c5687fc88969c44d" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-6.8.3.0" newVersion="6.8.3.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+</configuration>

@@ -1,0 +1,4 @@
+﻿@Styles.Render("~/bundles/css/admin")
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}

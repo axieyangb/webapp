@@ -1,0 +1,24 @@
+﻿.img-circle {
+  border-radius: 50%;
+  vertical-align: middle;
+    width: 70%;
+    display: block;
+    margin: 0px auto;
+    max-width: 100%;
+    height: auto;
+    border: 0;
+}
+.text-center {
+    text-align: center;
+}
+.left-align {
+        text-align: left;
+}
+.helping-text {
+    /*margin: 0;*/
+}
+.small {
+    font-weight: normal;
+  line-height: 1;
+  color: #777;
+}

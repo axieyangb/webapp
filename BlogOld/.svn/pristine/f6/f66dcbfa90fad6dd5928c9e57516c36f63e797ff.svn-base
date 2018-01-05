@@ -1,0 +1,14 @@
+﻿@model List<Blog.Models.Article>
+@foreach (var oneArticle in Model)
+{
+    <tr data-articleId="@oneArticle.ArticleId">
+        <td>
+            <a href="@Url.Action("Index","Article", new {articleId=@oneArticle.ArticleId} )" target="_blank">@oneArticle.Title</a>
+        </td>
+        <td>@oneArticle.PostDate.ToString("MM/dd/yyyy")</td>
+        <td>@if(oneArticle.ModifyDate!=null) {@Html.Raw(((DateTime)oneArticle.ModifyDate).ToString("MM/dd/yyyy"))}</td>
+        <td>
+            <button class="btn btn-default" data-toggle="modal" data-target="#confirm" data-actionCode="2" data-articleId="@oneArticle.ArticleId">Delete</button>
+        </td>
+    </tr>
+}

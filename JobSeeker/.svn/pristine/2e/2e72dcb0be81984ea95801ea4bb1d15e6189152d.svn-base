@@ -1,0 +1,47 @@
+import { JobService } from './../job/jobservice';
+import {Job} from './../job/job';
+import { Component, OnInit  } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+@Component({
+    moduleId: module.id,
+    selector: 'job-list',
+    templateUrl: 'jobListComponent.html',
+    styleUrls:['jobListComponent.css']
+})
+export class JobListComponent implements OnInit {
+    jobs:Job[];
+    oneJob:Job;
+    keywords:string;
+    listValid:boolean;
+    constructor(private jobservice:JobService,private route: ActivatedRoute,private router:Router) { 
+        this.listValid=true;
+        this.keywords="";
+        this.jobs=[];
+        this.oneJob=new Job();
+    }
+    ngOnInit() { 
+        this.route.params.map(a =>a["keywords"]).subscribe(a=>{this.keywords=a});
+        if(this.keywords!=null)
+        this.searchJobs();
+    }
+
+    getAllJobs():void{
+        this.jobservice.getAllJobs().subscribe(jobs => this.jobs=jobs);
+    }
+
+    updateUrl():void{
+        this.router.navigate(['/list',{'keywords':this.keywords}]);
+    }
+    searchJobs():void{
+        this.router.navigate(['/list',{'keywords':this.keywords}]);
+        if(this.keywords!="")
+        {
+            this.listValid=false;
+        this.jobservice.searchJobs(this.keywords).subscribe(jobs => {this.jobs=jobs;this.listValid=true});
+        }
+    }
+    showMoreDescription(targetJob:Job):void{
+         this.jobservice.getJobById(targetJob.Id).subscribe(oneJob =>{targetJob.JobDescription=oneJob.JobDescription; }
+    }
+
+}

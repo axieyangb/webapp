@@ -1,0 +1,120 @@
+﻿
+#main {
+    width: 100%;
+    margin: 0;
+    height: calc(100vh - 110px);
+    display: flex;
+    background: #202020;
+}
+#sidebar {
+    flex-basis: 80px;
+    background: #202020;
+    display: flex;
+    flex-direction: column;
+    color: #838383;
+    font-size: 60px;
+    align-items: center;
+}
+.side-items:hover {
+    color: white;
+}
+.side-items {
+    cursor: pointer;
+}
+
+#codeHistoryContent {
+    height: 400px;
+    overflow-y: scroll;
+}
+#codeHistoryContent li {
+    padding: 10px;
+}
+.cursor-pointer {
+    cursor:pointer
+}
+
+#toolBar {
+    z-index: 5;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: #202020;
+    padding: 3px;
+    display: flex;
+    color: white;
+    /*border-top: 1px solid #e1e1e1;*/
+}
+    #toolBar .form-group {
+        margin: 0;
+        padding-bottom: 0;
+       
+    }
+.form-control {
+    color: #838383;
+    padding-left: 12px;
+}
+
+.form-group .form-control {
+    margin-bottom: 0;
+}
+ option {
+     color: #555;
+ }
+#margin_left {
+    flex-basis: 80px;    
+} 
+.toolbar_section {
+    flex-basis: 250px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+    .toolbar_section > div {
+        flex-basis: 150px;
+    }
+    .toolbar_section > div >select{
+        cursor: pointer;
+    }
+
+#editorPanel {
+    flex: 1;
+    display: flex;
+}
+#codingPanel {
+    background: #333;
+    height: 100%;
+    flex-basis:1000px;
+
+}
+
+#resetCode > button {
+    color: white;
+}
+#resultPanel {
+    padding: 5px;
+    font-family: monospace;
+    flex: 1;
+    background: #333;
+    color: white;
+    font-size: 16px;
+    white-space: pre;
+    overflow-x: hidden;
+}
+
+#splitter {
+    z-index: 990;
+    background : url('../../img/handle-v.png') 1px 50% no-repeat;
+    filter: invert(80%);
+    cursor: col-resize;
+    z-index: 900;
+    flex-basis: 5px;
+    background-size: 80% 20px;
+}
+
+
+@media screen and (min-width: 1200px) {
+    #main {
+        height: calc(100vh - 120px);
+    }
+    }

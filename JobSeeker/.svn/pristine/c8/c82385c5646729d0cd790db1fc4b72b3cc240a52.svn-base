@@ -1,0 +1,9 @@
+<h3>Job List, total n jobs posted</h3>
+
+<ul class="jobs">
+    <li *ngFor="let Job of jobs | async">
+        <span>{{job.URL}}</span>
+        <br>
+        <span>{{job.JobDescription}}</span>
+    </li>
+</ul>

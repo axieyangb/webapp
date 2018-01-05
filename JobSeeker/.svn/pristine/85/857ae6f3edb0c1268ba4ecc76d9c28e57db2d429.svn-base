@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace JobSearchAPI.BALModels
+{
+    public class JobItem
+    {
+        public int Id { get; set; }
+        public string JobDescription { get; set; }
+        public string URL { get; set; }
+        public string Note { get; set; }
+        public DateTime? LastUpdateDate { get; set; }
+
+        public int DetailId { get; set; }
+        public int? Status { get; set; }
+
+        public int? InValidNum { get; set; }
+
+        public int? ThumbsUpNum { get; set; }
+
+        public int? VisitedNum { get; set; }
+
+        public string WebsiteName { get; set; }
+        public string Title { get; set; }
+        public string SubTitle { get; set; }
+    }
+}

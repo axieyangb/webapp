@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewBag.Title = "Music | Now to share";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.PageDescription = "Slow your pace, enjoy the music";
+    var lang = Blog.Helper.CultureHelper.GetCurrentCulture();
+    var languageCode = lang == "zh" ? "zh-CN" : "en";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div></div>
+    </div>
+</div>
+
+
+<video id="backend-video"  muted loop>
+    <source src="~/Content/img/backend-video.mp4" type="video/mp4" />
+        <source src="~/Content/img/backend-video.ogg" type="audio/ogg" />
+        <source src="~/Content/img/backend-video.webm" type="video/webm" />   
+</video>
+
+
+<script>
+    
+    (function() {
+        var video = document.getElementById("backend-video");
+        video.addEventListener( "canplay", function() {
+            video.play();
+        });
+    })();
+
+</script>
+<div class="panel panel-default" id="player">
+    <div class="panel-body" style="display:flex">
+
+        <div style="flex-basis:90px;">
+            <img id="imageCover" src="http://placehold.it/90X90" width="90" height="90" />
+        </div>
+        <div style="flex: 1">
+            <div class="player-progress-wrapper" style="display:flex">
+                <span id="primary-progress" style="flex:0.2"></span>
+                <span id="secondary-progress" style="flex:0.5"></span>
+                <span id="left-progress" style="flex:0.3"></span>
+            </div>
+            <div id="music-controller" style="display: flex">
+
+                <div id="sequence-controller" style="flex: 1;display: flex ">
+                    <div id="music-info" style="flex: 0.3;display: flex; flex-direction: column; justify-content: space-around">
+                        <h4 id="music-name"></h4>
+                        <span id="music-artist-album"></span>
+                    </div>
+                    <div style="flex: 0.7"></div>
+                </div>
+                <div id="play-control-section">
+                    <span class="fa fa-step-backward cursor-pointer" id="prevSongBtn" onclick="prevSong()"></span>
+                    <span class="fa fa-play-circle cursor-pointer" id="playBtn" onclick="playmusic(this)"></span>
+                    <span class="fa fa-step-forward cursor-pointer" id="nextSongBtn" onclick="nextSong()"></span>
+                </div>
+                <div id="menu-control" style="flex: 1; display: flex; flex-direction: row-reverse">
+                    <div id="music-menu-section" style="flex-basis: 180px; display: flex; justify-content: space-around; align-items: center">
+                        <span class="music-setting-section  cursor-pointer" id="music-volume" onclick="adjustVolume(this)">
+                            <span class="fa fa-volume-up"></span>
+                            <span id="volume-number" class="text-muted"></span>
+                        </span>
+                        <span class="music-setting-section cursor-pointer" id="music-menu-bar">
+                            <img src="~/Content/img/music-menu.svg" />
+                        </span>
+                    </div>
+                    <div id="playingSequence" style="flex-basis: 120px; display: flex; justify-content: space-around; align-items: center">
+                        <span class="cursor-pointer">
+                            <img src="~/Content/img/repeat.svg" data-value="0" onclick="changeSequence(this)" width="20" height="20" />
+                        </span>
+                    </div>
+                    <div id="music-playingTime" style="flex-basis:90px; display: flex; justify-content: space-around; align-items: center">
+                        <span id="currentPlayingTime">00:00</span>&nbsp;/&nbsp;
+                        <span id="totalPlayingTime">00:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-primary" id="currentPlayingListModal" style="display: none">
+            <div class="panel-heading" style="cursor: move" >
+                <button type="button" class="close" onclick="$('#currentPlayingListModal').hide()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Current Playing List</h4>
+                
+            </div>
+    <div class="panel-body">
+        <div id="toolBar">
+            <span class="btn btn-xs btn-raised btn-primary" onclick="shuffle()">Shuffle</span>
+            <span class="btn btn-xs btn-raised btn-default" id="moveUpBtn" onclick="move(-1)" style="display: none"><span class="fa fa-chevron-up"></span>&nbsp;Up</span>
+            <span class="btn btn-xs btn-raised btn-default" id="moveDownBtn" onclick="move(1)" style="display: none"><span class="fa fa-chevron-down"></span>&nbsp;Down</span>
+            <span class="btn btn-xs btn-raised btn-danger pull-right" id="deleteAll" onclick="deleteAll()"><span class="fa fa-trash"></span>&nbsp;Remove All</span>
+        </div>
+        <div id="playingList">
+            <ul class="list-group"></ul>
+        </div>
+        <div>
+            <button type="button" class="btn btn-default pull-right" onclick="$('#currentPlayingListModal').hide()">Close</button>
+        </div>
+    </div>
+  
+</div>
+
+
+
+
+<div class="panel panel-success" id="favorateListModal" style="display: none">
+            <div class="panel-heading">
+                <h4 class="modal-title">Favorate List</h4>
+            </div>
+            <div class="modal-body">
+                <div id="favorateList">
+                    <ul class="list-group"></ul>
+                </div>
+                <div>
+                    <span id="favorate-select-all" onclick="selectAllMusic(this)"><label class="cursor-pointer text-primary"><input type="checkbox">&nbsp;Select All</label></span>
+                    <button type="button" class="btn btn-primary" id="addToPlayingListBtn" disabled="disabled" onclick="addToPlayingList()">Playing Selected Musics</button>
+                    <button type="button" class="btn btn-default" onclick="$('#favorateListModal').hide()">Close</button>
+                </div>
+            </div>
+</div>
+
+<div style="display: none">
+    <audio id="current_player">
+        <source id="audioSource" type="audio/mpeg" />
+    </audio>
+</div>
+
+<div id="popluarMusicList" class="panel panel-warning" style="display: none" >
+    <div class="panel-heading">  <h4 class="modal-title">Popular List</h4>
+    </div>
+    <div class="panel-body" style="display: flex;height: calc(100%-60px)">
+        <div style="flex-basis: 120px;">
+            <ul id="popularCategory" class="list-group">
+            </ul>
+        </div>
+        <div style="flex-basis: 8px"></div>
+        <div style="flex: auto;">
+            <ul id="popularMusics" class="list-group">
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="showPopularMusicListSideBtn" class="left-side-btn cursor-pointer" onclick="showPopluarMusicList(this)">
+    <span class="fa fa-chevron-circle-down fa-rotate-270" ></span>
+</div>
+<div id="showFavoriateMusicListSideBtn" class="left-side-btn cursor-pointer" onclick="showFavoriateList(this)">
+    <span class="fa fa-chevron-circle-down fa-rotate-270"></span>
+</div>
+@section styles{
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.0.0/nouislider.min.css' rel="stylesheet">
+    <link href="~/Content/css/customizeAnimate.css" rel="stylesheet" />
+    <link href="~/Content/css/page/noui-slider.css" rel="stylesheet" />
+    <link href="~/Content/css/page/Music.css" rel="stylesheet" />
+}
+
+@section scripts{
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.0.0/nouislider.js'></script>
+    <script src="~/Scripts/Music/playList.js"></script>
+    <script src="~/Scripts/Music/playerControl.js"></script>
+    <script src="~/Scripts/Music/Index.js"></script>
+
+}

@@ -1,0 +1,122 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using JobSeeker.BAL.UrlHandlerPatterns;
+using JobSeeker.DBModel;
+
+namespace JobSeeker.BAL
+{
+    public class Entry
+    {
+        
+        private UrlHandler<JobContext.Job> _handler;
+        private readonly UrlStorage _storage;
+        private readonly Types.WebsiteType _type;
+        private readonly string _websiteName;
+        public Entry(LinkedList<string> urls, Types.WebsiteType type)
+        {
+            _type = type;
+            _storage = new UrlStorage(urls,type);
+            
+            switch (_type)
+            {
+                case Types.WebsiteType.Monster:
+                    _websiteName = "Monster";
+                    break;
+                case Types.WebsiteType.Indeed:
+                    _websiteName = "Indeed";
+                    break;
+                case Types.WebsiteType.Dice:
+                    _websiteName = "Dice";
+                    break;
+                default:return;
+            }
+        }
+
+        public void Start()
+        {
+            bool isFull = false;
+            do
+            {
+                try
+                {
+                    string url = _storage.GetUrl();
+                    if (_type == Types.WebsiteType.Monster)
+                    {
+                        _handler = new MonsterRegexHandler(url);
+                    }
+                    else if(_type == Types.WebsiteType.Indeed)
+                    {
+                        _handler = new IndeedRegexHandler(url);
+                    }
+                    if (!isFull)
+                    {
+                        //find deeper urls for further data grabing
+                        var moreUrls = _handler.GetHtmlUrlList();
+                        foreach (var one in moreUrls)
+                        {
+                            _storage.AddToUnVisted(one);
+                            if (_storage.IsFull())
+                            { isFull = true; break; }
+                        }
+                    }
+                    //find the useful urls for target data
+                    var detailUrls = _handler.GetTargetUrlList();
+                    foreach (var one in detailUrls)
+                    {
+                        _storage.AddToTargetUrl(one);
+                    }
+                    _storage.AppendToFile(url);
+                }
+                catch (Exception e)
+                {
+
+                }
+              
+
+
+            } while (!_storage.IsEmpty() );
+            var urls = _storage.GetTargetUrl();
+
+            HashSet<string> historyTargets = HistoryJobLinks();
+            using (var data =new JobContext())
+            {
+                foreach (var oneUrl in urls)
+                {
+                    if (historyTargets.Add(oneUrl))
+                    {
+                        var job = new JobContext.Job {URL = oneUrl, CreateDate = DateTime.Now,Note = "",WebsiteName = _websiteName };
+                        data.Jobs.Add(job);
+                        data.SaveChanges();
+                    }
+                }
+               
+
+            }
+  
+
+        }
+
+
+        public HashSet<string> HistoryJobLinks()
+        {
+ 
+            using (var data = new JobContext())
+            {
+                return (from a in data.Jobs where a.WebsiteName==_websiteName select a.URL).ToHashSet();
+            }
+        } 
+        //public void SaveToFile(LinkedList<string> urls)
+        //{
+        //    FileInfo oneFile = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), "output.txt"));
+        //    var st = oneFile.AppendText();
+        //    foreach (var one in urls)
+        //    {
+        //        st.WriteLine(one);
+        //    }
+        //    st.Close();
+        //}
+
+    }
+}

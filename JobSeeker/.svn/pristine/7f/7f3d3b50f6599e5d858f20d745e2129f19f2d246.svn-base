@@ -1,0 +1,94 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+
+namespace JobSeeker.DBModel
+{
+    public  class JobContext : DbContext
+    {
+        public JobContext()
+            : base("name=JobSeeker")
+        {
+        }
+
+        public virtual DbSet<Job> Jobs { get; set; }
+        public virtual DbSet<Source> Sources { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("JobSeeker");
+            modelBuilder.Entity<Job>()
+                .Property(e => e.JobDescription)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Job>()
+                .Property(e => e.URL)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Job>()
+                .Property(e => e.Note)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Job>()
+                .Property(e => e.CreateDate)
+                .HasPrecision(0);
+
+            modelBuilder.Entity<Job>()
+                .Property(e => e.LastUpdateDate)
+                .HasPrecision(0);
+        }
+
+        [Table("JobSeeker.Jobs")]
+        public class Job
+        {
+            [Key]
+            public int Id { get; set; }
+
+            public string JobDescription { get; set; }
+
+            public string URL { get; set; }
+
+            public int Depth { get; set; }
+
+            public bool IsVisited { get; set; }
+
+           
+            [StringLength(255)]
+            public string Note { get; set; }
+
+            [Column(TypeName = "datetime2")]
+            public DateTime? CreateDate { get; set; }
+
+            [Column(TypeName = "datetime2")]
+            public DateTime? LastUpdateDate { get; set; }
+
+            public  string WebsiteName { get; set; }
+            public string Title { get; set; }
+            public string SubTitle { get; set; }
+        }
+
+        [Table("JobSeeker.Source")]
+        public  class Source
+        {
+            [Key]
+            public int Id { get; set; }
+
+            [StringLength(255)]
+            public string Keywords { get; set; }
+
+            [StringLength(255)]
+            public string Location { get; set; }
+
+            public int? Count { get; set; }
+
+            [Column(TypeName = "datetime2")]
+            public DateTime? CreateDate { get; set; }
+
+            [Column(TypeName = "datetime2")]
+            public DateTime? LastUpdateDate { get; set; }
+
+            public int? Active { get; set; }
+
+        }
+    }
+}

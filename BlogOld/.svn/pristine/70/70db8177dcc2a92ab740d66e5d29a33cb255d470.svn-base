@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Playground | Now to share";
+    ViewBag.PageDescription = "Cool things I have made";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3 style="padding-left: 10%">@Blog.Resources.Global.Project_List</h3>
+<div class="row">
+    <div class="panel panel-default col-sm-8 col-sm-offset-2">
+
+        <div class="panel-body">
+            <a href="@Url.Action("TextbasedMazeGame", "Playground")">@Blog.Resources.Global.Pg_TextBasedMazeGame</a>
+            <br/>
+            <small>@Blog.Resources.Global.Pg_TextBasedMazeGame_desc</small>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-8 col-sm-offset-2">
+
+        <div class="panel-body">
+            <a href="@Url.Action("Index", "WebCam")">@Blog.Resources.Global.Pg_ArduinoWebcam</a>
+            <br/>
+            <small> @Blog.Resources.Global.Pg_ArduinoWebcam_Desc</small>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-8 col-sm-offset-2">
+
+        <div class="panel-body">
+            <a href="@Url.Action("RollABall")">@Blog.Resources.Global.Pg_RollABall</a>
+            <br />
+            <small> @Blog.Resources.Global.Pg_RollABall_Desc</small>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-8 col-sm-offset-2">
+
+        <div class="panel-body">
+            <a href="@Url.Action("SpaceShooter")">@Blog.Resources.Global.Pg_SpaceShooter</a>
+            <br/>
+            <small> @Blog.Resources.Global.Pg_SpaceShooter_Desc</small>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-8 col-sm-offset-2">
+
+        <div class="panel-body">
+            <a href="@Url.Action("SurvivalShooter")">@Blog.Resources.Global.Pg_SurvivalShooter</a>
+            <br />
+            <small> @Blog.Resources.Global.Pg_SurvivalShooter_Desc</small>
+        </div>
+    </div>
+    <div class="panel panel-default col-sm-8 col-sm-offset-2">
+
+        <div class="panel-body">
+            <a href="http://35.163.86.156/jobs/" target="_blank">@Blog.Resources.Global.Pg_JobSearch</a>
+            <br />
+            <small> @Blog.Resources.Global.Pg_JobSearch_Desc</small>
+        </div>
+    </div>
+    
+    <div class="panel panel-default col-sm-8 col-sm-offset-2">
+
+        <div class="panel-body">
+            <a href="@Url.Action("CaseTracker")" target="_blank">@Blog.Resources.Global.Pg_CaseTracker</a>
+            <br />
+            <small> @Blog.Resources.Global.Pg_CaseTracker_Desc</small>
+        </div>
+    </div>
+</div>

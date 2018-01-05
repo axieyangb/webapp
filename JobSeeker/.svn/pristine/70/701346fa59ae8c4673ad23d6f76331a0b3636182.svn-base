@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Cors;
+using JobSearchAPI.Models;
+
+namespace JobSearchAPI.Controllers
+{
+    [EnableCors("*","*","*")]
+    public class JobsController : ApiController
+    {
+        [HttpGet]
+        public IHttpActionResult Get()
+        {
+           return Get(num: 0);
+        }
+        [HttpGet]
+        public IHttpActionResult Get(int? num)
+        {
+            using (var data = new JobContext())
+            {
+
+                return Ok(data.GetJobs(num));
+            }
+        }
+
+        [HttpGet]
+        public IHttpActionResult Get(int id)
+        {
+            using (var data = new JobContext())
+            {
+               var job= data.Jobs.Find(id);
+                if (job == null)
+                    return NotFound();
+                return Ok(job);
+            }
+        }
+
+        [HttpGet]
+        public IHttpActionResult Get(string keywords)
+        {
+            if (string.IsNullOrEmpty(keywords))
+                return BadRequest();
+            using (var data = new JobContext())
+            {
+              return  Ok(data.SearchJobsByKeywords(keywords));
+            }
+        }
+    }
+}

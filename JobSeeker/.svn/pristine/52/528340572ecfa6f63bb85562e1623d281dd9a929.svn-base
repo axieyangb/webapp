@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Cache;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+
+namespace JobSeeker.BAL
+{
+    public abstract class UrlHandler<T>
+    {
+        protected string HtmlRawContent;
+        protected string RootUrl;
+        protected UrlHandler(string url)
+        {
+            RootUrl = url;
+            try
+            {
+                HtmlRawContent = HtmlFetch(url);
+            }
+            catch (Exception)
+            {
+               // Console.WriteLine( url +" | could not fetch content");
+                throw new Exception("Can not fetch content");
+            }
+        }
+
+        public string GetRawContent()
+        {
+            return HtmlRawContent;
+        }
+
+        public string HtmlFetch(string url)
+        {
+            HttpWebRequest.DefaultCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
+            HttpWebRequest http = (HttpWebRequest)WebRequest.Create(url);
+            http.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.4) Gecko/20060508 Firefox/1.5.0.4";
+            http.AutomaticDecompression = DecompressionMethods.GZip;
+
+            WebResponse response = http.GetResponse();
+
+            var stream = response.GetResponseStream();
+            if (stream == null) throw new Exception("Can not fetch content");
+            using (StreamReader sr = new StreamReader(stream))
+            {
+                string content = sr.ReadToEnd();
+                string decodeUrl= WebUtility.UrlDecode(content);
+                string decodeHtml = WebUtility.HtmlDecode(decodeUrl);
+                return decodeHtml;
+            }
+            
+        }
+        public abstract List<string> GetHtmlUrlList();
+        public abstract List<string> GetTargetUrlList();
+        public abstract T Get();
+    }
+}

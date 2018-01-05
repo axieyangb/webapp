@@ -1,0 +1,74 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Cache;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace JobDetailGraber
+{
+   public class Program
+    {
+        static void Main(string[] args)
+        {
+            JobContext.Job oneJob;
+            using (var data = new JobContext())
+            {
+                oneJob = (from a in data.Jobs where !a.IsVisited select a).FirstOrDefault();
+                while (oneJob != null)
+                {
+                    try
+                    {
+                        string content = HtmlFetch(oneJob.URL);
+                        oneJob.JobDescription = Get(content);
+                    }
+                    catch (Exception e)
+                    {
+                        oneJob.Note = "Error: No response";
+                    }
+                    oneJob.IsVisited = true;
+                    oneJob.LastUpdateDate=DateTime.Now;
+                    data.SaveChanges();
+                    oneJob = (from a in data.Jobs where !a.IsVisited select a).FirstOrDefault();
+                }
+            }
+        }
+        static  string HtmlFetch(string url)
+        {
+            HttpWebRequest.DefaultCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
+            HttpWebRequest http = (HttpWebRequest)WebRequest.Create(url);
+            http.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.4) Gecko/20060508 Firefox/1.5.0.4";
+            http.AutomaticDecompression = DecompressionMethods.GZip;
+
+            WebResponse response = http.GetResponse();
+
+            var stream = response.GetResponseStream();
+            if (stream == null) throw new Exception("Can not fetch content");
+            using (StreamReader sr = new StreamReader(stream))
+            {
+                string content = sr.ReadToEnd();
+                string decodeUrl = WebUtility.UrlDecode(content);
+                string decodeHtml = WebUtility.HtmlDecode(decodeUrl);
+                return decodeHtml;
+            }
+        }
+        static string Get(string content)
+        {
+            string ret = "";
+            content = Regex.Replace(content, @"(<style[^<]+<\/style>)", "");
+            MatchCollection matches = Regex.Matches(content,
+                 @"([^\\<>]+<\/p>)|([^\\<>]+<\/span>)|([^\\<>]+<\/strong>)|([^\\<>]+<\/li>)");
+            foreach (var oneMatch in matches)
+            {
+                var details = oneMatch.ToString().Replace("</span>", "").Replace("</li>", "").Replace("</p>", "").Replace("</strong>", "");
+                details = Regex.Replace(details, @"&[#a-zA-Z0-9]+;", "");
+                if (!string.IsNullOrEmpty(details))
+                    ret += "|" + details;
+            }
+            return ret;
+        }
+    }
+}

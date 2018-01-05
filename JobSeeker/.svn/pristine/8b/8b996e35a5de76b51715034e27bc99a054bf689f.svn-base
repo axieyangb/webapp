@@ -1,0 +1,10 @@
+<div class="header">
+    this is header
+</div>
+<div class="index-pic">
+    <img alt="James Welch's 76th birthday" height="215" src="https://www.google.com/logos/doodles/2016/james-welchs-76th-birthday-5636092473638912.2-hp.png" width="461" 
+    title="James Welch's 76th birthday">
+</div>
+<div class="input-group">
+    <input [(ngModel)]="keywords" class="form-control" (keyup.enter)="redirectToList()"><span class="btn btn-primary input-group-addon" (click)="redirectToList()">Search</span>
+</div>

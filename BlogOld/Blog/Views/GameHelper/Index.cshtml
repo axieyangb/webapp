@@ -1,0 +1,52 @@
+﻿@using System.Web.Razor.Parser
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/GameHelper/_Layout.cshtml";
+    string lang = Blog.Helper.CultureHelper.GetCurrentNeutralCulture();
+}
+
+<br/>
+<br />
+<br />
+<div class="row">
+
+    <div class="col-sm-12 text-center">
+        <h3>Game List</h3>
+    </div>
+    <div class="col-sm-12">
+        <table id="gameList" class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td>
+                    Sim City
+                </td>
+                <td>
+                    <a href="/@lang/Gamehelper/SimCity" class="btn btn-outline-primary" aria-pressed="True">Enter</a>
+                </td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+@section scripts
+{
+    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/GameHelper/Index.js"></script>
+}
+
+
+@section styles
+{
+    <link href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Content/css/GameHelper/Index.css" rel="stylesheet" />
+}

@@ -1,0 +1,110 @@
+﻿html, body, .mdl-list__item, h2, h3, h4, h5, h6, .mdl-button, .mdl-textfield__input {
+    font-family: "Roboto","Noto Sans SC";
+}
+
+.mdl-layout__header--waterfall.is-casting-shadow {
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+#Global_UserAction {
+    position: absolute;
+    right: 10%;
+    bottom: 5%;
+    z-index: 3;
+}
+
+#Global_LeaveMessage {
+    position: absolute;
+    right: 10%;
+    bottom: 18%;
+    z-index: 3;
+}
+
+.customize-mdl-card-padding {
+    border-radius: 2px;
+    padding: 80px 56px;
+    margin-bottom: 80px;
+}
+
+.is-small-screen .customize-mdl-card-padding {
+    padding: 40px 28px;
+}
+
+.customize-mdl-card-padding h3 {
+    margin-top: 48px;
+}
+
+.content-fit {
+    width: 100%;
+    height: auto;
+}
+
+#authorThumbnail {
+    border-radius: 50%;
+}
+
+#noscript {
+    position: fixed;
+    background-color: rgba(0,0,0,0.9);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    padding: 20px;
+}
+
+.hoverShadow:hover {
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+#Global_UserAction:hover {
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+#mediaIsPlaying > img {
+    -webkit-filter: invert(1);
+    vertical-align: middle;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+}
+
+.main-panel {
+    background-image: url('/Content/Imgs/Background/backgroundImg.png');
+    background-position: 0px 0px;
+    background-repeat: repeat;
+}
+
+#siteIcon > img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+@media (max-width: 479px) {
+    #siteTitle {
+        display: none;
+    }
+
+    #siteIcon {
+        display: initial;
+    }
+}
+
+
+
+#loader {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: white;
+    background-image:url('/Content/Imgs/Background/preloader.gif') ;
+    background-repeat: no-repeat;
+    background-position: center;
+}

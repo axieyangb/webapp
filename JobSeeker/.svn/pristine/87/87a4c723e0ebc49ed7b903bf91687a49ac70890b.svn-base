@@ -1,0 +1,12 @@
+import { Component,OnInit } from '@angular/core';
+import './rxjs-operators';
+@Component({
+    moduleId: module.id,
+    selector: 'jobs-app',
+    templateUrl:'app.component.html'
+})
+export class AppComponent {
+    keywords:string;
+     constructor(){
+     }
+ }

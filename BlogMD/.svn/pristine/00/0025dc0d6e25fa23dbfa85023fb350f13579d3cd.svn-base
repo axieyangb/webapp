@@ -1,0 +1,38 @@
+﻿html,body,.mdl-list__item,h2,h3,h4,h5,h6,.mdl-button,.mdl-textfield__input {
+    font-family: "Roboto","Noto Sans SC";
+}
+.mdl-layout__header--waterfall.is-casting-shadow {
+    -webkit-box-shadow: 0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12),0 5px 5px -3px rgba(0,0,0,.2);
+    -ms-box-shadow: 0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12),0 5px 5px -3px rgba(0,0,0,.2);
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12),0 5px 5px -3px rgba(0,0,0,.2);
+}
+#Global_UserAction {
+        position: absolute;
+    right: 10%;
+    bottom: 5%;
+    z-index: 3;
+}
+#Global_LeaveMessage {
+     position: absolute;
+    right: 10%;
+    bottom: 18%;
+    z-index: 3;
+}
+.customize-mdl-card-padding{
+   border-radius: 2px;
+  padding: 80px 56px;
+  margin-bottom: 80px;
+}
+
+.is-small-screen .customize-mdl-card-padding {
+  padding: 40px 28px;
+}
+
+.customize-mdl-card-padding h3 {
+  margin-top: 48px;
+}
+.content-fit{
+    width:100%;
+    height:auto;
+}
+

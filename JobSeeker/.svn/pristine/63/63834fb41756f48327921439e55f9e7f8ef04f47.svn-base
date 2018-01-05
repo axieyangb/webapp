@@ -1,0 +1,132 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Cache;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace JobDetailGraber
+{
+   public class Program
+    {
+        static void Main(string[] args)
+        {
+            JobContext.Job oneJob;
+            using (var data = new JobContext())
+            {
+                oneJob = (from a in data.Jobs where !a.IsVisited select a).FirstOrDefault();
+                while (oneJob != null)
+                {
+                    try
+                    {
+                        string content = HtmlFetch(oneJob.URL);
+                        oneJob.Title = GetTitle(content);
+                        oneJob.SubTitle = GetSubTitle(content);
+                       // oneJob.JobDescription = Get(content);
+                    }
+                    catch (Exception e)
+                    {
+                        oneJob.Note = "Error: No response";
+                    }
+                    oneJob.IsVisited = true;
+                    oneJob.LastUpdateDate=DateTime.Now;
+                    data.SaveChanges();
+                    oneJob = (from a in data.Jobs where !a.IsVisited select a).FirstOrDefault();
+                }
+            }
+        }
+        static  string HtmlFetch(string url)
+        {
+            HttpWebRequest.DefaultCachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
+            HttpWebRequest http = (HttpWebRequest)WebRequest.Create(url);
+            http.UserAgent = @"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.4) Gecko/20060508 Firefox/1.5.0.4";
+            http.AutomaticDecompression = DecompressionMethods.GZip;
+
+            WebResponse response = http.GetResponse();
+
+            var stream = response.GetResponseStream();
+            if (stream == null) throw new Exception("Can not fetch content");
+            using (StreamReader sr = new StreamReader(stream))
+            {
+                string content = sr.ReadToEnd();
+                string decodeUrl = WebUtility.UrlDecode(content);
+                string decodeHtml = WebUtility.HtmlDecode(decodeUrl);
+                string escapeSpecialHtml = EscapeSpecialString(decodeHtml);
+                return escapeSpecialHtml;
+            }
+        }
+        static string Get(string content)
+        {
+            string ret = "";
+            content = RemoveStyleSection(content);
+            content = RemoveScriptSection(content);
+             ret= RemoveTags(content);
+            return ret;
+        }
+
+       static string GetTitle(string content)
+       {
+           var matches = Regex.Matches(content,@"(<title(.*?)>).+(<\/title>)");
+           if (matches.Count > 0)
+               return Regex.Replace(matches[0].ToString(), @"(<title(.*?)>)|(<\/title>)", "");
+            return "";
+       }
+
+        static string GetSubTitle(string content)
+        {
+            var matches = Regex.Matches(content, "<meta name=\"description\"(.*?)>");
+            if (matches.Count > 0)
+            {
+                var subTitleSection= Regex.Replace(matches[0].Value, @"(<title(.*?)>)|(<\/title>)", "");
+               var subMatch=Regex.Matches(subTitleSection, "content=\".+\"");
+                if (subMatch.Count > 0)
+                    return subMatch[0].Value.Replace("content=\"", "").Replace("\"", "");
+                return "";
+            }
+            return "";
+        }
+        static string EscapeSpecialString(string content)
+       {
+           content = Regex.Replace(content, @"[\n\t\r]", "");
+            content = Regex.Replace(content, "(\\\")", "\"");
+            content = Regex.Unescape(content);
+            
+           return content.ToLower();
+
+       }
+       static string RemoveStyleSection(string content)
+       {
+           content = Regex.Replace(content, "(style=\"[a-zA-Z:;0-9-]+\")", "");
+           content = Regex.Replace(content, @"(<style[^<]+<\/style>)", "");
+           return content;
+       }
+       static string RemoveScriptSection(string content)
+       {
+           var start =content.IndexOf("<script", StringComparison.Ordinal);
+           int end;
+            while(start>=0)
+            {
+                end = content.IndexOf("</script>",start, StringComparison.Ordinal);
+                content = content.Substring(0, start) + content.Substring(end + 9, content.Length - end - 9);
+                start = content.IndexOf("<script", StringComparison.Ordinal);
+            }
+           return content;
+       }
+
+        static string RemoveTags(string content)
+        {
+            var ret= Regex.Replace(content,
+                @"(<span(.*?)>)|(<\/span>)|(<div(.*?)>)|(<\/div>)|(<a(.*?)>)|(<\/a>)|(<input(.*?)>)|(<\/input>)|(<p(.*?)>)|(<\/p>)|(<td(.*?)>)|(<\/td>)|(<tr(.*?)>)|(<\/tr>)|(<option(.*?)>)|(<\/option>)|(<br[ ]*[/]{0,1}>)|(<link(.*?)>)|(<\/link>)|(<form(.*?)>)|(<\/form>)|(<table(.*?)>)|(<\/table>)|(<html(.*?)>)|(<\/html>)|(<!--(.*?)-->)|(<head(.*?)>)|(<\/head>)|(<title(.*?)>)|(<\/title>)|(<meta(.*?)>)|(<select(.*?)>)|(<\/select>)|(<ul(.*?)>)|(<\/ul>)|(<font(.*?)>)|(<\/font>)|(<label(.*?)>)|(<\/label>)|(<li(.*?)>)|(<\/li>)|(<body(.*?)>)|(<\/body>)|(<!doctype(.*?)>)|(<strong(.*?)>)|(<\/strong>)|(<iframe(.*?)>)|(<\/iframe>)|(<img(.*?)>)|(<[\/ ]{0,1}b>)|(<h[0-9](.*?)>)|(<\/h[0-9])|(<b(.*?))>|(<noscript(.*?)>)|(<\/noscript>)|(<\/header>)|(<\/button>)|(<section(.*?)>)|(<\/section>)|(<dt(.*?)>)|(<\/dt>)|(<dd(.*?)>)|(<\/dd>)|(<dl(.*?)>)|(<\/dl>)|(<small(.*?)>)|(<\/small>)|(<nav(.*?)>)|(<\/nav>)|(<article(.*?)>)|(<\/article>)|(<footer(.*?)>)|(<\/footer>)|(<ol(.*?)>)|(<\/ol>)|(<i(.*?)>)|(<\/i>)|(<\/script>)", "    ");
+          return  Regex.Replace(ret, @"[ ]{2,100}", "   ");
+        }
+
+
+
+
+       }
+    
+}

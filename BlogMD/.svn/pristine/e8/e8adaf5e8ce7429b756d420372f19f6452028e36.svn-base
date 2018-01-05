@@ -1,0 +1,6 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>@Resources.Global.Index</h1>
+<h1>@System.DateTime.Now</h1>

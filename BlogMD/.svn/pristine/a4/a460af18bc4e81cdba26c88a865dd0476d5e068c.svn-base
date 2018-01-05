@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<h1>@System.DateTime.Now</h1>
+<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored  mdl-js-ripple-effect mdl-button--accent">
+    <i class="material-icons">add</i>
+</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    Button
+</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+    Button
+</button>
+
+<div id="divContent" style='display: none'>Done</div>
+<i class="material-icons">&#xE87C;</i>
+<i class="material-icons">face</i>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+      

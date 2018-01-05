@@ -1,0 +1,330 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "WebCam Viewer  | Playground | Now to share";
+    string ipAddress = ViewBag.ipAddress;
+}
+
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Webcam</a>
+            <a href="#" data-activates="mobile-list" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/Home/Index" target="_blank">Index</a></li>
+                <li><a href="/Gallery" target="_blank">Gallery</a></li>
+                <li><a href="/Webcam/SignOut">Sign Out</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-list">
+                <li><a href="/Home/Index" target="_blank">Index</a></li>
+                <li><a href="/Gallery" target="_blank">Gallery</a></li>
+                <li><a href="/Webcam/SignOut">Sign Out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+                <a class="btn-floating btn-large red">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul>
+                    <li>	<a class="btn-floating red" onclick="sendRequest(this)" action="kill"><i class="material-icons">stop</i></a></li>
+                    <li><a class="btn-floating yellow darken-1" onclick="sendRequest(this)" action="reset"><i class="material-icons">play_arrow</i></a></li>
+                    <li><a class="btn-floating green" onclick="refreshWebcam()"><i class="material-icons">refresh</i></a></li>
+                    <li><a class="btn-floating blue" onclick="captureImg()"><i class="material-icons">photo_camera</i></a></li>
+
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-image">
+                    <img class="materialboxed" id="webcambox" width="650" data-caption="Arduino Webcam designed by Jerry" onload="setImgStat()" onerror="ImgErrorHandle()" alt="webcam already stopped please refresh or start again">
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">More About the WebCam<i class="material-icons right">more_vert</i></span>
+                    <p>
+                        <a href="http://nowtoshare.com/Users" target="_blank">More about the Author</a>
+                    </p>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title activator grey-text text-darken-4">More About the WebCam<i class="material-icons right">more_horiz</i></span>
+                    <p>Here is some more information about this product</p>
+                    <p> Arduino Yun + 2 stepper motors</p>
+                </div>
+                <div class="card-action row">
+                    <form action="#" class=" col s8 offset-s2">
+                        <p class="range-field">
+                            <input type="range" id="range" min="10" max="90" step="10" value="10" />
+                        </p>
+                    </form>
+                    <div class="col s12">
+                        <table class="centered">
+
+                            <tr><td></td><td><a class="btn btn-small" onclick="Action(this)" data-direct="Up">&nbsp;&nbsp;<i class="material-icons">arrow_upward</i>&nbsp; &nbsp; Up</a></td><td></td></tr>
+                            <tr>
+                                <td>
+                                    <a class="btn btn-small" onclick="Action(this)" data-direct="Left"><i class="material-icons">arrow_back</i>&nbsp;Left</a>
+                                </td>
+                                <td><a class="btn btn-small" onclick="Action(this)" data-direct="Reset"><i class="material-icons">refresh</i>&nbsp;Reset</a></td>
+                                <td>
+                                    <a class="btn btn-small" onclick="Action(this)" data-direct="Right"><i class="material-icons">arrow_forward</i>&nbsp;Right</a>
+                                </td>
+                            </tr>
+                            <tr><td></td><td><a class="btn" onclick="Action(this)" data-direct="Down"><i class="material-icons">arrow_downward</i>&nbsp;Down</a></td><td></td></tr>
+
+
+                            <tr>
+                                <td> <a class="btn btn-small" onclick="controllLaser(1)"> Laser On</a></td>
+                                <td> <a class="btn btn-small" onclick="controllLaser(0)"> Laser Off</a></td>
+                                <td> <a class="btn btn-small" onclick="controllLaser(2)"> Laser Blink</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="btn btn-small" onclick="Action(this)" data-direct="swing">Swing</a>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td> <a class="btn btn-small btn-info" onclick="controllBuzzer(0)"> Happy Song</a></td>
+                                <td> <a class="btn btn-small btn-info" onclick="controllBuzzer(1)"> Little Star</a></td>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" id="capturedImgs">
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var degree = 10;
+    $(document).ready(function () {
+        $('.materialboxed').materialbox();
+        $(".button-collapse").sideNav();
+        $("#range").on("input change", function () {
+            degree = $("#range").val();
+        });
+        $('#webcambox').attr('src', 'http://@ipAddress:8080/?action=stream');
+        GetSnapshotList();
+
+
+    });
+
+    function Action(e) {
+        var direct = $(e).attr('data-direct').toLowerCase();
+        Materialize.toast('Move ' + direct, 4000);
+        var baseUrl = "http://@ipAddress/arduino/";
+        var dynamicUrl = baseUrl + 'motor/' + direct + '/' + degree;
+        var request = $.ajax({
+            url: dynamicUrl,
+            method: "POST",
+            dataType: "jsonp"
+        });
+        request.fail(function (msg) {
+        });
+    }
+    var imgStat = 0;
+    function setImgStat() {
+        imgStat = 1;
+    }
+    function ImgErrorHandle() {
+        if (imgStat == 1) {
+            refreshWebcam();
+        }
+        imgStat = 0;
+    }
+
+    function refreshWebcam() {
+        Materialize.toast('Refresh the webcam', 4000);
+        $('#webcambox').attr('src', 'http://@ipAddress:8080/?action=stream');
+    }
+
+    function sendRequest(e) {
+        var action = $(e).attr('action');
+        if (action == "kill")
+            Materialize.toast('Stop the webcam', 4000);
+        else if (action == "reset")
+            Materialize.toast('Start the webcam', 4000);
+        var request = $.ajax({
+            type: "GET",
+            dataType: 'JSONP',
+            crossDomain: true,
+            url: "http://@ipAddress:5000/WebcamController?action=" + action
+        });
+        request.fail(function (msg) {
+        });
+        request.done(function (msg) {
+        });
+    }
+
+    function controllLaser(num) {
+        var request = $.ajax({
+            type: "GET",
+            dataType: 'JSONP',
+            crossDomain: true,
+            url: "http://@ipAddress/arduino/Laser/" + num
+        });
+        request.fail(function (msg) {
+        });
+        request.done(function (msg) {
+        });
+    }
+
+    function controllBuzzer(num) {
+        var request = $.ajax({
+            type: "GET",
+            dataType: 'JSONP',
+            crossDomain: true,
+            url: "http://@ipAddress/arduino/buzzer/" + num
+        });
+        request.fail(function (msg) {
+        });
+        request.done(function (msg) {
+        });
+    }
+
+    function GetSnapshotList() {
+        $('#capturedImgs').html('Loading...');
+        $.ajax(
+        {
+            url: "http://@ipAddress:5000/WebcamController/CapturedImgs/?action=list",
+            dataType: "jsonp",
+            jsonpCallback: "callback",
+            success: function (response) {
+                var cardList = "";
+                for (var i = 0; i < response.length; i++) {
+                    var timeStamp = response[i].substring(0, response[i].length - 4);
+                    cardList += cardTemplate(timeStamp);
+                }
+                $('#capturedImgs').html(cardList);
+                $('.materialboxed').materialbox();
+            }
+        });
+    }
+
+    function cardTemplate(timeStamp) {
+        return "<div  class='col s12 m6 l4'><div id=" + timeStamp + " class='card'> " +
+                        "<div class='card-image'>" +
+                        "<img class='materialboxed' src='http://@ipAddress:5000/WebcamController/CapturedImgs/" +
+                        timeStamp +
+                        ".jpg' data-caption='Captured Time :" +
+                        timeConverter(timeStamp) +
+                        "'>" +
+                        "</div>" +
+                        "<div class='card-content'>" +
+                        "<span>" +
+                        timeConverter(timeStamp) +
+                        "</span><i id='delete' onClick='deleteFile(this)' fileName='" +
+                        timeStamp +
+                        "' class='material-icons right'>delete</i>" +
+                        //"<p><a href='/WebCam/DownloadImage?fileName=1470088121' target='_blank'><span>Download</span><i class='material-icons badge'>get_app</i></a>" +
+                        //"</p>" +
+                        "</div>" +
+                        "</div></div>";
+    }
+    function timeConverter(timeStamp) {
+        var a = new Date(timeStamp * 1000);
+        var year = a.getFullYear();
+        var month = padToTwo(a.getMonth() + 1);
+        var date = padToTwo(a.getDate());
+        var hour = padToTwo(a.getHours());
+        var min = padToTwo(a.getMinutes());
+        var sec = padToTwo(a.getSeconds());
+        var time = month + '/' + date + '/' + year + ' ' + hour + ':' + min + ':' + sec;
+        return time;
+    }
+    function padToTwo(number) {
+        if (number < 10) { number = "0" + number }
+        return number;
+    }
+    function deleteFile(e) {
+        var fileName = $(e).attr('fileName');
+        $.ajax(
+        {
+            url: "http://@ipAddress:5000/WebcamController/CapturedImgs/?action=delete&fileName=" + fileName,
+            type: "GET",
+            dataType: "jsonp",
+            jsonpCallback: "callback",
+            success: function (response) {
+                var elem = document.getElementById(fileName);
+                elem.parentNode.removeChild(elem);
+                Materialize.toast(response, 4000);
+            }
+        });
+    }
+    function captureImg(e) {
+        $.ajax(
+        {
+            url: "http://@ipAddress:5000/WebcamController/Capture.php",
+            type: "GET",
+            dataType: "jsonp",
+            jsonpCallback: "callback",
+            success: function (response) {
+                if (response !== "error") {
+                    var timeStamp = response.substring(33, 43);
+                    document.getElementById("capturedImgs").innerHTML += cardTemplate(timeStamp);
+                    $('#capturedImgs').find('.materialboxed').attr('class', 'materialboxed').materialbox();
+                }
+                Materialize.toast(response, 4000);
+            }
+        });
+    }
+</script>
+<style>
+    .btn {
+        padding: 0 1rem;
+    }
+
+    .card .card-action {
+        padding: 0;
+        z-index: 0;
+    }
+
+    @@media screen and (max-width:708px) and (min-width: 600px) {
+        .card .card-content {
+            padding: 10px;
+        }
+
+        #delete {
+            margin: 0;
+        }
+    }
+
+    .material-icons {
+        vertical-align: middle;
+    }
+
+    nav {
+        background-color: #26a69a;
+    }
+
+    #delete {
+        cursor: pointer;
+    }
+
+    #capturedImgs > div {
+        padding: 0;
+    }
+
+        #capturedImgs > div > div {
+            margin: 5px;
+        }
+</style>
+</html>

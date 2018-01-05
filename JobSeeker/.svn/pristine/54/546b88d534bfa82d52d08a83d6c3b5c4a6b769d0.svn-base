@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using JobSeeker.BAL;
+
+namespace JobSeeker
+{
+    public class Program
+    {
+        static string FILENAME ="Files\\entryFile.txt";
+        static void Main(string[] args)
+        {
+            try
+            {
+                LinkedList<string> roots = ReadEntryFile();
+                Entry();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Func name: "+e.TargetSite.Name+" | Error Info :"+e);
+                throw new Exception(e.ToString());
+            }
+
+        }
+
+        static LinkedList<string> ReadEntryFile()
+        {
+            var currentPath = Directory.GetCurrentDirectory();
+            var filePath = Path.Combine(currentPath, FILENAME);
+            if (!File.Exists(filePath)) throw new Exception("Entry file not exist");
+            LinkedList<string> entryUrls = new LinkedList<string>();
+            using (var st = new StreamReader(filePath))
+            {
+                while (!st.EndOfStream)
+                {
+                    entryUrls.AddLast(st.ReadLine());
+                }
+            }
+            return entryUrls;
+        }
+
+        static void Entry()
+        {
+             Entry entry =new Entry(ReadEntryFile());
+            entry.Start();
+        }
+    }
+}

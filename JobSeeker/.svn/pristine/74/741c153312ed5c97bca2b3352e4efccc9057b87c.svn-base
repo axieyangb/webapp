@@ -1,0 +1,53 @@
+using System.Collections.Generic;
+using System.Data.SqlClient;
+
+namespace JobSearchAPI.Models
+{
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+
+    public partial class JobContext : DbContext
+    {
+        public JobContext()
+            : base("name=JobContextDB")
+        {
+        }
+
+        public virtual DbSet<Job> Jobs { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("JobSeeker");
+            modelBuilder.Entity<Job>()
+                .Property(e => e.JobDescription)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Job>()
+                .Property(e => e.URL)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Job>()
+                .Property(e => e.Note)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Job>()
+                .Property(e => e.CreateDate)
+                .HasPrecision(0);
+
+            modelBuilder.Entity<Job>()
+                .Property(e => e.LastUpdateDate)
+                .HasPrecision(0);
+        }
+
+        public List<Job> SearchJobsByKeywords(string keywords)
+        {
+           return Database.SqlQuery<Job>("JobSeeker.SearchJob @keywords", new SqlParameter("keywords",keywords)).ToList();
+        }
+        public List<Job> GetJobs(int? num)
+        {
+            return Database.SqlQuery<Job>("JobSeeker.GetJobs @num", new SqlParameter("num", num ?? 0)).ToList();
+        }
+    }
+}

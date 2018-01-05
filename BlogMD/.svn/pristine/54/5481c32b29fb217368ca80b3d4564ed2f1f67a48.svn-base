@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/mdl-v1.1.2/material.min.css" rel="stylesheet" />
+    <link href="~/Content/nprogress.css" rel="stylesheet" />
+    <link href="~/Content/Fonts.css" rel="stylesheet"/>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/nprogress.min.js"></script>
+</head>
+<body>
+    <div class="demo-layout-waterfall mdl-layout mdl-js-layout mdl-layout--fixed-header ">
+        <header class="mdl-layout__header mdl-layout__header--waterfall mdl-shadow--8dp">
+            <!-- Top row, always visible -->
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Blog</span>
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">
+                    <label class="mdl-button mdl-js-button mdl-button--icon"
+                           for="waterfall-exp">
+                        <i class="material-icons">search</i>
+                    </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" name="sample"
+                               id="waterfall-exp">
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom row, not visible on scroll -->
+            <div class="mdl-layout__header-row ">
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation -->
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="">@Resources.Global.Index</a>
+                    <a class="mdl-navigation__link" href="">@Resources.Global.Article</a>
+                    <a class="mdl-navigation__link" href="">@Resources.Global.Gallery</a>
+                    <a class="mdl-navigation__link" href="">@Resources.Global.Contact</a>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer mdl-shadow--8dp">
+            <span class="mdl-list__item mdl-list__item--two-line mdl-shadow--2dp">
+                <span class="mdl-list__item-primary-content">
+                    <i class="material-icons mdl-list__item-avatar">person</i>
+                    <span>@Resources.Global.AuthorInfo_Name</span>
+                    <span class="mdl-list__item-sub-title">@Resources.Global.AuthorInfo_Pos</span>
+                </span>
+                <span class="mdl-list__item-secondary-content">
+                    <span class="mdl-list__item-secondary-info"></span>
+                    <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons">more_vert</i></a>
+                </span>
+            </span>
+
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="page-content">@RenderBody()</div>
+        </main>
+    </div>
+
+
+
+        @Scripts.Render("~/bundles/jquery")
+<script src="~/Content/mdl-v1.1.2/material.min.js"></script>
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

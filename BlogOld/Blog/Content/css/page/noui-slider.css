@@ -1,0 +1,34 @@
+﻿.noUi-vertical {
+    width: 10px;
+}
+.noUi-base {
+    background-color: #dddddd;
+}
+.noUi-handle {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 12px;
+    height: 12px;
+    left: -10px;
+    top: -5px;
+    background: #337ab7;
+    box-shadow: none;
+    border: none;
+}
+.noUi-vertical .noUi-handle {
+    margin-left: 5px;
+    margin-top: 12px;
+    cursor: ns-resize;
+}
+
+.noUi-vertical .noUi-handle {
+    width: 10px;
+    height: 15px;
+    left: -6px;
+    top: -17px;
+}
+.noUi-handle:after, .noUi-handle:before{
+    content:normal;
+}
+

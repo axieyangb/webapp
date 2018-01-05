@@ -1,0 +1,158 @@
+﻿@using System.Net.Http
+@using System.Web.UI.WebControls
+@{
+    ViewBag.Title = "Home | Now to share";
+    ViewBag.PageDescription = "Here are the brillant ideas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Half Page Image Background Carousel Header -->
+<header id="myCarousel" class="carousel slide">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for Slides -->
+    <div class="carousel-inner panel">
+        <div class="item">
+            <!-- Set the first background image using inline CSS below. -->
+            <div class="fill fill-horseBg"></div>
+            <div class="carousel-caption">
+                <div class="site-heading">
+                    <h1 class="title-heading">@Blog.Resources.Global.Share</h1>
+                    <br />
+                    <span class="subheading">@Blog.Resources.Global.Horse_soulmate</span>
+                </div>
+            </div>
+        </div>
+        <div class="item active">
+            <!-- Set the second background image using inline CSS below. -->
+            <div class="fill fill-freedomBg"></div>
+            <div class="carousel-caption">
+                <div class="site-heading">
+                    <h1 class="title-heading">@Blog.Resources.Global.Faith</h1>
+                    <br />
+                    <span class="subheading">@Blog.Resources.Global.I_am_rich</span>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <!-- Set the third background image using inline CSS below. -->
+            <div class="fill fill-braveBg"></div>
+            <div class="carousel-caption">
+                <div class="site-heading">
+                    <h1 class="title-heading">@Blog.Resources.Global.Brave</h1>
+                    <br />
+                    <span class="subheading">@Blog.Resources.Global.YouJumpIJump</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev" title="Previous">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next" title="Next">
+        <span class="icon-next"></span>
+    </a>
+
+</header>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left Panel Content -->
+        <div class="col-xl-3 col-md-3 col-lg-3 col-xs-11">
+            <!-- Search Bar -->
+            <div class="row">
+                <div class="input-group form-group" id="searchBar">
+
+                    <div class="input-group-addon dropdown">
+                        <a id="searchCategory" role="button" class="btn btn-primary btn-sm btn-raised dropdown-toggle" data-toggle="dropdown" title="Select Category">@Blog.Resources.Global.Search <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a role="button" onclick="searchSelector(this);" data-value="1" title="Title"><span class="glyphicon glyphicon-book"></span>&nbsp;@Blog.Resources.Global.Title</a></li>
+                            <li><a role="button" onclick="searchSelector(this);" data-value="2" title="Sub Title"><span class="glyphicon glyphicon-bookmark"></span>&nbsp;@Blog.Resources.Global.Subtitle</a></li>
+                            <li><a role="button" onclick="searchSelector(this);" data-value="3" title="Author"><span class="glyphicon glyphicon-user"></span>&nbsp;@Blog.Resources.Global.Author</a></li>
+                            <li><a role="button" onclick="searchSelector(this);" data-value="5" title="Year"><span class="glyphicon glyphicon-calendar"></span>&nbsp;@Blog.Resources.Global.Year</a></li>
+                            <li><a role="button" onclick="searchSelector(this);" data-value="6" title="Month"><span class="glyphicon glyphicon-calendar"></span>&nbsp;@Blog.Resources.Global.Month</a></li>
+                            <li>
+                                <a role="button" onclick="searchSelector(this);" data-value="7" title="Day"><span class="glyphicon glyphicon-calendar"></span>&nbsp;@Blog.Resources.Global.Day</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a role="button" onclick="searchSelector(this);" data-value="8" title="Content"><span class="fa fa-file-text"></span>&nbsp;Content</a></li>
+                        </ul>
+                    </div>
+
+                    <input type="text" class="form-control" disabled="disabled" aria-label="SearchBar" id="searchInput" onkeypress="enterKeySearch(event)">
+                    <span class="input-group-addon">
+                        <button onclick="searchRun()" id="goSearch" class="btn btn-sm btn-primary btn-raised" disabled="disabled"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                </div>
+            </div>
+            <!-- Topic category -->
+            <div class="row">
+                <div class="panel panel-primary col-xs-12" id="leftpanel">
+                    <div class="panel-heading">
+                        <span class="categoryName">@Blog.Resources.Global.MostPopularTopics</span>
+                        <span class="btn-group pull-right categorySelector">
+                            <label class="btn btn-xs btn-primary btn-raised" onclick="moveCategory(-1)">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </label>
+                            <label class="btn btn-xs btn-primary btn-raised" onclick="moveCategory(-1)">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+
+                            </label>
+                        </span>
+                    </div>
+                    <div class="panel-body" id="leftpanel-body">
+
+                        <div class="list-group" id="categoryItemList">
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+
+        <div class="col-xl-4 col-lg-4 col-md-4 col-xs-10 col-xs-offset-1">
+            <div id="order" class="col-xs-12">
+                <div class="btn-group pull-right">
+                    <label class="btn btn-sm btn-primary" data-value=2 onclick="orderBy(this)" id="orderByPostDate">
+                        <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+                        &nbsp;Post Time
+                    </label>
+                    <label class="btn btn-sm btn-primary" onclick="orderBy(this)" id="orderByTitle" data-value="4" >
+                        <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                        &nbsp;Title
+                    </label>
+                </div>
+            </div>
+            <div id="filterTags"></div>
+            <div id="articlesList" class="col-xs-12">
+            </div>
+        </div>
+
+        <!-- Right Panel Content -->
+        <div class="col-xl-3 col-lg-3 col-md-3 col-xs-10">
+
+        </div>
+    </div>
+</div>
+
+<a id="return-to-top" class="cursor-pointer" title="Return to top" onclick="animatedScoll()"><span class="glyphicon glyphicon-chevron-up"></span></a>
+
+@section styles{
+    <link href="~/Content/css/page/home.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/Scripts/Home/Index.js"></script>
+}

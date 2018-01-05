@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="navbar-header">
+        <a routerLink="/home" class="navbar-brand  pull-left">
+            <i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook API</a>
+
+    </div>
+    <nav>
+        <ul class="nav navbar-nav">
+            <li> <a href="/post">Create a Post</a> </li>
+            <li> <a href="#">CSS</a> </li>
+            <li> <a href="#">Components</a> </li>
+            <li> <a href="#">JavaScript</a> </li>
+            <li class="active"> <a href="#">Customize</a> </li>
+        </ul>
+    </nav>
+    <span class="header-center pull-right">
+    <button *ngIf="loginResponse==null || loginResponse.status=='unknown'" class="btn btn-primary" (click)="login()">
+      <i class="fa fa-sign-in" aria-hidden="true"></i>
+       Login
+       </button>
+    <button *ngIf="loginResponse!=null && loginResponse.status=='connected'" class="btn btn-default" (click)="logout()">
+      <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+      </button>
+    </span>
+</div>
+
+
+<div *ngIf="loginResponse!=null && loginResponse.authResponse!=null">
+
+    {{loginResponse.authResponse.accessToken}}
+</div>
+<div class="container-fluid">
+    <app-content></app-content>
+
+
+
+
+</div>

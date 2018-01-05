@@ -1,0 +1,16 @@
+.centered {
+    display: block;
+    max-width: 484px;
+    text-align: -webkit-center;
+    margin: auto;
+}
+
+.index-pic {
+    height: 231px;
+    margin-top: 45px;
+    text-align: -webkit-center;
+}
+
+.glyphicon {
+    top: 0px;
+}

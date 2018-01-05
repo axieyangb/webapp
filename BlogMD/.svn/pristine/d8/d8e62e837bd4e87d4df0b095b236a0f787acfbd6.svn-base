@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="mdl-grid">
+    <div class="mdl-card mdl-color--white mdl-shadow--4dp mdl-color-text--grey-800 mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop mdl-grid">
+        <div class="mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet">
+            <img src="~/Content/Imgs/AuthorInfo/Me.png" class="img-circle mdl-js-button" />
+            <div class="text-center">
+                <h4>Jerry Xie</h4>
+                <p>Software Engineer</p>
+            </div>
+            <hr />
+            <div>
+                <h4 class="left-align">
+                    <i class="material-icons">person</i> About me
+                </h4>
+                <p>
+                    Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
+
+                    A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts.
+                </p>
+            </div>
+            <div>
+                <h4 class="left-align">
+                    <i class="material-icons">contact_phone</i> Contact me
+                </h4>
+                <p>
+                    <i class="material-icons">place</i>7421 Frankford Apt.1637, Dallas, TX
+                    <br/>
+                    <i class="material-icons">phone</i>+01 312-709-6998
+                    <br/>
+                    <i class="material-icons">insert_link</i> <a href="http://www.nowtoshare.com" target="_blank">http://www.nowtoshare.com</a>
+                </p>
+            </div>
+            <div>
+                <h4 class="left-align">
+                    <i class="material-icons">laptop_windows</i> Skills
+                </h4>
+                <h6>C# .Net Development</h6>
+                <div id="p1" class="mdl-progress mdl-js-progress"></div>
+                <h6>Web Design</h6>
+                <div id="p2" class="mdl-progress mdl-js-progress"></div>
+                <h6>SQL Server Development</h6>
+                <div id="p3" class="mdl-progress mdl-js-progress"></div>
+            </div>
+
+
+        </div>
+        <div class="mdl-cell mdl-cell--8-col mdl-cell--5-col-tablet">
+            <h3 class="left-align">
+                <i class="material-icons">work</i> Work Exprience
+            </h3>
+            <div>
+                <h5>Creative Designer</h5>
+                <p class="helping-text small"><i class="material-icons">place</i> Mirchu <i class="material-icons">date_range</i> 21 Feb 2012
+                </p>
+                <p>By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+            </div>
+            <div >
+                <h5>Senior Web Designer</h5>
+                <p class="helping-text small"><i class="material-icons">place</i> WorldFellow <i class="material-icons">date_range</i> 27 Jan 2009
+                </p>
+                <p>By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users.</p>
+            </div>
+            <div>
+                <h3 class="left-align">
+                    <i class="material-icons">school</i> Education
+                </h3>
+                <div>
+                    <h5>Master of Design</h5>
+                    <p class="helping-text small"><i class="material-icons">place</i> AIO University<i class="material-icons">date_range</i> 27 Aug 2007
+                    </p>
+                    <p>By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts.</p>
+                </div>
+                <div>
+
+                    <h5>Bachelor of Science(CS)</h5>
+                    <p class="helping-text small"><i class="material-icons">place</i> Myer's University <i class="material-icons">date_range</i>27 Aug 2005</p>
+                    <p>By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <link href="~/Content/Css/AboutMe/Index.css" rel="stylesheet" />
+}

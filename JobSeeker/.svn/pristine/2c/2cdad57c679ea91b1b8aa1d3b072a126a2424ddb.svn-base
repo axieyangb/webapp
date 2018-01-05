@@ -1,0 +1,28 @@
+<div class="row">
+    <br>
+    <div class="input-group">
+        <input [(ngModel)]="keywords" class="form-control" (keyup.enter)="searchJobs()"><span class="btn btn-primary input-group-addon" (click)="searchJobs()">Search</span>
+    </div>
+</div>
+<hr>
+<div class="row" *ngIf="listValid">
+    <h4>Total {{jobs.length}} related jobs found</h4>
+</div>
+<div class="row">
+    <ul *ngIf="listValid">
+        <li *ngFor="let job of jobs" class="list-unstyled">
+            <a [href]="job.URL" target="_blank">
+                <p class="overflow-ellipsis">{{job.URL}}</p>
+            </a>
+            <em class="text-muted small">Last Captured Time : {{job.CreateDate}}</em>
+            <br>
+            <p>{{job.JobDescription}}<span class="btn btn-sm" #showMore (click)="showMoreDescription(job);showMore.value='show less'">Show More</span></p>
+            <br>
+            <br>
+
+        </li>
+    </ul>
+    <div class="overlay" *ngIf="!listValid">
+        <p class="text-info">Loading...</p>
+    </div>
+</div>

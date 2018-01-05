@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "SimCity";
+    Layout = "~/Views/GameHelper/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12 text-center"><h2>Sim City</h2></div>
+</div>
+<div class="row">
+    <div class="col-md-12 card" style="padding: 15px">
+        <h3>Cost Calculator</h3>
+        <div class="form-group row" id="costCalculator" style="display:none">
+            <label for="selecteditem" class="col-md-2 col-form-label">Required Items:</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" data-provide="typeahead" id="selecteditem" />
+            </div>
+            <label for="itemCount" class="col-md-2 col-form-label">Item Count:</label>
+            <div class="col-md-3">
+                <input type="number" class="form-control" value="1" max="10" min="1" id="itemCount" />
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" onclick="attachItem()">Add</button>
+            </div>
+        </div>
+
+        <div class="border border-primary" style="padding: 10px;">
+            <h4>Result:&nbsp;<span class="btn btn-sm btn-default fa fa-refresh cursor-pointer text-info" onclick="clearItems()"></span></h4>
+            <div id="selectedItemMenu">
+            </div>
+            <div id="calculatedSummary">
+                <hr />
+                <div class="row justify-content-center summaryBlock" style="display:none">
+
+                    <div class="col-1"><strong>Total =</strong></div>
+                    <div class="col-1 text-center">
+                        <span id="totalCount">0</span>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-2 text-right"><span></span></div>
+                    <div class="col-1 text-right">
+                        <img src="/Content/img/gameHelper/simcity/Dollar.png">&nbsp;&nbsp;<span id="totalPrice">0</span>
+                    </div>
+                    <div class="col-1 text-right"><span class="fa fa-clock-o"></span>&nbsp;&nbsp;<span id="totalTime">0</span>&nbsp;min</div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 card" style="padding: 15px">
+        <h3>Item Dictionary</h3>
+        <table id="itemList" class="table table-bordered" width="100%">
+            <thead>
+                <tr>
+                    <td> Item Name</td>
+                    <td> Sell Max Price (<img src="/Content/img/gameHelper/simcity/Dollar.png" /> )</td>
+                    <td> Meterials Required</td>
+                    <td> Raw Meterials Producing Time (min)</td>
+                    <td> Assemblying Time (min)</td>
+                    <td> Total Time(min)</td>
+                    <td> Dollar Per Minute(<img src="/Content/img/gameHelper/simcity/Dollar.png" />/min)</td>
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+
+<!-- The modal -->
+<div class="modal fade" id="showBuildDetail" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalLabel">Build Path</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tbody id="buildGrid">
+                    
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+   
+    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
+    <script src="~/Scripts/GameHelper/Simcity.js"></script>
+}
+
+
+@section styles
+{
+    <link href="//cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Content/css/GameHelper/SimCity.css" rel="stylesheet" />
+}

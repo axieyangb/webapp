@@ -1,0 +1,170 @@
+﻿@using System.Runtime.Versioning
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Share the brillant idea, enjoy the challenging life, Programmer will conquer the world">
+    <meta name="keywords" content="now to share, Blog, Interviews, Algorithms, Jerry Xie, Yangyang Xie, 谢阳洋, Now to share"/>
+    <meta name="author" content="JerryXie">
+    <meta name="DC.title" content="Share the brillant idea and enjoy the challenging life"/>
+
+    <meta property="og:url" content="@Request.Url.AbsoluteUri" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@ViewBag.PageDescription" />
+    <meta property="og:image" content="http://@Request.Url.Host/Content/img/home-bg.png"/>
+    <meta  property="fb:app_id" content="1912251295679877"/>
+
+    <link rel="shortcut icon" href="@Url.Content("~/Content/img/favicon.ico")" type="image/x-icon"/>
+    <title>@ViewBag.Title</title>
+    <!-- Custom Fonts -->
+    @Styles.Render("~/bundles/css")
+    @*<link href="~/Content/css/Meterial/bootstrap-material-design.min.css" rel="stylesheet" />
+    <link href="~/Content/css/fonts.css" rel="stylesheet" />
+    <link href="~/Content/css/blog.css" rel="stylesheet" />*@
+    @RenderSection("styles", required: false)
+    @Scripts.Render("~/bundles/js")
+    @RenderSection("scripts", required: false)
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    @{
+        string lang = Blog.Helper.CultureHelper.GetCurrentNeutralCulture();
+    }
+</head>
+<body>
+
+<input id="isLogged" value="@(Session["LoggedUserID"] == null ? Html.Raw("false") : Html.Raw("true") )"/>
+<input id="lang" value="@lang" style="display: none" />
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom" style="z-index: 3">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")" title="@Blog.Resources.Global.Index"><span>@Blog.Resources.Global.Blog_Title_1 <img src="@Url.Content("~/Content/img/home-horseBrain.png")" class="navbar-brand-icon" alt="horseBrain"> @Blog.Resources.Global.Blog_Title_2</span></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right" id="navbar">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="@Url.Action("Index", "Home")" title="@Blog.Resources.Global.Index">@Blog.Resources.Global.Index</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Gallery")" title="@Blog.Resources.Global.Gallery">@Blog.Resources.Global.Gallery</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Playground")" title="@Blog.Resources.Global.Playground">@Blog.Resources.Global.Playground</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("AboutMe", "Home")" title="@Blog.Resources.Global.AboutMe">@Blog.Resources.Global.AboutMe</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Music")" title="@Blog.Resources.Global.Music">@Blog.Resources.Global.Music</a>
+                    </li>
+                    <li>
+                        @if (Session["LoggedUserID"] == null)
+                        {
+                        @Html.ActionLink(@Blog.Resources.Global.Login, "Login", "Admin") 
+                        }
+                        else
+                        {
+
+                        <a href="@Url.Action("Index","DashBoard")" title="@Blog.Resources.Global.Dashboard">
+                            <p class="profile">@Blog.Resources.Global.Dashboard</p>
+                        </a>
+
+                        }
+                    </li>
+                    <li>
+                        <a id="siteIcon" data-toggle="dropdown" title="Change Language">
+                            <span>@Blog.Resources.Global.Language: 
+                            @if (lang.Equals("zh"))
+                            {
+                                <img src="/Content/img/China.png" alt="chinaFlag"/>
+                            }
+                            else
+                            {
+                                <img src="/Content/img/UnitedStatesofAmerica.png" alt="AmericanFlag"/>
+                            }</span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="siteIcon">
+                            @{
+                                string[] segments = Request.Url.Segments.Where(a => !a.Equals("zh/") && !a.Equals("zh") && !a.Equals("en/") && !a.Equals("en")).ToArray();
+                                segments = segments ?? new string[0];}
+
+                            @if (lang.Equals("zh"))
+                            {
+                                <li><a href="@Html.Raw("/en" + string.Join("", segments))" title="Change Language To English"><img src="/Content/img/UnitedStatesofAmerica.png" alt="EnglishFlag" title="English Flag"/> &nbsp;&nbsp;English</a> </li>
+
+                            }
+                            else
+                            {
+                                <li><a href="@Html.Raw("/zh" + string.Join("", segments))" title="Change Language to Chinese"><img src="/Content/img/China.png" alt="ChineseFlag" title="Chinese Flag"/> &nbsp;&nbsp;中文</a></li>
+
+                            }
+                        </ul>
+                    </li>
+                    <li id="sessionExpireTime"><a title="Session">Session : <span></span></a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    @RenderBody()
+
+    <!-- Footer -->
+    @*<br>
+    <div class="col-lg-8 col-md-offset-2 col-md-10 col-md-offset-1  col-xs-10 col-xs-offset-1">
+        <ul class="list-inline text-center">
+            <li>
+                <a href="https://twitter.com/axieyangb" title="twitter">
+                    <span class="fa-stack fa-lg">
+                        <span class="fa fa-circle fa-stack-2x"></span>
+                        <span class="fa fa-twitter fa-stack-1x fa-inverse"></span>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.facebook.com/axieyangb" title="facebook">
+                    <span class="fa-stack fa-lg">
+                        <span class="fa fa-circle fa-stack-2x"></span>
+                        <span class="fa fa-facebook fa-stack-1x fa-inverse"></span>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/axieyangb" title="github">
+                    <span class="fa-stack fa-lg">
+                        <span class="fa fa-circle fa-stack-2x"></span>
+                        <span class="fa fa-github fa-stack-1x fa-inverse"></span>
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <p class="copyright text-muted">@Blog.Resources.Global.Copyright</p>
+    </div>*@
+
+    @if (lang == "zh")
+    {
+    <div id="YOUDAO_SELECTOR_WRAPPER" style="width:320px;height:240px;"></div>
+    <script src = "@Url.Content("~/Scripts/Global/YouDao.js")"  charset="utf-8"></script>
+    }
+</body>
+
+
+</html>

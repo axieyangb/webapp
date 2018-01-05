@@ -1,0 +1,130 @@
+﻿@font-face {
+    font-family: 'Roboto';
+    src: url('Fonts/Roboto/Roboto-Thin/Roboto-Thin-webfont.eot');
+    src: url('Fonts/Roboto/Roboto-Thin/Roboto-Thin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Fonts/Roboto/Roboto-Thin/Roboto-Thin-webfont.woff') format('woff'),
+         url('Fonts/Roboto/Roboto-Thin/Roboto-Thin-webfont.ttf') format('truetype'),
+         url('Fonts/Roboto/Roboto-Thin/Roboto-Thin-webfont.svg#robotothin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('Fonts/Roboto/Roboto-Light/Roboto-Light-webfont.eot');
+    src: url('Fonts/Roboto/Roboto-Light/Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Fonts/Roboto/Roboto-Light/Roboto-Light-webfont.woff') format('woff'),
+         url('Fonts/Roboto/Roboto-Light/Roboto-Light-webfont.ttf') format('truetype'),
+         url('Fonts/Roboto/Roboto-Light/Roboto-Light-webfont.svg#robotolight') format('svg');
+    font-weight: 300;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('Fonts/Roboto/Roboto-Regular/Roboto-Regular-webfont.eot');
+    src: url('Fonts/Roboto/Roboto-Regular/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Fonts/Roboto/Roboto-Regular/Roboto-Regular-webfont.woff') format('woff'),
+         url('Fonts/Roboto/Roboto-Regular/Roboto-Regular-webfont.ttf') format('truetype'),
+         url('Fonts/Roboto/Roboto-Regular/Roboto-Regular-webfont.svg#robotoregular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('Fonts/Roboto/Roboto-Medium/Roboto-Medium-webfont.eot');
+    src: url('Fonts/Roboto/Roboto-Medium/Roboto-Medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Fonts/Roboto/Roboto-Medium/Roboto-Medium-webfont.woff') format('woff'),
+         url('Fonts/Roboto/Roboto-Medium/Roboto-Medium-webfont.ttf') format('truetype'),
+         url('Fonts/Roboto/Roboto-Medium/Roboto-Medium-webfont.svg#robotomedium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('Fonts/Roboto/Roboto-Bold/Roboto-Bold-webfont.eot');
+    src: url('Fonts/Roboto/Roboto-Bold/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Fonts/Roboto/Roboto-Bold/Roboto-Bold-webfont.woff') format('woff'),
+         url('Fonts/Roboto/Roboto-Bold/Roboto-Bold-webfont.ttf') format('truetype'),
+         url('Fonts/Roboto/Roboto-Bold/Roboto-Bold-webfont.svg#robotobold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('Fonts/Roboto/Roboto-Black/Roboto-Black-webfont.eot');
+    src: url('Fonts/Roboto/Roboto-Black/Roboto-Black-webfont.eot?#iefix') format('embedded-opentype'),
+         url('Fonts/Roboto/Roboto-Black/Roboto-Black-webfont.woff') format('woff'),
+         url('Fonts/Roboto/Roboto-Black/Roboto-Black-webfont.ttf') format('truetype'),
+         url('Fonts/Roboto/Roboto-Black/Roboto-Black-webfont.svg#robotoblack') format('svg');
+    font-weight: 900;
+    font-style: normal;
+
+}
+
+/*
+* Noto Sans TC (Chinese_traditional) 
+ */
+
+@font-face {
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 100;
+  src: url(Fonts/NotoSansTC/NotoSansTC-Thin/NotoSansTC-Thin.woff2) format('woff2'),
+       url(Fonts/NotoSansTC/NotoSansTC-Thin/NotoSansTC-Thin.woff) format('woff'),
+       url(Fonts/NotoSansTC/NotoSansTC-Thin/NotoSansTC-Thin.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 300;
+  src: url(Fonts/NotoSansTC/NotoSansTC-Light/NotoSansTC-Light.woff2) format('woff2'),
+       url(Fonts/NotoSansTC/NotoSansTC-Light/NotoSansTC-Light.woff) format('woff'),
+       url(Fonts/NotoSansTC/NotoSansTC-Light/NotoSansTC-Light.otf) format('opentype');
+}
+@font-face {
+   font-family: 'Noto Sans TC';
+   font-style: normal;
+   font-weight: 400;
+   src: url(Fonts/NotoSansTC/NotoSansTC-Regular/NotoSansTC-Regular.woff2) format('woff2'),
+        url(Fonts/NotoSansTC/NotoSansTC-Regular/NotoSansTC-Regular.woff) format('woff'),
+        url(Fonts/NotoSansTC/NotoSansTC-Regular/NotoSansTC-Regular.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC';
+   font-style: normal;
+   font-weight: 500;
+   src: url(Fonts/NotoSansTC/NotoSansTC-Medium/NotoSansTC-Medium.woff2) format('woff2'),
+        url(Fonts/NotoSansTC/NotoSansTC-Medium/NotoSansTC-Medium.woff) format('woff'),
+        url(Fonts/NotoSansTC/NotoSansTC-Medium/NotoSansTC-Medium.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC';
+   font-style: normal;
+   font-weight: 700;
+   src: url(Fonts/NotoSansTC/NotoSansTC-Bold/NotoSansTC-Bold.woff2) format('woff2'),
+        url(Fonts/NotoSansTC/NotoSansTC-Bold/NotoSansTC-Bold.woff) format('woff'),
+        url(Fonts/NotoSansTC/NotoSansTC-Bold/NotoSansTC-Bold.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC';
+   font-style: normal;
+   font-weight: 900;
+   src: url(Fonts/NotoSansTC/NotoSansTC-Black/NotoSansTC-Black.woff2) format('woff2'),
+        url(Fonts/NotoSansTC/NotoSansTC-Black/NotoSansTC-Black.woff) format('woff'),
+        url(Fonts/NotoSansTC/NotoSansTC-Black/NotoSansTC-Black.otf) format('opentype');
+ }
+
+/**Meterial Icons*/
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(MeterialIcons/MaterialIcons-Regular.eot); 
+  src: local('Material Icons'),
+       local('MeterialIcons/MaterialIcons-Regular'),
+       url(MeterialIcons/MaterialIcons-Regular.woff2) format('woff2'),
+       url(MeterialIcons/MaterialIcons-Regular.woff) format('woff'),
+       url(MeterialIcons/MaterialIcons-Regular.ttf) format('truetype');
+}
+

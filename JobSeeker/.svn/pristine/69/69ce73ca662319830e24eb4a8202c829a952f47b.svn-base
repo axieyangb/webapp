@@ -1,0 +1,119 @@
+import { OrderByPipe } from './../common/orderPipeComponent';
+
+import { JobService } from './../job/jobservice';
+import { Job } from './../job/job';
+import{Pager} from './../job/pager';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import {PagerService} from './../job/pagerservice'
+const enum OrderType {
+    Relevance = 0,
+    Date = 1
+}
+
+@Component({
+    moduleId: module.id,
+    selector: 'job-list',
+    templateUrl: 'jobListComponent.html',
+    styleUrls: ['jobListComponent.css']
+})
+
+export class JobListComponent implements OnInit {
+    jobs: Job[];
+    pagerObj:Pager;
+    pagedJobs:Job[];
+    oneJob: Job;
+    keywords: string;
+    listValid: boolean;
+    orderType: OrderType = OrderType.Relevance;
+    orderString: string = '';
+    field: string = 'createdate';
+    constructor(
+        private jobservice: JobService, 
+        private route: ActivatedRoute, 
+        private router: Router,
+        private pagerservice:PagerService,
+        private order: OrderByPipe
+        ) {
+        this.listValid = true;
+        this.keywords = "";
+        this.jobs = [];
+        this.oneJob = new Job();
+    }
+    ngOnInit() {
+        this.route.params.map(a => a["keywords"]).subscribe(a => { this.keywords = a });
+        if (this.keywords != null)
+            this.searchJobs();
+    }
+
+    getAllJobs(): void {
+        this.jobservice.getAllJobs().subscribe(jobs => {this.jobs = jobs;this.setPager(this.jobs.length)});
+    }
+    searchJobs(): void {
+        this.router.navigate(['/list', { 'keywords': this.keywords }]);
+        if (this.keywords != "") {
+            this.listValid = false;
+            this.jobservice.searchJobs(this.keywords).subscribe(jobs => { this.jobs = jobs; this.listValid = true;this.setPager(1) });
+        }
+    }
+    showMoreDescription(targetJob: Job): void {
+        this.jobservice.getJobById(targetJob.Id).subscribe(oneJob => { targetJob.JobDescription = oneJob.JobDescription; });
+        targetJob.IsFullDescriptionShow = true;
+    }
+    hideMoreDescription(targetJob: Job): void {
+        targetJob.JobDescription = (targetJob.JobDescription.length > 100 ? targetJob.JobDescription.substring(0, 100) + "..." : targetJob.JobDescription);
+        targetJob.IsFullDescriptionShow = false;
+    }
+    highlightKeywords(content: string) {
+        content = content.replace(/</g, "").replace(/>/g, "").replace(/\//g, "").replace(/<mark>/g, "").replace(/<\/mark>/g, "");
+        let splits: string[] = this.keywords.split(' ');
+        for (var index = 0; index < splits.length; index++) {
+            let keyItem = splits[index];
+            if (keyItem.length > 0) {
+                let regex = new RegExp(keyItem, "g");
+                content = content.replace(regex, "<mark>" + keyItem + "</mark>");
+            }
+        }
+        return content;
+    }
+    orderByDate() {
+      this.jobs=this.order.transform(this.jobs,"createdate desc");
+        this.orderString = 'createdate desc';
+        this.orderType = OrderType.Date;
+        this.setPager(1);
+
+    }
+    orderByRelevent(): void {
+         this.jobs=this.order.transform(this.jobs,"rank desc");
+        this.orderType = OrderType.Relevance;
+        this.setPager(1);
+    }
+    isNewPosted(dateStr: string): boolean {
+        let todayStr: string = new Date().toJSON().toString();
+        return dateStr.substring(0, 10) == todayStr.substring(0, 10);
+    }
+
+    UpdateThumbsUp(oneJob: Job) {
+        if (!oneJob.HasThumbsUp) {
+            oneJob.HasThumbsUp = true;
+            this.jobservice.thumbsUp(oneJob.Id).subscribe(res =>oneJob.ThumbsUpNum++);
+        }
+    }
+    UpdateVistedNum(oneJob: Job) {
+     this.jobservice.visitedNumUpdate(oneJob.Id).subscribe(res=>oneJob.VisitedNum++);
+
+    }
+    updateInvalidNum(oneJob:Job)
+    {
+        if(!oneJob.HasReportInvalid)
+        {
+            oneJob.HasReportInvalid=true;
+        this.jobservice.invalidNumUpdate(oneJob.Id).subscribe(res=>oneJob.InValidNum++);
+        }
+    }
+    setPager(currentPage:number){
+       
+        this.pagerObj=this.pagerservice.getPager(this.jobs.length,currentPage,10);
+        this.pagedJobs=this.jobs.slice(this.pagerObj.startIndex, this.pagerObj.endIndex + 1);  
+    }
+}

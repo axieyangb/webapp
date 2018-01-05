@@ -1,0 +1,56 @@
+<div class="row">
+    <br>
+    <div class="input-group">
+        <input [(ngModel)]="keywords" class="form-control" (keyup.enter)="searchJobs()"><span class="btn btn-primary input-group-addon" (click)="searchJobs()">Search</span>
+    </div>
+</div>
+<hr>
+<div class="row" *ngIf="listValid">
+    <em class="text-muted">Page {{pagerObj.currentPage}} of {{jobs.length}} related jobs</em>
+    <div class="btn-group pull-right">
+        <label class="btn btn-sm btn-default" [class.active]="orderType==0"><input type="radio" name="order" hidden (click)="orderByRelevent()">Relevance</label>
+        <label class="btn btn-sm btn-default" [class.active]="orderType==1"> <input type="radio" name="order" (click)="orderByDate()" hidden>Date</label>
+    </div>
+</div>
+<div class="row">
+    <ul *ngIf="listValid">
+        <li *ngFor="let job of pagedJobs | orderBy: orderString" class="list-unstyled">
+            <a [href]="job.URL" target="_blank" (click)="UpdateVistedNum(job)">
+                <p class="overflow-ellipsis"> <i *ngIf="isNewPosted(job.CreateDate)" class="label label-sm label-success">New</i><i *ngIf="job.Status==1" class="label label-sm label-danger">Invalid</i>{{job.URL}}</p>
+            </a>
+
+            <span class="text-muted"><span class="glyphicon glyphicon-globe"></span>&nbsp;{{job.WebsiteName}}</span>
+            &nbsp;&nbsp;
+            <span> <span class="glyphicon glyphicon-eye-open text-muted"></span>&nbsp; {{job.VisitedNum}}</span>
+            &nbsp;&nbsp;
+            <span [class]="job.HasThumbsUp ? 'text-danger' : 'text-info thumbsUpActive'">
+                <span class="glyphicon glyphicon-thumbs-up" (click)="UpdateThumbsUp(job)"></span>&nbsp; {{job.ThumbsUpNum}}
+            </span>
+            <span>
+               <button class="btn btn-default btn-xs pull-right">Report Invalid Link</button>
+            </span>
+            <br>
+            <em class="text-muted small">Last Captured Time : {{job.CreateDate}}</em>
+            <br>
+            <p [innerHTML]="highlightKeywords(job.JobDescription)"></p>
+            <span class="btn btn-sm" *ngIf="!job.IsFullDescriptionShow" (click)="showMoreDescription(job)"><span class="glyphicon glyphicon-chevron-down"></span>&nbsp;Show More</span>
+            <span class="btn btn-sm" *ngIf="job.IsFullDescriptionShow" (click)="hideMoreDescription(job)"><span class="glyphicon glyphicon-chevron-up"></span>&nbsp;Hide More</span>
+
+            <br>
+            <br>
+
+        </li>
+    </ul>
+    <div *ngIf="listValid">
+        <ul class="pagination">
+            <li class="cursor-pointer" *ngFor="let pageNum of pagerObj.pages" [class.active]="pagerObj.currentPage==pageNum"><a (click)="setPager(pageNum)">{{pageNum}}</a></li>
+        </ul>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="overlay " *ngIf="!listValid ">
+        <p class="text-info ">Loading...</p>
+    </div>
+</div>

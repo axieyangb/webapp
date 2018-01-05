@@ -1,0 +1,73 @@
+.overflow-ellipsis {
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cursor-pointer {
+    cursor: pointer
+}
+
+.searchBox {
+    margin-top: 5px;
+    max-width: 600px;
+}
+
+.titleSize {
+    font-size: 18px;
+}
+
+.padding-top {
+    padding-top: 75px;
+}
+
+.img-pic-background {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-position: center;
+    min-height: 50px;
+    background-repeat: no-repeat;
+    background-image: url(content/imgs/jobsearchSmall.png);
+}
+
+.titleUnavailable {
+    text-decoration: line-through;
+    color: #777;
+}
+
+.filtertagsection {
+    margin-top: 10px;
+}
+
+.filtertagsection>span:hover {
+    background: #95383b;
+}
+
+.filtersection {
+    margin-left: 10px;
+}
+
+@media (max-width: 770px) {
+    .col-xs-0 {
+        width: 0;
+        display: none;
+        background-image: none;
+    }
+}
+
+.row {
+    margin: 5px;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 3px 1.5rem;
+    font-weight: 400;
+    text-align: inherit;
+    white-space: nowrap;
+    background: 0 0;
+    border: 0;
+}

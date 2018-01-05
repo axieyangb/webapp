@@ -1,0 +1,36 @@
+<div class="row padding-top">
+    <h1 class="page-header">
+        Dashboard <small>Statistics Overview</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li class="active">
+            <i class="glyphicon glyphicon-dashboard"></i>&nbsp;Dashboard
+        </li>
+    </ol>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="well">
+                <h4>Visited Links</h4>
+                <h3>96</h3>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="well">
+                <h4>Thumbs Ups</h4>
+                <h3>9</h3>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="well">
+                <h4>Applied Jobs</h4>
+                <h3>50</h3>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="well">
+                <h4>Invalid Reports</h4>
+                <h3>29</h3>
+            </div>
+        </div>
+    </div>
+</div>

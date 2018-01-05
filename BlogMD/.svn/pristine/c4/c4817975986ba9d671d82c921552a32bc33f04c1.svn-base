@@ -1,0 +1,17 @@
+﻿$('#Global_UserAction').click(function () {
+    $('#Global_LeaveMessage').attr('class', 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-shadow--8dp mdl-color--accent mdl-layout--small-screen-only animated fadeInUp');
+    if ($('#Global_LeaveMessage').attr('status') !== "show") {
+        $('#Global_LeaveMessage').show();
+        $('#Global_LeaveMessage').attr('status', 'show');
+    } else {
+        $('#Global_LeaveMessage').attr('class', 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-shadow--8dp mdl-color--accent mdl-layout--small-screen-only animated fadeOutDown');
+        $('#Global_LeaveMessage').attr('status', 'hide');
+    }
+});
+$('main').click(function() {
+    if ($('#Global_LeaveMessage').attr('status')==="show")
+        {
+        $('#Global_LeaveMessage').attr('class', 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-shadow--8dp mdl-color--accent mdl-layout--small-screen-only animated fadeOutDown');
+        $('#Global_LeaveMessage').attr('status', 'hide');
+    }
+})

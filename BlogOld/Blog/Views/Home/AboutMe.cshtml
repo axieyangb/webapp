@@ -1,0 +1,326 @@
+﻿
+@{
+    ViewBag.Title = "About Me | Now to share";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.PageDescription = "Cool things I have experienced ";
+    var lang = Blog.Helper.CultureHelper.GetCurrentCulture();
+}
+<script src="~/Scripts/skype-uri.js"></script>
+
+<div class="overlay">
+    
+   
+        <p class="blockquote">
+            @Blog.Resources.Global.AboutMe_Quotes
+            <br />
+            <span class="cite pull-right">@Blog.Resources.Global.AboutMe_Quotes_Author  </span>
+          
+        </p>
+ <br/>
+    <div>
+        <h2 class="PushTheButton"> @Blog.Resources.Global.AboutMe_PushHere&nbsp;&nbsp;<span class="glyphicon glyphicon-hand-down"></span></h2>
+        <div class="round">
+            <input type="checkbox" id="onoff" name="onoff"/>
+            <div class="back"><label class="but" for="onoff"><span class="on">0</span><span class="off">I</span></label>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row" style="display: none">
+    <div class="col-xs-12 col-md-3 container">
+        <div class="cell shadow--2dp row">
+            <img onclick="showLargerImage(this)" src="/Content/img/Me.png" class="img-circle col-xs-8 col-xs-offset-2 pointer-cusor" alt="me"/>
+            <div class="text-center col-xs-12">
+                <h4>@Blog.Resources.Global.AuthorInfo_Name</h4><br />
+                <p>@Blog.Resources.Global.AuthorInfo_Pos</p>
+                <a class="btn btn-default" href="http://docs.google.com/gview?url=http://nowtoshare.com/Content/img/projectImgs/Resume.pdf">View My Resume</a>
+            </div>
+        </div>
+        <div class="cell shadow--2dp">
+            <h4>
+                <span class="glyphicon glyphicon-user"></span>&nbsp; @Blog.Resources.Global.AboutMe
+            </h4>
+            <p>@Blog.Resources.Global.Self_Desc</p>
+        </div>
+       
+        <div class="cell shadow--2dp">
+            <h4>
+                <span class="glyphicon glyphicon-phone-alt"></span>&nbsp;
+                @Blog.Resources.Global.ContactMe
+            </h4>
+
+            <a href="https://www.google.com/maps?q=7421+Frankford,+Dallas,+TX" target="_blank">
+                <p class="text-ellipsis">
+                    <span class="glyphicon glyphicon-map-marker"></span>&nbsp;Dallas, TX
+                </p>
+            </a>
+
+            <a>
+                <p class="text-ellipsis">
+                    <span class="glyphicon glyphicon-earphone"></span>&nbsp; +01 312-709-6998
+                </p>
+            </a>
+
+            <a href="mailto:yyangxie@gmail.com">
+                <p class="text-ellipsis">
+                    <span class="glyphicon glyphicon-envelope"></span>&nbsp; yyangxie@gmail.com
+                </p>
+            </a>
+
+            <a href="https://www.linkedin.com/in/yangyangxie" target="_blank">
+                <p class="text-ellipsis">
+                    <span class="glyphicon glyphicon-cloud"></span>&nbsp; https://www.linkedin.com/in/yangyangxie
+                </p>
+            </a>
+
+            <span><span class="mall" id="SkypeButton_Call_yang.yang.xie_1" style="height: 13px;"></span></span>
+
+        </div><br />
+
+        <div class="cell  shadow--2dp ">
+            <h4>
+                <span class="glyphicon glyphicon-scale"></span> &nbsp;@Blog.Resources.Global.Skills
+            </h4>
+            <h6>@Blog.Resources.Global.Skills_1</h6>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+                    <span class="sr-only">60% Complete</span>
+                </div>
+            </div>
+            <h6>@Blog.Resources.Global.Skills_2</h6>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
+                    <span class="sr-only">70% Complete</span>
+                </div>
+            </div>
+            <h6>@Blog.Resources.Global.Skills_3</h6>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
+                    <span class="sr-only">90% Complete</span>
+                </div>
+            </div>
+             <h6>@Blog.Resources.Global.Skills_4</h6>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                    <span class="sr-only">100% Complete</span>
+                </div>
+            </div>
+            <h6>@Blog.Resources.Global.Skills_5</h6>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+                    <span class="sr-only">80% Complete</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-xs-12 col-md-9 container">
+        <div class="shadow--2dp cell">
+            <h3>
+                <span class="glyphicon glyphicon-briefcase"></span>&nbsp;@Blog.Resources.Global.WorkExperience
+            </h3>
+            <div>
+                <h5>@Blog.Resources.Global.AuthorInfo_Pos</h5>
+                <p class="helping-text small">
+                    <span class="glyphicon glyphicon-map-marker"></span>&nbsp; @Blog.Resources.Global.Work_PlaceName_1 &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span>&nbsp; @Blog.Resources.Global.Work_Duration_1
+                </p>
+                <p>@Html.Raw(Blog.Resources.Global.Work_Desc_1)</p>
+            </div>
+            <div>
+                <h5>@Blog.Resources.Global.Work_Title_2</h5>
+                <p class="helping-text small">
+                    <span class="glyphicon glyphicon-map-marker"></span>&nbsp; @Blog.Resources.Global.Work_PlaceName_2&nbsp;&nbsp; <span class="glyphicon glyphicon-time"></span>&nbsp; @Blog.Resources.Global.Work_Duration_2
+                </p>
+                <p>@Blog.Resources.Global.Work_Desc_2 </p>
+                <a class="btn btn-default" data-toggle="modal" data-target="#showComment" id="showMore">@Blog.Resources.Global.ShowComment</a>
+            </div>
+        </div>
+        <div class="shadow--2dp cell ">
+            <h3>
+                <span class="glyphicon glyphicon-education"></span>&nbsp; @Blog.Resources.Global.Education
+            </h3>
+            <div>
+                <h5>@Blog.Resources.Global.Education_MajorName_1</h5>
+                <p class="helping-text small">
+                    <span class="glyphicon glyphicon-map-marker"></span>&nbsp;  @Blog.Resources.Global.Education_SchoolName_1&nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span>&nbsp;@Blog.Resources.Global.Education_SchoolDuration_1
+                </p>
+                <p>@Blog.Resources.Global.Education_Desc_1</p>
+            </div>
+            <div>
+
+                <h5>@Blog.Resources.Global.Education_MajorName_2</h5>
+                <p class="helping-text small"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;  @Blog.Resources.Global.Education_SchoolName_2 &nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span>&nbsp;@Blog.Resources.Global.Education_SchoolDuration_2</p>
+                <p>@Blog.Resources.Global.Education_Desc_2</p>
+            </div>
+        </div>
+        <div class="shadow--2dp cell">
+            <h3><span class="glyphicon glyphicon-folder-open"></span>&nbsp;@Blog.Resources.Global.Project</h3>
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-lg-4  padding-5px">
+                    <div class="thumbnail">
+                        <img onclick="showLargerImage(this)" class="pointer-cusor" src="~/Content/img/projectImgs/Project_Adminportal.png" alt="project of Admin Portal"/>
+                        <div class="caption">
+                            <h3>
+                                @Blog.Resources.Global.Project_AdminPortal_Title
+                                <a class="pull-right btn-fab pointer-cusor" onclick="showMoreImgs('AdminPortal')"><span class="glyphicon glyphicon-option-horizontal"></span></a>
+                                <span class="small">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span>&nbsp; @Blog.Resources.Global.Project_AdminPortal_Duration</span>
+                            </h3>
+                            <p class="text-muted text-wrap-ellipsis">@Blog.Resources.Global.Project_AdminPortal_Description</p>
+                            <p>
+                                <a href="http://stage.indigoehr.com/EnrollmentAdminStage" target="_blank" class="btn btn-primary" >@Blog.Resources.Global.Project_LiveSite</a> <button onclick="showTechnicalDetail('ProviderSearch')" class="btn btn-default" >@Blog.Resources.Global.Project_TechnicalDetail</button>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-4  padding-5px">
+                    <div class="thumbnail">
+                        <img onclick="showLargerImage(this)" class="pointer-cusor" src="~/Content/img/projectImgs/Project_ProviderSearch.png" alt="project of the provider search" />
+                        <div class="caption">
+                            <h3>
+                                @Blog.Resources.Global.Project_ProviderSearch_Title
+                                <a class="pull-right btn-fab pointer-cusor" onclick="showMoreImgs('ProviderSearch')">
+                                    <span class="glyphicon glyphicon-option-horizontal"></span>
+                                </a>
+                                <span class="small">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span>&nbsp; @Blog.Resources.Global.Project_ProviderSearch_Duration</span>
+                            </h3>
+                            <p class="text-muted text-wrap-ellipsis">@Blog.Resources.Global.Project_ProviderSearch_Detail</p>
+                            <p>
+                                <a href="http://alliantplans.com/find-provider/" target="_blank" class="btn btn-primary" role="button">@Blog.Resources.Global.Project_LiveSite</a> <button onclick="showTechnicalDetail('ProviderSearch')" class="btn btn-default">@Blog.Resources.Global.Project_TechnicalDetail</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6 col-lg-4  padding-5px">
+                    <div class="thumbnail">
+                        <img onclick="showLargerImage(this)" class="pointer-cusor" src="~/Content/img/projectImgs/Project_JobSearch.png" alt="project of the job search website" />
+                        <div class="caption">
+                            <h3>
+                                @Blog.Resources.Global.Project_JobSearch_Title
+                                <a class="pull-right btn-fab pointer-cusor" onclick="showMoreImgs('JobSearch')">
+                                    <span class="glyphicon glyphicon-option-horizontal"></span>
+                                </a>
+                                <span class="small">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span>&nbsp; @Blog.Resources.Global.Project_JobSearch_Duration</span>
+                            </h3>
+                            <p class="text-muted text-wrap-ellipsis">@Blog.Resources.Global.Project_JobSearch_Detail</p>
+                            <p>
+                                <a href="http://35.163.86.156/jobs/" target="_blank" class="btn btn-primary" role="button">@Blog.Resources.Global.Project_LiveSite</a> <button onclick="showTechnicalDetail('JobSearch')" class="btn btn-default" >@Blog.Resources.Global.Project_TechnicalDetail</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shadow--2dp cell">
+            <h3>
+                <span class="glyphicon glyphicon-certificate"></span>&nbsp;@Blog.Resources.Global.Certification
+            </h3>
+            <div class="row">
+                <img onclick="showLargerImage(this)" class="col-xs-12 col-md-6 col-lg-3 pointer-cusor" src="~/Content/img/certification.png" alt="microsoft certification" />
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="showProjectDetail">
+    <div class="modal-dialog modal-full" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">@Blog.Resources.Global.Index_ViewMore :</h4>
+            </div>
+            <div class="modal-body" id="moreProjectImages">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="moreLargerImage">
+    <div class="modal-dialog modal-full" role="document">
+        <div class="modal-content">
+            <div class="modal-header row">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="moreLargerImageBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="technicalDetail">
+    <div class="modal-dialog modal-full" role="document">
+        <div class="modal-content">
+            <div class="modal-header row">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="technicalDetailBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="showComment">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header row">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Comment:</h4>
+            </div>
+            <div class="modal-body">
+                <a href="https://www.linkedin.com/in/davidminh" target="_blank">https://www.linkedin.com/in/davidminh</a>
+                <p>
+                    <img class="content-fit" src="/Content/img/Recommendation.png" alt="professor recommentation" />
+                </p>
+                <div @if (lang.Equals("en")) { @Html.Raw("style=\"display:none\"")             }>
+                    <header>谢阳洋:</header>
+                    <p>
+                        阳洋实现了复杂3D插值算法的开源程序AlGDock（<a href="https://github.com/ccbatiit/algdock/">https://github.com/ccbatiit/algdock/</a>），这是由我的研究小组开发的项目。他展示了在这个整个项目中的主动性和独立性。他是那种会尽一切努力及时准确地完成任务的人。
+
+                        之后，我表达了对定义的二阶导数插值算法的兴趣，阳洋研究几种不同的算法，并提交给我的每一种方法的优点和缺点。接着，他实现和测试我们选择的方法中的B样条和Catmull-Rom样条，从我这里只需要很少的一点帮助。他甚至提出一个新的插值算法，另一名学生正在计划在这个夏天开始实现这个建议。
+
+                        阳洋不仅具有技术能力和编程的热情，同时也显示出一个优秀的团队合作成员的品质。他与其他人的研究小组和睦相处并具有乐于助人的个性;他还定期帮助较弱的程序员完成他们的项目。他的英语沟通能力与其他国际学生相媲美。
+
+                        我相信，在未来阳洋将成为一个优秀的软件开发人员
+                    </p>
+                    <p>2015 年 6月 25日， David 在美国伊利诺伊大学教授谢阳洋</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script type="text/javascript">
+    Skype.ui({ "name": "chat", "element": "SkypeButton_Call_yang.yang.xie_1", "participants": ["yang.yang.xie"], "imageSize": 14 });
+</script>
+@section Scripts{
+    <script src="~/Scripts/Home/AboutMe.js"></script>
+
+}
+@section Styles{
+    <link href="~/Content/css/page/AboutMe.css" rel="stylesheet" />
+}

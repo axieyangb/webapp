@@ -1,0 +1,32 @@
+﻿body {
+}
+
+.hover-effect {
+    opacity: 0.6;
+}
+
+    .hover-effect:hover {
+        cursor: pointer;
+        opacity: 1;
+    }
+
+.itemBlock {
+    padding: 10px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.btn-link {
+    cursor: pointer;
+}
+    .btn-link:hover {
+        text-decoration: underline !important;
+        color: #17a2b8 !important;
+    }
+
+
+    #showBuildDetail> .modal-dialog {
+        max-width: 1000px;
+    }

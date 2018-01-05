@@ -1,0 +1,35 @@
+<div class="row">
+    <br>
+    <div class="input-group">
+        <input [(ngModel)]="keywords" class="form-control" (keyup.enter)="searchJobs()"><span class="btn btn-primary input-group-addon" (click)="searchJobs()">Search</span>
+    </div>
+</div>
+<hr>
+<div class="row" *ngIf="listValid">
+    <h4>Total {{jobs.length}} related jobs found</h4>
+    <div class="btn-group pull-right">
+        <label class="btn btn-sm btn-default" [class.active]="orderType==0"><input type="radio" name="order" hidden (click)="OrderByRelevent()">Relevance</label>
+        <label class="btn btn-sm btn-default" [class.active]="orderType==1"> <input type="radio" name="order" (click)="OrderByDate()" hidden>Date</label>
+    </div>
+</div>
+<div class="row">
+    <ul *ngIf="listValid">
+        <li *ngFor="let job of jobs | orderPipe: orderString" class="list-unstyled">
+            <a [href]="job.URL" target="_blank">
+                <p class="overflow-ellipsis"> <i *ngIf="isNewPosted(job.CreateDate)" class="label label-sm label-success">New</i>{{job.URL}}</p>
+            </a>
+            <em class="text-muted small">Last Captured Time : {{job.CreateDate}}</em>
+            <br>
+            <p [innerHTML]="highlightKeywords(job.JobDescription)"></p>
+            <span class="btn btn-sm" *ngIf="!job.IsFullDescriptionShow" (click)="showMoreDescription(job)"><span class="glyphicon glyphicon-chevron-down"></span>&nbsp;Show More</span>
+            <span class="btn btn-sm" *ngIf="job.IsFullDescriptionShow" (click)="hideMoreDescription(job)"><span class="glyphicon glyphicon-chevron-up"></span>&nbsp;Hide More</span>
+
+            <br>
+            <br>
+
+        </li>
+    </ul>
+    <div class="overlay " *ngIf="!listValid ">
+        <p class="text-info ">Loading...</p>
+    </div>
+</div>

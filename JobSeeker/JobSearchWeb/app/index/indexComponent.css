@@ -1,0 +1,28 @@
+.index-pic {
+    height: 215px;
+    margin-top: 100px;
+    width: 100%;
+    text-align: -webkit-center;
+    margin-bottom: 45px;
+}
+
+.index-pic>img {
+    height: 100%;
+    width: 100%;
+    max-width: 461px;
+    max-height: 215px;
+}
+
+.searchBox {
+    max-width: 600px;
+    float: none;
+    margin: 0 auto;
+}
+
+.glyphicon {
+    top: 0px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

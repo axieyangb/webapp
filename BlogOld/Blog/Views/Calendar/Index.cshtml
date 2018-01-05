@@ -1,0 +1,242 @@
+﻿
+
+@{
+    ViewBag.Title = Blog.Resources.Global.Calendar + " | Now to share";
+    ViewBag.PageDescription = "A great tool to help you schedule your life";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<input hidden="hidden" id="sessionInfo" value="@ViewBag.CalendarSession" />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel" style="margin: 5px; padding: 10px;">
+                <div class="calendar-header">
+                    <span class="btn-group left-right-action">
+                        <button class="btn btn-raised btn-xs" onclick="addMonth(-1)"><span class="glyphicon glyphicon-chevron-left"></span> </button>
+                        <button class="btn btn-raised btn-xs" onclick="addMonth(1)"><span class="glyphicon glyphicon-chevron-right"></span> </button>
+                        <button class="btn btn-raised btn-xs" onclick="goToToday()" style="margin-left: 10px;">Today </button>
+                    </span>
+                    <span class="current-info">
+                    </span>
+
+                    <span class="btn-group display-mode">
+                        <button class="btn btn-raised btn-xs" disabled="disabled">Year </button>
+                        <button class="btn btn-raised btn-xs">Month</button>
+                        <button class="btn btn-raised btn-xs"  disabled="disabled">Week</button>
+                        <button class="btn btn-raised btn-xs"  disabled="disabled">Day</button>
+                    </span>
+                    <span class="holiday-mode">
+                        <span class="form-group">
+                            <label class="control-label" for="region">Holiday Region</label>
+                            <select class="form-control" id="region" onchange="changeRegion(this)" style="font-size: 12px">
+                                <option value="1">United States</option>
+                                <option value="0"> China</option>
+                                <option value="2">All</option>
+                            </select>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="panel" style="margin: 5px;">
+                <div class="panel-heading">
+                    Calendars&nbsp;
+                    <span class="btn btn-default btn-xs btn-raised" @(Session["LoggedUserID"] == null ?  Html.Raw("style=\"display: none\""): Html.Raw("")) onclick="showAddingUserBox()"><span class="glyphicon glyphicon-plus"></span></span>
+                </div>
+                <div class="panel-body" id="calendarsBody">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="panel" style="margin: 5px;">
+                <div id="calendarBody">
+                    <div class="cal-header">
+                    </div>
+                    <div class="cal-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" id="disclaimer" style="padding: 5px;">
+            <div class="panel">
+                <div class="panel-body">
+                    <h3>Disclaimer</h3>
+                    <p class="text-warning"> Considering the browser compatibility, please use Chrome to open this calendar</p>
+                    <p> This calendar is designed and created by Jerry Xie, if you interested or have any questions, please contact the author</p>
+                    <p>Create date : 2017/09/22</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+<div class="modal fade" id="addingEventBox">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Adding Event</h4>
+            </div>
+            <div class="modal-body" id="codeHistoryContent">
+                <div class="panel event-panel">
+                    <div class="eventInfoSelector">
+                        <div class="form-group eventName">
+                            <label class="control-label">Event Name</label>
+                            <input class="form-control" type="text" />
+                        </div>
+                        <div class="eventCalendar">
+                            <label class="control-label"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;Add Calendars</label>
+                            <span class="btn btn-primary btn-xs btn-raised"><span class="glyphicon glyphicon-plus"></span></span>
+                            <span id="eventUsers"></span>
+                        </div>
+                    </div>
+                    <div style="width: 30%; min-height: 60px;  display: inline-flex; align-items: center;justify-content: space-around">
+                        <label class="control-label" style="flex: 0.6;margin:0"><b>Repeat Setting:</b></label>
+                        <select style="height: 26px;flex:0.3" id="repeatTime" onchange="changeTimeScope(this)">
+                            <option value="0">None</option>
+                            <option value="1">Daily</option>
+                            <option value="7">Weekly</option>
+                            <option value="-1">Monthly</option>
+                        </select>
+                    </div>
+
+                    <div class="timeRangeSelector">
+                    </div>
+                    <div class="form-group eventDescription">
+                        <label class="control-label">Description</label>
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    <div class="locationSelector">
+                        <label class="control-label"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;Location</label>
+                        <span class="btn btn-primary btn-xs btn-raised" data-flag="0"><span class="glyphicon glyphicon-plus"></span></span><br />
+                    </div>
+                    <div class="colorPicker">
+                        <label class="control-label">Event Color</label>
+                        <div class="color-panel">
+                            <div data-color="#5484ed" style="width: 16px; height: 16px; margin: 5px;background-color:rgb(84, 132, 237)"></div>
+                            <div data-color="#a4bdfc" style="width: 16px; height: 16px; margin: 5px;background-color:rgb(164, 189, 252)"></div>
+                            <div data-color="#46d6db" style="width: 16px; height: 16px; margin: 5px;background-color:rgb(70, 214, 219)"></div>
+                            <div data-color="#7ae7bf" style="width: 16px; height: 16px; margin: 5px;background-color:rgb(122, 231, 191)"></div>
+                            <div data-color="#51b749" style="width: 16px; height: 16px; margin: 5px;background-color:rgb(81, 183, 73)"></div>
+                            <div data-color="#fbd75b" style="width: 16px; height: 16px; margin: 5px;background-color:rgb(251, 215, 91)"></div>
+                            <div data-color="#ffb878" style="width: 16px; height: 16px; margin: 5px;background-color:rgb(255, 184, 120)"></div>
+                            <div data-color="#ff887c" style="width: 16px; height: 16px; margin: 5px;background-color:rgb(255, 136, 124)"></div>
+                            <div data-color="#dc2127" style="width: 16px; height: 16px; margin: 5px; background-color: rgb(220, 33, 39)"></div>
+                            <div data-color="#dbadff" style="width: 16px; height: 16px; margin: 5px;background-color:rgb(219, 173, 255)"></div>
+                            <div data-color="#e1e1e1" style="width: 16px; height: 16px; margin: 5px;background-color:rgb(225, 225, 225)"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="control-label">Notification Before Event</label>
+                        <div class="notificationSelector">
+                            <div id="emailNotification">
+                                <span class="cusor-pointer"><input type="checkbox" onchange="checkNotification(this)" />Email :</span>
+                                <input type="number" value="30" disabled="disabled" />
+                                <select disabled="disabled">
+                                    <option>minutes</option>
+                                    <option>hours</option>
+                                </select>
+                            </div>
+                            <div id="messageNotificaiton">
+                                <span class="cusor-pointer"><input type="checkbox" onchange="checkNotification(this)" />Message :</span>
+                                <input type="number" value="30" disabled="disabled" />
+                                <select disabled="disabled">
+                                    <option>minutes</option>
+                                    <option>hours</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-primary btn-raised" onclick="addEventButton()" id="manipulateEventBtn">Create</button>
+                <button type="button" class="btn btn-sm btn-danger btn-raised" onclick="deleteEventButton(this)" id="deleteEventBtn" style="display: none">Delete</button>
+                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">@Blog.Resources.Global.Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="addingUserBox">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">Adding User</h5>
+            </div>
+            <div class="modal-body" id="addingUserBody">
+                <div class="form-group label-floating is-empty userNameAddingUser">
+                    <label class="control-label">Username</label>
+                    <input class="form-control">
+                </div>
+                <div style="display: inline-flex; justify-content: space-around; align-items: center; width: 100%">
+                    <span style="flex: 0.3"><b>Email Setting:</b></span>
+                    <div class="form-group label-floating is-empty emailAddingUser" style="flex: 0.6">
+                        <label class="control-label">Email</label>
+                        <input class="form-control" type="email">
+                    </div>
+                </div>
+                <div style="display: inline-flex; justify-content: space-around; align-items: center; width: 100%">
+                    <span style="flex: 0.3"><b>Message Setting:</b></span>
+                    <div class="form-group label-floating is-empty cellPhoneAddingUser" style="flex: 0.4">
+                        <label class="control-label">CellPhone</label>
+                        <input class="form-control" type="tel">
+                    </div>
+
+                    <div class="form-group label-floating is-empty carrierAddingUser" style="flex: 0.15">
+                        <label class="control-label">Carrier</label>
+                        <select class="form-control">
+                            <option></option>
+                            <option>Tmobile</option>
+                            <option>AT&T</option>
+                            <option>Sprint</option>
+                            <option>Verizon</option>
+                            <option>U.S. Cellular</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display: inline-flex; justify-content: space-around; align-items: center; width: 100%">
+                    <span><input type="checkbox" checked="checked" id="emailActive"/><b>Accept Email</b></span>
+                    <span><input type="checkbox" checked="checked" id="messageActive"/><b>Accept Message</b></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-primary btn-raised" id="manipulateUserBtn" onclick="createUser(this)">Create</button>
+                <button type="button" class="btn btn-sm btn-danger btn-raised" id="deleteUserBtn" onclick="deleteUser(this)" style="display: none"><span class="fa fa-trash-o" aria-hidden="true"></span>&nbsp;Delete</button>
+
+                 <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">@Blog.Resources.Global.Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <link href="~/Content/css/page/calender.css" rel="stylesheet" />
+
+}
+
+
+@section scripts{
+    <script src="~/Scripts/Calendar/calendar.js"></script>
+
+}

@@ -1,0 +1,69 @@
+﻿@using System.Web.Razor.Parser
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/bundles/css/dashboard")
+    @Scripts.Render("~/bundles/DashboardJs")
+        @RenderSection("Scripts",required:false)
+    @{
+       var lang = Blog.Helper.CultureHelper.GetCurrentNeutralCulture();
+    }
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href='@Url.Action("Index", "Home")'>Return To Front Page</a>
+        </div>
+        <a class="navbar-brand pull-right" href='@Url.Action("SignOut","DashBoard")'>Sign Out</a>
+    </nav>
+<div class="container-fluid" id="Container">
+    <div class="row">
+        <nav class="col-lg-2 col-md-2 col-sm-2 col-xs-0" id="side-navbar">
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse" id="side-ul-block">
+                <ul class="nav navbar-nav side-nav">
+                    <li class="col-md-12 col-ml-12 col-xs-12" id="Index">
+                        @* ReSharper disable once Html.PathError *@
+                        <a href="@Url.Action("Index","DashBoard")"><i class="fa fa-fw fa-dashboard active"></i>Dashboard</a>
+                    </li>
+                    <li class="col-md-12 col-ml-12 col-xs-12" id="Post">
+                        @* ReSharper disable once Html.PathError *@
+                        @* ReSharper disable once Html.PathError *@
+                        <a href="@Url.Action("Post","DashBoard")"><i class="fa fa-paper-plane"></i>Article Post</a>
+                    </li>
+                    <li class="col-md-12 col-ml-12 col-xs-12 " id="Upload">
+                        @* ReSharper disable once Html.PathError *@
+                        <a href="@Url.Action("Upload","DashBoard")"><i class="fa fa-fw fa-table"></i>Media Post</a>
+                    </li>
+                    <li class="col-md-12 col-ml-12 col-xs-12" id="Review">
+                        <a href="@Url.Action("ViewImage","DashBoard",new {id=Session["LoggedUserID"]})"><i class="fa fa-fw fa-edit"></i>View my Gallery</a>
+                    </li>
+                    <li class="col-md-12  col-ml-12 col-xs-12" id="ViewProfile">
+                        <a href="/@lang/User/Index/@Session["LoggedUserID"]" >View Public Profile</a>
+                    </li>
+                    <li class="col-md-12 col-xs-12" id="Profile">
+                        @* ReSharper disable once Html.PathError *@
+                        <a href="@Url.Action("EditProfile","DashBoard")"><i class="fa fa-fw fa-file"></i>Edit Your Profile</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <div id="page-wrapper" class="col-lg-8 col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-1 col-md-8 ">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

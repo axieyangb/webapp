@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="WebsiteBuilder" xml:space="preserve">
+    <value>关于作者</value>
+  </data>
+  <data name="Article" xml:space="preserve">
+    <value>文章</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>作者</value>
+  </data>
+  <data name="AuthorInfo_Name" xml:space="preserve">
+    <value>谢阳洋</value>
+  </data>
+  <data name="AuthorInfo_Pos" xml:space="preserve">
+    <value>软件工程师</value>
+  </data>
+  <data name="Blog_Title_1" xml:space="preserve">
+    <value>欢迎来到</value>
+  </data>
+  <data name="Blog_Title_2" xml:space="preserve">
+    <value>马勒戈壁</value>
+  </data>
+  <data name="Brave" xml:space="preserve">
+    <value>勇敢</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>联系</value>
+  </data>
+  <data name="ContactMe" xml:space="preserve">
+    <value>联系我</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>版权 &amp;copy; 个人网站 2015 谢阳洋设计</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>控制面板</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="DescribeYourself" xml:space="preserve">
+    <value>描述你自己</value>
+  </data>
+  <data name="Education" xml:space="preserve">
+    <value>教育</value>
+  </data>
+  <data name="Education_Desc_1" xml:space="preserve">
+    <value>两年的IIT 学习，让我接触到了各个领域的天才和顶尖的人， 他们影响了我的想法和我对学习的看法， 从最开始的被动接受到如今的 充满激情的主动学习。 并且， 高负荷的作业和项目让我比以前学的更有效率同时更注重目标导向。</value>
+  </data>
+  <data name="Education_Desc_2" xml:space="preserve">
+    <value>我在中国拿到我的学士学位， 我还记得在我第二学期，我第一次接触到了C语言，当时它对我来说是多么的有魅力，我把它当作乐高玩具一样，能用他从无到有的创造我想要的东西。我开始沉迷于编程和计算机科学。思念的电子学习让我更好的理解了及玄机的结构同时获得了更底层编程的能力，这对我以后的学习工作都是及其有帮助的。</value>
+  </data>
+  <data name="Education_MajorName_1" xml:space="preserve">
+    <value>计算机科学硕士    GPA3.75/4</value>
+  </data>
+  <data name="Education_MajorName_2" xml:space="preserve">
+    <value>电气工程及其自动化学士    GPA3.5/4</value>
+  </data>
+  <data name="Education_SchoolDuration_1" xml:space="preserve">
+    <value>2013年8月15日 - 2015年5月15日</value>
+  </data>
+  <data name="Education_SchoolDuration_2" xml:space="preserve">
+    <value>2008年9月1日 - 2012年6月1日</value>
+  </data>
+  <data name="Education_SchoolName_1" xml:space="preserve">
+    <value>伊利诺伊理工大学,美国    </value>
+  </data>
+  <data name="Education_SchoolName_2" xml:space="preserve">
+    <value>江苏大学，中国    </value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>邮箱</value>
+  </data>
+  <data name="Faith" xml:space="preserve">
+    <value>信仰</value>
+  </data>
+  <data name="Gallery" xml:space="preserve">
+    <value>照片</value>
+  </data>
+  <data name="HaveAccount" xml:space="preserve">
+    <value>已经有账号了？</value>
+  </data>
+  <data name="Horse_soulmate" xml:space="preserve">
+    <value>套马的汉子</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>首页</value>
+  </data>
+  <data name="Index_ArticleDescription" xml:space="preserve">
+    <value>在这里分享我的生活经历和一些不着边际的奇思妙想...</value>
+  </data>
+  <data name="Index_GalleryDescription" xml:space="preserve">
+    <value>摄影感知触觉，感知心情，更感知爱情。对于最初的那份感动，它会时常提起。</value>
+  </data>
+  <data name="Index_ViewMore" xml:space="preserve">
+    <value>更多</value>
+  </data>
+  <data name="I_am_rich" xml:space="preserve">
+    <value>我很有钱</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>月份</value>
+  </data>
+  <data name="MostPopularTopics" xml:space="preserve">
+    <value>最热话题</value>
+  </data>
+  <data name="NickName" xml:space="preserve">
+    <value>昵称</value>
+  </data>
+  <data name="NoAccount" xml:space="preserve">
+    <value>没有账户?</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="Pg_ArduinoWebcam" xml:space="preserve">
+    <value>Arduino 网络摄像机头（需要登录）</value>
+  </data>
+  <data name="Pg_ArduinoWebcam_Desc" xml:space="preserve">
+    <value>一个基于Arduino 开发的网络摄像头，用于监控我家小猫</value>
+  </data>
+  <data name="Pg_TextBasedMazeGame" xml:space="preserve">
+    <value>基于文本的走迷宫游戏</value>
+  </data>
+  <data name="Pg_TextBasedMazeGame_desc" xml:space="preserve">
+    <value>一个命令行格式的简单有趣无尽迷宫小游戏</value>
+  </data>
+  <data name="Playground" xml:space="preserve">
+    <value>头脑风暴</value>
+  </data>
+  <data name="Project" xml:space="preserve">
+    <value>项目</value>
+  </data>
+  <data name="Project_List" xml:space="preserve">
+    <value>项目列表</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>记住我</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="Self_Desc" xml:space="preserve">
+    <value>作为一名软件工程师，我拥有3年多的程序模式设计和面向对象开发的专业经验， 同时有一年多的企业项目架构和代码优化经验。非常了解 SQL Server数据库的开发 和 .NET框架下的网站开发。</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>分享</value>
+  </data>
+  <data name="ShowComment" xml:space="preserve">
+    <value>显示评语</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>注册</value>
+  </data>
+  <data name="Skills" xml:space="preserve">
+    <value>技能</value>
+  </data>
+  <data name="Skills_1" xml:space="preserve">
+    <value>C# .NET 开发</value>
+  </data>
+  <data name="Skills_2" xml:space="preserve">
+    <value>网站开发</value>
+  </data>
+  <data name="Skills_3" xml:space="preserve">
+    <value>SQL Server 数据库开发</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>副标题</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="WorkExperience" xml:space="preserve">
+    <value>工作经历</value>
+  </data>
+  <data name="Work_Desc_1" xml:space="preserve">
+    <value>作为一名在 &lt;a href="http://healthonellc.com/"&gt;Health One Alliance&lt;/a&gt; 工作的软件开发人员，&lt;a href="http://healthonellc.com/"&gt;Health One Alliance&lt;/a&gt; 是一个为整个南部乔治亚州提供健康服务和医疗保险的机构， 我百分之六十的日常工作专注于实现一个高效无误并且保密的电子数据交互(EDI)的解决方案。 其他剩余部分，作为一个全栈网络开发工程师，我参与并开发了一套基于&lt;a href="http://getbootstrap.com/"&gt;Bootstrap&lt;/a&gt; 样式的 管理员门户网站，其中我的职责包括了网站架构，代码优化复查，和编程。</value>
+  </data>
+  <data name="Work_Desc_2" xml:space="preserve">
+    <value>在 美国IIT（伊利诺伊理工大学） 化学教授家里一年的寄住经历， 让我有幸加入了他的学术研究小组。 通过利用在高级算法中学到的知识， 成功的实现了复杂3D 差值算法并运用到了他的交互网格模型中， 并获得了他的高度评价。</value>
+  </data>
+  <data name="Work_Duration_1" xml:space="preserve">
+    <value>2015年7月1日 - 现在</value>
+  </data>
+  <data name="Work_Duration_2" xml:space="preserve">
+    <value>2014年9月1日 - 2015年5月1日</value>
+  </data>
+  <data name="Work_PlaceName_1" xml:space="preserve">
+    <value>达拉斯，德克萨斯州</value>
+  </data>
+  <data name="Work_PlaceName_2" xml:space="preserve">
+    <value>芝加哥，伊利诺伊州</value>
+  </data>
+  <data name="Work_Title_2" xml:space="preserve">
+    <value>开源项目开发员</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>年份</value>
+  </data>
+  <data name="YouJumpIJump" xml:space="preserve">
+    <value>往前一步是蓝天</value>
+  </data>
+  <data name="Pg_RollABall" xml:space="preserve">
+    <value>滚动一个小球游戏</value>
+  </data>
+  <data name="Pg_RollABall_Desc" xml:space="preserve">
+    <value>通过移动一个小球来捡起周围的方块</value>
+  </data>
+  <data name="Pg_SpaceShooter" xml:space="preserve">
+    <value>飞机射击游戏</value>
+  </data>
+  <data name="Pg_SpaceShooter_Desc" xml:space="preserve">
+    <value>一个简单有趣的飞机射击游戏</value>
+  </data>
+  <data name="Pg_SurvivalShooter" xml:space="preserve">
+    <value>婴儿宝贝射击游戏</value>
+  </data>
+  <data name="Pg_SurvivalShooter_Desc" xml:space="preserve">
+    <value>儿时的梦想，小宝宝爱玩具，有一天玩具变成了敌人，宝宝变成了救世英雄</value>
+  </data>
+  <data name="Certification" xml:space="preserve">
+    <value>证书</value>
+  </data>
+  <data name="Project_AdminPortal_Description" xml:space="preserve">
+    <value>这个管理员门户网站是用来帮助我们内部的员工去管理 保险数据的， 功能包括 用户管理，组织管理和代理商管理， 电子文档监控和报告。</value>
+  </data>
+  <data name="Project_AdminPortal_Duration" xml:space="preserve">
+    <value>2016年1月1日 - 现在</value>
+  </data>
+  <data name="Project_AdminPortal_Title" xml:space="preserve">
+    <value>管理员门户网站</value>
+  </data>
+  <data name="Project_LiveSite" xml:space="preserve">
+    <value>网站</value>
+  </data>
+  <data name="Project_ProviderSearch_Detail" xml:space="preserve">
+    <value>查找医生是一个给用户提供方面搜索周围医生或者医院的门户网站。 你可以通过地址，名字或者专科 来搜索。 百分之90的工作是由我一个人完成的包括整个网站的架构。这个项目花了我一个月的时间，更多细节可以点击下面的按钮</value>
+  </data>
+  <data name="Project_ProviderSearch_Duration" xml:space="preserve">
+    <value>2016年9月1日 - 现在</value>
+  </data>
+  <data name="Project_ProviderSearch_Title" xml:space="preserve">
+    <value>医生搜索</value>
+  </data>
+  <data name="Project_TechnicalDetail" xml:space="preserve">
+    <value>技术细节</value>
+  </data>
+  <data name="AboutMe_Quotes" xml:space="preserve">
+    <value>阳洋不仅具有技术能力和编程的热情，同时也显示出一个优秀的团队合作成员的品质。他与其他人的研究小组和睦相处并具有乐于助人的个性;他还定期帮助较弱的程序员完成他们的项目。他的英语沟通能力与其他国际学生相媲美。我相信，在未来阳洋将成为一个优秀的软件开发人员</value>
+  </data>
+  <data name="AboutMe_Quotes_Author" xml:space="preserve">
+    <value>David Minh  - 伊利诺伊理工大学助理教授</value>
+  </data>
+  <data name="AboutMe_PushHere" xml:space="preserve">
+    <value>按这里</value>
+  </data>
+  <data name="Pg_JobSearch" xml:space="preserve">
+    <value>用Angular JS 2 设计的求职网站</value>
+  </data>
+  <data name="Pg_JobSearch_Desc" xml:space="preserve">
+    <value>这是一个我个人开发的求职网站。帮助找工作的人们更有效的搜索Dice,Indeed 和Monster 上的工作。在后台，有一个网络爬虫每小时抓取从上面三个网站抓取资料。现在还在开发阶段，欢迎各种建议</value>
+  </data>
+  <data name="Project_JobSearch_Detail" xml:space="preserve">
+    <value>这是一个非常不错的项目，我用了现在所有最新的技术在我的网站里，前台我用了Angular 2的框架。 用户端和服务器的联系完全依赖于RESTful的服务。登陆系统用的 是OAuth 2.0 的密钥基础的架构， 后台用的是最流行的mvc架构和entity framework</value>
+  </data>
+  <data name="Project_JobSearch_Duration" xml:space="preserve">
+    <value>2016年9月1日 - 2016年12月1日</value>
+  </data>
+  <data name="Project_JobSearch_Title" xml:space="preserve">
+    <value>工作查询</value>
+  </data>
+  <data name="Skills_4" xml:space="preserve">
+    <value>高级算法</value>
+  </data>
+  <data name="Skills_5" xml:space="preserve">
+    <value>JAVA 开发</value>
+  </data>
+  <data name="Music" xml:space="preserve">
+    <value>音乐</value>
+  </data>
+  <data name="BackToTop" xml:space="preserve">
+    <value>回到顶部</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>关键词</value>
+  </data>
+  <data name="MusicSearch" xml:space="preserve">
+    <value>音乐搜索</value>
+  </data>
+  <data name="SongListSummary" xml:space="preserve">
+    <value>&lt;p&gt;当前显示 &lt;span id="songsNum"&gt;&lt;/span&gt; 首歌， 一共 &lt;span id="totalNum"&gt;&lt;/span&gt; 相关歌曲&lt;/p&gt;</value>
+  </data>
+  <data name="Statement" xml:space="preserve">
+    <value>这个音乐搜索工具只用于&lt;b&gt;研究目的&lt;/b&gt;, &lt;b&gt;禁止 &lt;/b&gt;任何商业活动!</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>收藏</value>
+  </data>
+  <data name="TotalSongsInFavorite" xml:space="preserve">
+    <value>一共 &lt;span id="favoriteTotal"&gt;&lt;/span&gt; 首歌在列表中</value>
+  </data>
+  <data name="PublicGallery" xml:space="preserve">
+    <value>相册集</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="Billboard" xml:space="preserve">
+    <value>热门榜单</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>评论区</value>
+  </data>
+  <data name="Donate" xml:space="preserve">
+    <value>赞助</value>
+  </data>
+  <data name="DonateRequest" xml:space="preserve">
+    <value>觉得有用么？我需要你的支持</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="EmailPrivacyPolicy" xml:space="preserve">
+    <value>在没有你允许的情况下，我们不会暴露你的邮箱</value>
+  </data>
+  <data name="LeaveComment" xml:space="preserve">
+    <value>留言区</value>
+  </data>
+  <data name="PicturesSelected" xml:space="preserve">
+    <value>图片选择了</value>
+  </data>
+  <data name="PleaseRate" xml:space="preserve">
+    <value>请评分</value>
+  </data>
+  <data name="PostTime" xml:space="preserve">
+    <value>上传时间</value>
+  </data>
+  <data name="ShowAll" xml:space="preserve">
+    <value>显示全部</value>
+  </data>
+  <data name="Showing" xml:space="preserve">
+    <value>显示</value>
+  </data>
+  <data name="TodayMostPopularPictures" xml:space="preserve">
+    <value>今日最热门图片</value>
+  </data>
+  <data name="TopPictures" xml:space="preserve">
+    <value>热门图片</value>
+  </data>
+  <data name="WeekMostPopularPictures" xml:space="preserve">
+    <value>每周最热门图片</value>
+  </data>
+  <data name="ShareToMyWechat" xml:space="preserve">
+    <value>分享到我的微信</value>
+  </data>
+  <data name="ShareToMyWechatHelper" xml:space="preserve">
+    <value>打开微信，点击底部的“发现”，或左上角加号，使用 “扫一扫” 即可将网页在微信打开，点击左上角三个点，分享到朋友圈。</value>
+  </data>
+  <data name="Photo" xml:space="preserve">
+    <value>照片</value>
+  </data>
+  <data name="Reply" xml:space="preserve">
+    <value>回复</value>
+  </data>
+  <data name="RecentPublish" xml:space="preserve">
+    <value>最近发布</value>
+  </data>
+  <data name="AboutMe" xml:space="preserve">
+    <value>关于我</value>
+  </data>
+  <data name="CodingPad" xml:space="preserve">
+    <value>代码写字板</value>
+  </data>
+  <data name="Entertainment" xml:space="preserve">
+    <value>娱乐</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>个人简介</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="Calendar" xml:space="preserve">
+    <value>日历</value>
+  </data>
+  <data name="Pg_CaseTracker" xml:space="preserve">
+    <value>移民局案件追踪</value>
+  </data>
+  <data name="Pg_CaseTracker_Desc" xml:space="preserve">
+    <value>这个页面是用来追踪案件的，基本原理就是间断地去移民局查询最近的状态，一旦发现案件状态改变，你将会得到通知。</value>
+  </data>
+</root>

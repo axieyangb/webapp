@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Text based Maze Game  | Playground | Now to share";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="/Content/PlaygroundContent/TextBasedMaze/rot.js"></script>
+<script src="/Content/PlaygroundContent/TextBasedMaze/setgame.js"></script>
+<script src="~/Content/PlaygroundContent/TextBasedMaze/VirtualJoyStick.js"></script>
+<div class="row">
+    <div id="Container" class="col-sm-12"></div>
+</div>
+
+<div id="controller"></div>
+<script>
+    $(document)
+        .ready(function () {
+            Game.init();
+            resize();
+            InitializeController();
+        });
+    $(window)
+        .resize(function () {
+            resize();
+        });
+
+
+    function InitializeController() {
+        var joystick = new VirtualJoystick({
+            container: document.getElementById('controller'),
+            mouseSupport: true, limitStickTravel: true,
+            stickRadius: 50
+        });
+        document.getElementById('controller').style.position = "absolute";
+        setInterval(function(){
+            if (joystick.right()) {
+                touchControl('right');
+            } else if (joystick.left()) {
+                touchControl('left');
+            } else if (joystick.up()) {
+                touchControl('up');
+            } else if (joystick.down()) {
+                touchControl('down');
+            }
+        }, 1/15  * 1000);
+
+      
+    }
+</script>
+<style>
+    body {
+        overflow: hidden;
+    }
+
+    #Container > canvas {
+        display: flex;
+        justify-content: center;
+    }
+
+    #controller {
+        z-index: 999;
+        background-color: transparent;
+        float: none;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+</style>

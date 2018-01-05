@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Media Upload | Now to share";
+    Layout = "~/Views/Dashboard/_Layout.cshtml";
+}
+@Scripts.Render("~/bundles/upload")
+
+<div class="col-lg-12">
+    <h1 class="page-header">Media <small>Post</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li class="active">
+            <i class="fa fa-paper-plane"></i>Media Post
+        </li>
+    </ol>
+</div>
+<input type="file" class="filestyle" data-input="false" data-badge="false"  name="files1" id="file1" multiple>
+<br />
+<output id="list"></output>
+<br />
+<button type="button" class="btn btn-sm btn-primary" id="upload-submit" style="display:none" onclick="uploadFile()">Upload files</button>
+<button type="button" style="display:none" class="btn btn-sm btn-warning" id="upload-cancel" onclick="cancelFile()">Cancel</button>
+
+
+<!-- Drop Zone -->
+<h4>Or drag and drop files below</h4>
+<div class="upload-drop-zone" id="drop-zone">
+    Just drag and drop files here
+</div>
+<!--  Load bytes-->
+<p id="loaded_n_total"></p>
+<p id="status"></p>
+<!-- Progress Bar -->
+<div class="progress">
+    <div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+    </div>
+</div>
+
+<!-- Upload Finished -->
+<div class="js-upload-finished">
+    <h3>Processed files</h3>
+    <div class="list-group" id="resultList">
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.side-nav > #Upload >a').css("color", "#fff");
+        $('input[type=file]').change(function () {
+            genList(this.files);
+
+        });
+    });
+    // Setup the dnd listeners.
+    var dropZone = document.getElementById('drop-zone');
+    dropZone.addEventListener('dragover', handleDragOver, false);
+    dropZone.addEventListener('drop', handleFileSelect, false);
+
+</script>

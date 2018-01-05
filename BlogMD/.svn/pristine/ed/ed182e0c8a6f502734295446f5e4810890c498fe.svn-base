@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="mdl-grid">
+    <div class="mdl-card mdl-color--white   mdl-color-text--grey-800   mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col-phone mdl-cell--8-col-tablet mdl-cell--3-offset-desktop mdl-cell--6-col-desktop mdl-grid hoverShadow">
+        <div class="mdl-card__title mdl-card--expand">
+            <h2 class="mdl-card__title-text">@Resources.Global.Article</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            @Resources.Global.Index_ArticleDescription
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="@Url.Action("Article", "Home")">
+                @Resources.Global.Index_ViewMore
+            </a>
+        </div>
+    </div>
+   
+     <div class="mdl-card mdl-color--white mdl-color-text--grey-800 mdl-shadow--2dp mdl-cell mdl-cell--12-col-phone mdl-cell--8-col-tablet mdl-cell--3-offset-desktop mdl-cell--6-col-desktop mdl-grid hoverShadow">
+        <div class="mdl-card__title mdl-card--expand">
+            <h2 class="mdl-card__title-text">@Resources.Global.Gallery</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            @Resources.Global.Index_GalleryDescription
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                @Resources.Global.Index_ViewMore
+            </a>
+        </div>
+    </div>
+   
+     <div class="mdl-card mdl-color--white  mdl-color-text--grey-800 mdl-shadow--2dp mdl-cell mdl-cell--12-col-phone mdl-cell--8-col-tablet mdl-cell--3-offset-desktop mdl-cell--6-col-desktop mdl-grid hoverShadow">
+        <header class="customize-mdl-card__play-btn  mdl-cell mdl-cell--5-col-smalldesktop  mdl-cell--3-col-desktop mdl-cell--3-col-tablet mdl-cell--4-col-phone mdl-color-text--white">
+            <button class="playControl mdl-button  mdl-button--fab mdl-color-text--white withoutShadow" onclick="playControl(this)">
+                <i class="material-icons">play_arrow</i>
+            </button>
+            <!--Video player HTML 5 original verion, hide it-->
+            <audio class="mediaContainers">
+                <source src="@Resources.ResourceLocation.Audio_Root/%e5%8b%87%e6%b0%94.mp3" type="audio/mpeg"/>
+            </audio>
+            <img class="cover" src="@Resources.ResourceLocation.Audio_Root/hqdefault.jpg"/>
+        </header>
+        <div class="mdl-card mdl-cell mdl-cell--7-col-smalldesktop  mdl-cell--9-col-desktop mdl-cell--5-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-card__supporting-text">
+                <h4>勇气--梁静茹</h4>
+                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse.
+            </div>
+            <div class="mdl-card__actions">
+                <input class="mediaSeekBar mdl-slider mdl-js-sliderEnhance" type="range"
+                       min="0" max="100" value="0" buffed="0" tabindex="0">
+                <span class="playTimeDisplay"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mdl-card mdl-color--white  mdl-color-text--grey-800 mdl-shadow--2dp mdl-cell mdl-cell--12-col-phone mdl-cell--8-col-tablet mdl-cell--3-offset-desktop mdl-cell--6-col-desktop mdl-grid hoverShadow">
+        <header class="customize-mdl-card__play-btn mdl-cell mdl-cell--5-col-smalldesktop mdl-cell--3-col-desktop mdl-cell--3-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">
+            <button class="playControl mdl-button  mdl-button--fab mdl-color-text--white withoutShadow" onclick="playControl(this)">
+                <i class="material-icons">play_arrow</i>
+            </button>
+            <!--Video player HTML 5 original verion, hide it-->
+            <audio class="mediaContainers">
+                <source src="http://97.99.107.91:5000/Source/%e6%8a%98%e5%ad%90%e6%88%8f.mp3" type="audio/mpeg" />
+            </audio>
+        </header>
+        <div class="mdl-card mdl-cell  mdl-cell--7-col-smalldesktop mdl-cell--9-col-desktop mdl-cell--5-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-card__supporting-text">
+                <h4>折子戏</h4>
+                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse.
+            </div>
+            <div class="mdl-card__actions">
+                <input class="mediaSeekBar mdl-slider mdl-js-sliderEnhance" type="range"
+                       min="0" max="100" value="0" buffed="0" tabindex="0">
+                <span class="playTimeDisplay"></span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="mdl-card mdl-color--white  mdl-color-text--grey-800 mdl-shadow--2dp mdl-cell mdl-cell--12-col-phone mdl-cell--8-col-tablet mdl-cell--3-offset-desktop mdl-cell--6-col-desktop mdl-grid hoverShadow">
+        <header class="customize-mdl-card__play-btn mdl-cell mdl-cell--5-col-smalldesktop mdl-cell--3-col-desktop mdl-cell--3-col-tablet mdl-cell--4-col-phone mdl-color-text--white">
+            <button class="playControl mdl-button  mdl-button--fab mdl-color-text--white withoutShadow" onclick="playControl(this)">
+                <i class="material-icons">play_arrow</i>
+            </button>
+            <!--Video player HTML 5 original verion, hide it-->
+                <video class="mediaContainers cover">
+                    <source src="http://97.99.107.91:5000/Source/demo.mp4" type="video/mp4" />
+                </video>
+        </header>
+        <div class="mdl-card mdl-cell  mdl-cell--7-col-smalldesktop mdl-cell--9-col-desktop mdl-cell--5-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-card__supporting-text">
+                <h4>Demo Video</h4>
+                Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse.
+            </div>
+            <div class="mdl-card__actions">
+                <input class="mediaSeekBar mdl-slider mdl-js-sliderEnhance" type="range"
+                       min="0" max="100" value="0" buffed="0" tabindex="0">
+                <span class="playTimeDisplay"></span>
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect fullscreenButton" onclick="findVideoBoxAndFullScreen(this)">
+                    Full Screen
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section scripts{
+    <link href="~/Content/Css/Home/Index.css" rel="stylesheet"/>
+    <script src="~/Scripts/WebView/Home/Index.js"></script>
+}

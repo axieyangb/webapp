@@ -1,0 +1,6 @@
+<div class="index-pic">
+    <img alt="Job Search" src="content/imgs/jobsearch.png">
+</div>
+<div class="input-group searchBox">
+    <input [(ngModel)]="keywords" class="form-control" (keyup.enter)="redirectToList()"><span class="btn btn-primary input-group-addon" (click)="redirectToList()">Search</span>
+</div>

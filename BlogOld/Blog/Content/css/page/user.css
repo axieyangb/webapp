@@ -1,0 +1,76 @@
+﻿
+.stats {
+    text-align:center;
+    text-shadow:1px 1px 0px #fff;
+    margin-top:25px;  
+  
+}
+.stats li{
+    width:125px;
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px; 
+}
+.stats span{
+    font-family:Helvetica;
+    font-weight:bold;
+    text-shadow:1px 1px 0px #fff;
+    font-size:4em;
+  
+    display:block;
+    line-height:1em;
+}
+.imgLoading {
+    width: 150px;
+    height: 150px;
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cursor-pointer{
+    cursor: pointer; 
+}
+#return-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.7);
+    width: 50px;
+    height: 50px;
+    display: block;
+    text-decoration: none;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    border-radius: 35px;
+
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#return-to-top span {
+    color: #fff;
+    margin: 0;
+    position: relative;
+    left: 16px;
+    top: 13px;
+    font-size: 19px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#return-to-top:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+#return-to-top:hover span {
+    color: #fff;
+    top: 5px;
+}

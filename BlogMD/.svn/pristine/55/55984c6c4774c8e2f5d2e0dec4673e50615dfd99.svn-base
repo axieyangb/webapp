@@ -1,0 +1,31 @@
+﻿$('#Global_UserAction').click(function () {
+    
+    $('#Global_LeaveMessage').attr('class', 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-shadow--8dp mdl-color--accent mdl-layout--small-screen-only animated fadeInUp');  
+    if ($('#Global_LeaveMessage').attr('status') !== "show") {
+        $('#Global_UserAction').rotate({
+            angle: 0,
+            animateTo:225
+        });
+        $('#Global_LeaveMessage').show();
+        $('#Global_LeaveMessage').attr('status', 'show');
+    }
+    else {
+        $('#Global_UserAction').rotate({
+            angle: 225,
+            animateTo: 0
+        });
+        $('#Global_LeaveMessage').attr('class', 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-shadow--8dp mdl-color--accent mdl-layout--small-screen-only animated fadeOutDown');
+        $('#Global_LeaveMessage').attr('status', 'hide');
+
+    }
+});
+$('main').click(function () {
+    if ($('#Global_LeaveMessage').attr('status') === "show") {
+        $('#Global_UserAction').rotate({
+            angle: 225,
+            animateTo: 0
+        });
+        $('#Global_LeaveMessage').attr('class', 'mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-shadow--8dp mdl-color--accent mdl-layout--small-screen-only animated fadeOutDown');
+        $('#Global_LeaveMessage').attr('status', 'hide');
+    }
+});

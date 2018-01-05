@@ -1,0 +1,48 @@
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace JobDetailGraber
+{
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+
+    public partial class JobContext : DbContext
+    {
+        public JobContext()
+            : base("name=Job")
+        {
+        }
+
+        public DbSet<Job> Jobs { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("JobSeeker");
+        }
+
+        [Table("JobSeeker.Jobs")]
+        public partial class Job
+        {
+            public int Id { get; set; }
+
+            public string JobDescription { get; set; }
+
+            public string URL { get; set; }
+
+            public int Depth { get; set; }
+
+            public bool IsVisited { get; set; }
+
+            [DefaultValue("")]
+            public string Note { get; set; }
+            public DateTime? CreateDate { get; set; }
+
+            [Required]
+            public DateTime? LastUpdateDate { get; set; }
+        }
+
+
+    }
+}

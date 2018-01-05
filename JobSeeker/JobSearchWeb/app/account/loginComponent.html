@@ -1,0 +1,30 @@
+<div class="row">
+
+    <div class="loginImg" routerLink="/">
+    </div>
+
+
+    <div class=" col-sm-offset-3 col-sm-6 col-md-4 col-md-offset-4">
+        <div class="account-wall">
+            <img class="profile-img" [src]="iconUrl" alt="">
+            <div *ngIf="inputPassword" class="typedUsername">{{user.username}}</div>
+            <div class="form-signin">
+                <input *ngIf="!inputPassword" [class.errorInfo]="!isExisted" class="form-control" [(ngModel)]="user.username" placeholder="Username" [value]="user.username" name="username" (keyup.enter)="next()" required autofocus>
+                <input *ngIf="inputPassword" type="password" [class.errorInfo]="errorType!=0" class="form-control" [(ngModel)]="user.password" placeholder="Password" name="password" (keyup.enter)="login()" required autofocus>
+                <span *ngIf="!isExisted" class="text-danger">Sorry, We can not recognize your username.</span>
+                <span *ngIf="errorType==1" class="text-danger">Wrong password. Try again.</span>
+                <span *ngIf="errorType==2" class="text-danger">Inner Error, please contact with admin.</span>
+                <!--<input type="password" class="form-control" placeholder="Password" required>-->
+                <button *ngIf="!inputPassword" class="btn btn-primary btn-block" [class.disabled]="isInProgress" (click)="next();" >{{GetBtnContent("Next")}}</button>
+                <button *ngIf="inputPassword" class="btn btn-primary btn-block" [class.disabled]="isInProgress" (click)="login()">{{GetBtnContent("Sign in")}}</button>
+                <!--<label class="checkbox pull-left">
+                    <input type="checkbox" value="remember-me">
+                    Remember me
+                </label>-->
+                <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+            </div>
+        </div>
+        <a href="#" *ngIf="!inputPassword" class="text-center new-account" routerLink="/register">Create an account </a>
+        <a *ngIf="inputPassword" class="text-center new-account cursor-pointer" (click)="back()">Sign in with a different account </a>
+    </div>
+</div>
