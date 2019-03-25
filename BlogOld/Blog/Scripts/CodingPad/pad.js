@@ -12,7 +12,8 @@ var languageName = ["java", "csharp"];
 
 var java_template = "// package whatever; // don't place package name! \n" +
     "import java.io.*; \n\n" +
-    "public class myCode {\n" +
+    "import java.util.*; \n\n" +
+    "public class Main {\n" +
     "\tpublic static void main (String[] args) throws java.lang.Exception\n" +
     "\t{\n" +
     "\t\tSystem.out.println(\"Hello Java\");\n" +

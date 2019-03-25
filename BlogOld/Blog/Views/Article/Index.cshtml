@@ -367,14 +367,17 @@
                     <div id="codeEditor"></div>
                 </div>
 
-                <br/>
+                <br />
                 <textarea id="rawCode" style="display: none"></textarea>
                 <label for="execute-result"><b>Result: </b></label>
                 <div class="panel panel-default">
-                    <div ><pre id="execute-result"></pre>
+                    <div>
+                        <pre id="execute-result"></pre>
                     </div>
                 </div>
                 <span class="text-danger">Current compiler only supports java and C#. Other languages will come soon.</span>
+                <br/>
+                <span class="text-warning" id="codeWarning"></span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal" onclick="executeCode(this)" id="executeBtn">Execute</button>

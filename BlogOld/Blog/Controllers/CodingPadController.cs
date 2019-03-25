@@ -55,7 +55,8 @@ namespace Blog.Controllers
         public async Task<string> RunCode(string codeEncoded, string language)
         {
             var codeDecoded = HttpUtility.HtmlDecode(codeEncoded);
-            return await CodeHelper.GetIntance().RunCode(codeDecoded, language);
+            return await CodeHelper.GetIntance().RunCode(codeDecoded, "Main.java", language);
+
         }
 
         public async Task<string> GetMyCodes()

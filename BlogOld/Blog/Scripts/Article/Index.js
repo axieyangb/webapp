@@ -300,7 +300,7 @@ function resizeImgAndTable() {
 
 var java_template_1 = function (code) {
     code = code.replace(new RegExp('\n', 'g'), "\n  ");
-    return ""+
+    return "import java.io.*;\n"+
     "import java.util.*;\n" +
     "public class Main {\n" +
         "   public static void main(String args[]) {\n" +
@@ -347,6 +347,7 @@ function showRunCodeModal(target) {
      language = preSegment.attr('data-pbcklang');
      $('#executeBtn').attr('data-language', language);
     var rawCode = getRawCodeContent(preSegment);
+    checkContainingMainFunction(rawCode);
     $('#rawCode').text(rawCode);
     $.getScript("/Scripts/AceEditor/src/ace.js").done(function () {
         ace.config.set('basePath', '/Scripts/AceEditor/src');
@@ -367,6 +368,22 @@ function showRunCodeModal(target) {
     $('#templateSelector').val(-1);
     $('#execute-result').html('');
     $('#codeRun').modal();
+}
+
+function checkContainingMainFunction(rawCode) {
+    // The code didnot contain the main function.
+    var mainFunctionNum = rawCode.match(/(public)[ ]+(static)[ ]+(void)[ ]+(main)[ ]*[(][ ]*(String[ ]+args[]*\[\][)])/g);
+    if (mainFunctionNum== null || mainFunctionNum.length != 1) {
+        $('#executeBtn').addClass('disabled');
+        $('#codeWarning').html('Your code should contain exact one main function!');
+    } else {
+        $('#executeBtn').removeClass('disabled');
+        $('#codeWarning').html('');
+    }
+
+
+  
+    return true;
 }
 
 function detectCodeSectionAndAppendRunCodeLink() {
@@ -434,6 +451,7 @@ function addTemplate(target) {
     editor.setValue(appendedCode);
     editor.clearSelection();
     $(target).attr('disabled', 'disabled');
+    checkContainingMainFunction(appendedCode);
 
 }
 
