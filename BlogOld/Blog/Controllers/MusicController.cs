@@ -277,7 +277,7 @@ namespace Blog.Controllers
                     music.ListId = musicInDb.ListId;
                     music.Rate = musicInDb.Rate;
                     music.ImgUrl = musicInDb.ImgUrl;
-                    music.Url = "http://" + sourceHost + "/music/" + musicInDb.Url;
+                    music.Url = GetMusicUrl(music.MusicExternalId);
                     music.Lyric = musicInDb.Lyric;
                 }
                 else
@@ -287,8 +287,9 @@ namespace Blog.Controllers
                     music.CreateDate = DateTime.Now;
                     music.ImgUrl = "";
                     db.Musics.Add(music);
-                    await db.SaveChangesAsync();
+                    
                 }
+                await db.SaveChangesAsync();
             }
         }
 
